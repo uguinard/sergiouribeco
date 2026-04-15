@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+const allGeography = await getCollection('geography');
+// Sort by date mostly
+allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Geografía de Ideas" description="Una colección de relatos, viajes y exploraciones." lang="es">
+  <div class="max-w-4xl">
+    <header class="mb-16 border-b border-earth/20 pb-8">
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">Geografía de Ideas</h1>
+      <p class="text-xl text-ink-light font-serif italic">
+        Un mapa de experiencias, relatos de viaje y reflexiones entrelazadas.
+      </p>
+    </header>
+
+    <div class="space-y-12">
+      {allGeography.map(entry => (
+        <article class="group relative pl-8 border-l border-earth/30 hover:border-clay transition-colors duration-500">
+          <div class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-sand border-2 border-earth group-hover:border-clay transition-colors duration-500"></div>
+          
+          <div class="flex flex-col gap-2">
+            <time class="text-xs font-sans uppercase tracking-widest text-ink/50" datetime={entry.data.date.toISOString()}>
+              {entry.data.date.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </time>
+            
+            <a href={`/es/geography/${entry.id}`} class="block">
+              <h2 class="text-2xl font-serif text-ink group-hover:text-clay transition-colors duration-300">
+                {entry.data.title.es}
+              </h2>
+            </a>
+            
+            {entry.data.description?.es && (
+              <p class="text-ink-light mt-2 max-w-2xl leading-relaxed">
+                {entry.data.description.es}
+              </p>
+            )}
+            
+            {entry.data.tags?.es && entry.data.tags.es.length > 0 && (
+              <div class="flex gap-2 mt-4">
+                {entry.data.tags.es.map(tag => (
+                  <span class="text-[10px] font-sans uppercase tracking-wider text-ink/40 bg-earth/5 px-2 py-1 rounded-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

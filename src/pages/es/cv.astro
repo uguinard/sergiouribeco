@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Currículum Vitae" lang="es">
+  <div class="max-w-3xl mx-auto mt-8">
+    <header class="mb-16 border-b border-earth/20 pb-12">
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-2">Sergio Uribe</h1>
+      <p class="text-xl text-ink-light font-sans tracking-wide uppercase mb-6 text-sm">Ingeniero Pedagógico & Especialista en Adquisición del Español</p>
+      
+      <div class="flex gap-4 font-sans text-xs text-ink/70">
+        <a href="mailto:hello@sergiouribe.co" class="hover:text-clay transition-colors">hello@sergiouribe.co</a>
+        <span>&bull;</span>
+        <a href="https://linkedin.com/in/sergiouribe" target="_blank" class="hover:text-clay transition-colors">LinkedIn</a>
+      </div>
+    </header>
+
+    <div class="space-y-16">
+      <section>
+        <h2 class="text-xs font-sans uppercase tracking-widest text-earth mb-8 flex items-center gap-4">
+          <span class="h-[1px] w-8 bg-earth"></span> Perfil
+        </h2>
+        <p class="font-serif text-ink-light leading-relaxed">
+          Especialista en la adquisición del idioma español con un fuerte enfoque en la Cognición 4E y el Input Comprensible. Diseño entornos lingüísticos centrados en el ser humano, mapeando marcos teóricos cognitivos en experiencias prácticas e inmersivas para estudiantes de todo el mundo.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xs font-sans uppercase tracking-widest text-earth mb-8 flex items-center gap-4">
+          <span class="h-[1px] w-8 bg-earth"></span> Experiencia
+        </h2>
+        
+        <div class="space-y-12">
+          <!-- Experience Item -->
+          <div class="relative pl-6 border-l border-ink/10 hover:border-clay transition-colors duration-300">
+            <div class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-sand border-2 border-clay"></div>
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-serif text-xl text-ink">Ingeniero Pedagógico Independiente</h3>
+              <span class="text-xs font-sans text-ink/50 uppercase tracking-wider">2023 &mdash; Presente</span>
+            </div>
+            <p class="text-sm font-sans text-ink-light mb-3">Autónomo</p>
+            <p class="font-serif text-ink-light leading-relaxed">
+              Diseño de currículos y plataformas inmersivas para la adquisición del español. Utilización de medios interactivos, estrategias de input comprensible y lingüística cognitiva para facilitar el crecimiento orgánico del lenguaje.
+            </p>
+          </div>
+          
+          <!-- Experience Item -->
+          <div class="relative pl-6 border-l border-ink/10 hover:border-earth transition-colors duration-300">
+            <div class="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full bg-sand border-2 border-ink/20"></div>
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-serif text-xl text-ink">Instructor de Idiomas y Diseñador Curricular</h3>
+              <span class="text-xs font-sans text-ink/50 uppercase tracking-wider">2019 &mdash; 2023</span>
+            </div>
+            <p class="text-sm font-sans text-ink-light mb-3">Varios Institutos</p>
+            <p class="font-serif text-ink-light leading-relaxed">
+              Aplicación de principios de Input Comprensible en entornos de aula práticos, transicionando programas con enfoque gramatical hacia entornos de adquisición impulsados por el mensaje y el significado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xs font-sans uppercase tracking-widest text-earth mb-8 flex items-center gap-4">
+          <span class="h-[1px] w-8 bg-earth"></span> Educación
+        </h2>
+        
+        <div class="space-y-8">
+          <div class="flex justify-between items-start">
+             <div>
+               <h3 class="font-serif text-lg text-ink">Máster en Lingüística Aplicada</h3>
+               <p class="text-sm font-sans text-ink-light">Enfoque en Lingüística Cognitiva y Enfoques 4E</p>
+             </div>
+             <span class="text-xs font-sans text-ink/50 uppercase tracking-wider">2022</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>

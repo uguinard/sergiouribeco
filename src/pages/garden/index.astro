@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../utils/i18n';
+
+const t = useTranslations('en');
+const allGarden = await getCollection('garden');
+allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="The Pedagogical Garden" description="Pedagogical engineering for Spanish Acquisition.">
+  <div class="max-w-4xl">
+    <header class="mb-16 border-b border-earth/20 pb-8">
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">The Pedagogical Garden</h1>
+      <p class="text-xl text-ink-light font-serif italic">
+        A behind-the-scenes look at my experiments in Spanish language acquisition, 4E cognition, and comprehensible input design.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {allGarden.map(entry => (
+        <article class="bg-paper border border-earth/20 p-8 hover:border-earth/60 transition-colors duration-300 relative group">
+          <div class="absolute top-0 left-0 w-full h-[2px] bg-earth opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          
+          <div class="flex justify-between items-start mb-4">
+            <time class="text-xs font-sans uppercase tracking-widest text-ink/50" datetime={entry.data.date.toISOString()}>
+              {entry.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+            <span class={`text-[10px] font-sans uppercase tracking-wider px-2 py-1 rounded-sm ${
+              entry.data.status === 'completed' ? 'bg-ink/5 text-ink/60' : 
+              entry.data.status === 'in-progress' ? 'bg-clay/10 text-clay' : 
+              'bg-earth/10 text-earth'
+            }`}>
+              {t('status', entry.data.status)}
+            </span>
+          </div>
+          
+          <a href={`/garden/${entry.id}`} class="block mb-4">
+            <h2 class="text-xl font-serif text-ink group-hover:text-clay transition-colors duration-300 leading-tight">
+              {entry.data.title.en}
+            </h2>
+          </a>
+          
+          {entry.data.tags?.en && entry.data.tags.en.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-auto">
+              {entry.data.tags.en.map(tag => (
+                <span class="text-[10px] font-sans text-ink/40">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

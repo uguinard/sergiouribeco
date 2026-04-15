@@ -1,0 +1,127 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ImmersiveViewer from '../../../components/ImmersiveViewer.astro';
+import En from '../../../components/En.astro';
+import Es from '../../../components/Es.astro';
+import ArticleFallback from '../../../components/ArticleFallback.astro';
+import { useTranslations } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const geographyEntries = await getCollection('geography');
+  return geographyEntries.map(entry => ({
+    params: { id: entry.id }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const t = useTranslations('es');
+
+let Content = null;
+let renderError = false;
+
+try {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+} catch (e) {
+  console.error(`[Astro] Error rendering ${entry.id}:`, e);
+  renderError = true;
+}
+---
+
+<Layout title={entry.data.title.es} description={entry.data.description?.es} lang="es">
+  <article class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start relative mt-8">
+    
+    <!-- Main Content Area -->
+    <div class="col-span-1 md:col-span-8">
+      <header class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">{entry.data.title.es}</h1>
+        {entry.data.description?.es && <p class="text-xl text-ink-light font-serif italic mb-6">{entry.data.description.es}</p>}
+        
+        <div class="flex gap-4 font-sans text-xs text-ink/60 uppercase tracking-widest border-b border-earth/20 pb-6">
+          <time datetime={entry.data.date.toISOString()}>
+            {entry.data.date.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          {entry.data.location && <span>&bull; {entry.data.location}</span>}
+        </div>
+      </header>
+
+      <div class="prose prose-lg prose-headings:font-serif prose-headings:text-ink prose-p:text-ink-light prose-p:leading-relaxed prose-a:text-clay hover:prose-a:text-earth max-w-none">
+        {!renderError && Content ? (
+          <Content components={{ ImmersiveViewer, En, Es }} />
+        ) : (
+          <ArticleFallback lang="es" />
+        )}
+      </div>
+      
+      {entry.data.tags?.es && entry.data.tags.es.length > 0 && (
+        <div class="mt-16 pt-8 border-t border-earth/20">
+          <h3 class="text-sm font-sans uppercase tracking-widest text-ink/60 mb-4">{t('ui', 'tags')}</h3>
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.es.map(tag => (
+              <span class="px-3 py-1 bg-paper border border-earth/30 rounded-full text-xs font-sans text-ink-light">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- Marginalia Sidebar (Asymmetric Panel) -->
+    <aside class="col-span-1 md:col-span-4 sticky top-12 space-y-8 mt-12 md:mt-0 font-sans border-l border-earth/20 pl-8">
+      <a href="/es/geography" class="text-xs uppercase tracking-widest text-earth hover:text-clay font-sans mb-12 hidden md:inline-block">
+        &larr; {t('ui', 'backToGeography')}
+      </a>
+
+      {entry.data.marginalia?.emotional?.es && (
+        <div class="bg-paper p-6 border border-earth/10 rounded-sm relative group transition-all duration-300 hover:shadow-sm">
+          <div class="absolute -left-3 top-6 w-6 h-[1px] bg-clay/50"></div>
+          <h4 class="text-xs uppercase tracking-widest text-clay mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-clay"></span>
+            {t('ui', 'emotional')}
+          </h4>
+          <p class="text-sm text-ink-light leading-relaxed">{entry.data.marginalia.emotional.es}</p>
+        </div>
+      )}
+
+      {entry.data.marginalia?.philosophical?.es && (
+        <div class="bg-paper p-6 border border-earth/10 rounded-sm relative group transition-all duration-300 hover:shadow-sm">
+          <div class="absolute -left-3 top-6 w-6 h-[1px] bg-ink/30"></div>
+          <h4 class="text-xs uppercase tracking-widest text-ink/60 mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-ink/60"></span>
+            {t('ui', 'philosophical')}
+          </h4>
+          <p class="text-sm text-ink-light leading-relaxed">{entry.data.marginalia.philosophical.es}</p>
+        </div>
+      )}
+
+      {entry.data.marginalia?.pedagogical?.es && (
+        <div class="bg-paper p-6 border border-earth/10 rounded-sm relative group transition-all duration-300 hover:shadow-sm">
+          <div class="absolute -left-3 top-6 w-6 h-[1px] border-t border-dashed border-earth"></div>
+          <h4 class="text-xs uppercase tracking-widest text-earth mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-transparent border border-earth"></span>
+            {t('ui', 'pedagogical')}
+          </h4>
+          <p class="text-sm text-ink-light leading-relaxed">{entry.data.marginalia.pedagogical.es}</p>
+        </div>
+      )}
+
+      {entry.data.relatedIdeas && entry.data.relatedIdeas.length > 0 && (
+        <div class="pt-8">
+          <h4 class="text-xs uppercase tracking-widest text-ink/60 mb-4">{t('ui', 'relatedIdeas')}</h4>
+          <ul class="space-y-3">
+            {entry.data.relatedIdeas.map(idea => (
+              <li>
+                <a href={`/es/geography/${idea.toLowerCase().replace(/ /g, '-')}`} class="text-sm text-clay hover:text-earth transition-colors flex items-center gap-2 group">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity text-xs">&rarr;</span>
+                  {idea}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </aside>
+  </article>
+</Layout>

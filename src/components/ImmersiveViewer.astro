@@ -1,0 +1,40 @@
+---
+interface Props {
+  image: string;
+  alt?: string;
+  height?: string;
+}
+
+const { image, alt = "360 Immersive Panorama", height = "400px" } = Astro.props;
+const containerId = `panorama-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="immersive-viewer my-12 relative border border-earth/20 rounded-sm overflow-hidden shadow-sm group">
+  <div id={containerId} style={`height: ${height}; width: 100%;`} class="bg-ink/5 relative z-10"></div>
+  
+  <div class="absolute inset-x-0 bottom-0 py-2 px-4 bg-ink/80 backdrop-blur-sm text-sand text-xs font-sans z-20 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    <span>Comprehensible Input Environment</span>
+    <span>Drag to look around</span>
+  </div>
+</div>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+
+<script define:vars={{ containerId, image, alt }}>
+  // Initialize on load to avoid blocking render
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.pannellum) {
+      window.pannellum.viewer(containerId, {
+        "type": "equirectangular",
+        "panorama": image,
+        "autoLoad": true,
+        "title": alt,
+        "compass": false,
+        "showControls": true,
+        "mouseZoom": false,
+        "keyboardZoom": false,
+      });
+    }
+  });
+</script>

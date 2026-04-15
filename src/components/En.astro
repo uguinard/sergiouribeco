@@ -1,0 +1,4 @@
+---
+const isEn = !Astro.url.pathname.startsWith('/es');
+---
+{isEn && <slot />}
