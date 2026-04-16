@@ -9,14 +9,15 @@
   --earth-lt:  #c2b49a;
   --rule:      rgba(26,23,20,0.12);
   --serif:     'Lora', 'Georgia', 'Times New Roman', serif;
-  --sans:      'Inter', system-ui, -apple-system, sans-serif;
+  --sans:      'Albert Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* ── Eyebrow ─────────────────────────────── */
 .eyebrow {
   font-family: var(--sans);
   font-size: 0.7rem;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--earth);
   margin-bottom: 1.5rem;
@@ -41,14 +42,16 @@
 .hero h1 {
   font-family: var(--serif);
   font-size: clamp(2.4rem, 5vw, 4.5rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.1;
   color: var(--ink);
   margin: 0 0 2rem;
   letter-spacing: -0.02em;
 }
 .hero h1 em {
+  font-family: var(--serif);
   font-style: italic;
+  font-weight: 400;
   color: var(--clay);
 }
 
@@ -201,18 +204,21 @@
 .about-label {
   font-family: var(--sans);
   font-size: 0.68rem;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--earth);
   padding-top: 0.4rem;
 }
 .about-body {
-  font-family: var(--serif);
+  font-family: var(--sans);
   color: var(--ink-soft);
-  line-height: 1.85;
+  line-height: 1.8;
 }
 .about-lead {
+  font-family: var(--serif);
   font-size: 1.15rem;
+  font-weight: 500;
   color: var(--ink);
   margin-bottom: 1.2rem;
 }
@@ -354,7 +360,8 @@
 .cta-btn {
   font-family: var(--sans);
   font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.7rem 1.6rem;

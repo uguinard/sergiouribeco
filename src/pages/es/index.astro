@@ -1,64 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import MapGame from '../../components/MapGame.astro';
 import '../../styles/home.css';
 ---
 <Layout title="Inicio" lang="es">
 
   <div class="screen-fill">
-    <div class="hero">
-
-      <div class="hero-text animate-fade-in-up">
-        <p class="eyebrow">Docente de Idiomas Certificado IB &middot; Espa&ntilde;ol &middot; Franc&eacute;s &middot; Ingl&eacute;s</p>
-        <h1>
-          El espa&ntilde;ol no es un c&oacute;digo<br/>
-          a <em>decodificar</em> &mdash;<br/>
-          es un mundo<br/>
-          a <em>habitar</em>.
-        </h1>
-        <p class="subhead">
-          Crec&iacute; en Bogot&aacute; convencido de que pertenecer a algo &mdash; un lugar, una lengua, una forma de ver &mdash; no es opcional para un ser humano. He ense&ntilde;ado espa&ntilde;ol en comunidades ind&iacute;genas de Colombia, en Turqu&iacute;a y Tailandia, y estoy ahora en &ETH;&agrave; N&abreve;ng desarrollando <em>neuroSpanish</em>: una metodolog&iacute;a construida sobre la convicci&oacute;n de que la lengua, antes de ser una asignatura, es una forma distinta de percibir el mundo.
-        </p>
-        <nav class="hero-nav">
-          <a href="/es/philosophy" class="nav-link">
-            <span class="nav-line"></span>
-            Filosof&iacute;a educativa
-          </a>
-          <a href="/es/cv" class="nav-link secondary">
-            <span class="nav-line"></span>
-            Curr&iacute;culum completo
-          </a>
-        </nav>
-      </div>
-
-      <div class="hero-figure animate-fade-in-up" aria-hidden="true" style="animation-delay: 0.2s;">
-        <div class="orbit-wrap">
-          <div class="orbit orbit-1"></div>
-          <div class="orbit orbit-2"></div>
-          <div class="orbit orbit-3"></div>
-          <div class="glyph-core">
-            <span>&ntilde;</span>
-          </div>
-        </div>
-        <div class="coord coord-bogota">Bogot&aacute;, CO</div>
-        <div class="coord coord-sevilla">Sevilla, ES</div>
-        <div class="coord coord-tarsus">Tarsus, TR</div>
-        <div class="coord coord-danang">&ETH;&agrave; N&abreve;ng, VN</div>
-      </div>
-
-    </div>
+    <MapGame lang="es" />
   </div>
 
 </Layout>
 
 <style>
   .screen-fill {
-    min-height: calc(100vh - 18rem);
+    min-height: calc(100vh - 10rem);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
-  .hero {
-    padding: 0;
-    min-height: unset;
   }
 </style>

@@ -24,7 +24,7 @@ const t = ui[lang];
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen text-ink bg-sand font-serif selection:bg-earth selection:text-paper antialiased">
     <!-- Sticky Header -->
@@ -89,6 +89,34 @@ const t = ui[lang];
 </html>
 
 <style is:global>
+  :root {
+    --font-display: 'Lora', serif;
+    --font-body: 'Albert Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    line-height: 1.8;
+  }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  em {
+    font-family: var(--font-display);
+    font-style: italic;
+  }
+
+  /* Navigation & Labels */
+  .nav-item, .eyebrow, .about-label, .cta-btn {
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
   /* Navigation Item Soft Underline */
   .nav-item {
     position: relative;
@@ -96,6 +124,7 @@ const t = ui[lang];
     color: var(--ink-light);
     transition: color 0.3s ease;
     text-decoration: none;
+    font-size: 0.75rem;
   }
   .nav-item::after {
     content: '';

@@ -1,64 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MapGame from '../components/MapGame.astro';
 import '../styles/home.css';
 ---
 <Layout title="Home">
 
   <div class="screen-fill">
-    <div class="hero">
-
-      <div class="hero-text animate-fade-in-up">
-        <p class="eyebrow">IB-Certified Language Educator &middot; Spanish &middot; French &middot; English</p>
-        <h1>
-          Spanish is not a code<br/>
-          to <em>decode</em> &mdash;<br/>
-          it is a world<br/>
-          to <em>inhabit</em>.
-        </h1>
-        <p class="subhead">
-          I grew up in Bogot&aacute; believing that belonging to something &mdash; a place, a language, a way of seeing &mdash; is not optional for a human being. I have taught Spanish in indigenous communities in Colombia, across Turkey and Thailand, and I am now in &ETH;&agrave; N&abreve;ng developing <em>neuroSpanish</em>: a methodology built on the conviction that language, before it is a subject, is a different way of perceiving the world.
-        </p>
-        <nav class="hero-nav">
-          <a href="/philosophy" class="nav-link">
-            <span class="nav-line"></span>
-            Educational philosophy
-          </a>
-          <a href="/cv" class="nav-link secondary">
-            <span class="nav-line"></span>
-            Full CV
-          </a>
-        </nav>
-      </div>
-
-      <div class="hero-figure animate-fade-in-up" aria-hidden="true" style="animation-delay: 0.2s;">
-        <div class="orbit-wrap">
-          <div class="orbit orbit-1"></div>
-          <div class="orbit orbit-2"></div>
-          <div class="orbit orbit-3"></div>
-          <div class="glyph-core">
-            <span>&ntilde;</span>
-          </div>
-        </div>
-        <div class="coord coord-bogota">Bogot&aacute;, CO</div>
-        <div class="coord coord-sevilla">Sevilla, ES</div>
-        <div class="coord coord-tarsus">Tarsus, TR</div>
-        <div class="coord coord-danang">&ETH;&agrave; N&abreve;ng, VN</div>
-      </div>
-
-    </div>
+    <MapGame />
   </div>
 
 </Layout>
 
 <style>
   .screen-fill {
-    min-height: calc(100vh - 18rem);
+    min-height: calc(100vh - 10rem);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
-  .hero {
-    padding: 0;
-    min-height: unset;
   }
 </style>

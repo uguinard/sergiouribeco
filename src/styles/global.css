@@ -10,7 +10,7 @@
   --color-clay: #C07C64;
 
   --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Albert Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
