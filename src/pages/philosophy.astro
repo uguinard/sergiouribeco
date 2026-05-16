@@ -1,44 +1,151 @@
 ---
+import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+
+const lang = 'en';
+const allPages = await getCollection('pages_en');
+const entry = allPages.find(p => p.id === 'philosophy');
+if (!entry) throw new Error(`philosophy not found. IDs: ${allPages.map(p => p.id).join(', ')}`);
+
+const { Content } = await render(entry);
+const { title, description } = entry.data;
 ---
 
-<Layout title="Educational Philosophy">
+<Layout title={title} description={description}>
   <div class="max-w-3xl mx-auto mt-8 relative">
+
     <div class="absolute -left-12 top-0 bottom-0 w-[1px] bg-earth/20 hidden md:block"></div>
+    <div class="absolute -left-[12.5px] top-0 bottom-0 w-[2px] hidden md:block"
+         style="background: linear-gradient(to bottom, transparent 0%, var(--clay, #8B2020) 8%, var(--clay, #8B2020) 92%, transparent 100%); opacity: 0.15;"></div>
 
     <header class="mb-16">
-      <h1 class="text-4xl md:text-6xl font-serif text-ink tracking-tight mb-6">Educational Philosophy</h1>
-      <p class="text-xl text-ink-light font-serif italic border-l-2 border-clay pl-4">
-        Language is not a different set of labels for the same reality &mdash; it is a different vision of reality altogether.
-      </p>
+      <p class="eyebrow mb-4">Educational Philosophy</p>
+      <h1 class="text-4xl md:text-6xl font-serif text-ink tracking-tight mb-6">{title}</h1>
+      {description && (
+        <p class="text-xl text-ink-light font-serif italic border-l-2 border-clay pl-4">
+          {description}
+        </p>
+      )}
     </header>
 
-    <div class="prose prose-lg prose-headings:font-serif prose-headings:text-ink prose-p:text-ink-light prose-p:leading-relaxed max-w-none space-y-8">
+    <div class="philosophy-prose prose prose-lg max-w-none">
+      <Content />
+    </div>
 
-      <p>
-        Wilhelm von Humboldt observed in the nineteenth century that each language is not a different set of labels for the same reality &mdash; it is a different vision of reality altogether. George Lakoff and Mark Johnson gave that intuition its neurological grounding in 1980: meaning is embodied, structured by conceptual metaphors rooted in physical experience, and those structures vary across languages in ways that actually change what a speaker can perceive and feel. This is not a philosophical curiosity. It is the most important fact about language teaching, and it is what I work from every day in a classroom.
-      </p>
-
-      <h2>Language as Conceptual Access</h2>
-      <p>
-        The practical consequence is this: teaching Spanish is not teaching vocabulary and grammar. It is giving a student access to a conceptual world that does not exist for them in English &mdash; one where <em>añoranza</em> names a specific texture of longing that has no English equivalent; where <em>sobremesa</em> designates the unhurried time after a meal that many cultures do not even recognise as a category worth naming; where the personal <em>a</em> marks human beings as grammatically distinct from objects, encoding a respect for personhood directly into the syntax. When a student acquires these words and structures &mdash; not memorises them, but actually acquires them &mdash; they have gained new perceptual capacity. That is what intercultural empathy looks like at the level of language: not tolerance of difference, but access to it.
-      </p>
-
-      <h2>Acquisition, Not Learning</h2>
-      <p>
-        Stephen Krashen&rsquo;s distinction between acquisition and learning is, in this light, not just a pedagogical preference &mdash; it is an ethical commitment. Learning, in Krashen&rsquo;s sense, produces declarative knowledge: rules the student can state but not use fluently under the pressure of real communication. Acquisition produces procedural competence: the kind that operates below conscious attention, the way your own language does. In an IB Spanish ab initio class, where students arrive knowing nothing and need to reach genuine oral and written production within two years, only acquisition will do. The question is how to engineer the conditions for it.
-      </p>
-
-      <h2>The NeuroSpanish Methodology</h2>
-      <p>
-        My answer is the methodology I call <em>neuroSpanish</em>, built from three converging traditions. From &Oslash;rberg&rsquo;s <em>Lingua Latina per se Illustrata</em>: the demonstration that a language can be acquired entirely through comprehensible narrative, if the input is constructed with cognitive precision. From 4E Cognition &mdash; Embodied, Embedded, Enacted, Extended &mdash; the understanding that meaning is not computed in the mind but assembled by a body moving through a world. And from Krashen&rsquo;s Input Hypothesis: the <em>i+1</em> principle, where acquisition happens at the edge of current competence, in the zone where the student can understand but must stretch to do so. The SENSUM &mdash; a multisensory lexical scaffold I developed &mdash; is the practical mechanism: each new word enters with gesture, cultural context, emotional weight, and narrative scene, activating multiple neural networks simultaneously, so that the cognitive load of novelty is distributed rather than concentrated. The student does not memorise the word. They recognise it when it returns, because their body has already met it.
-      </p>
-
-      <h2>The Affective Dimension</h2>
-      <p>
-        For a diverse international classroom &mdash; students from ten or fifteen language backgrounds, each carrying different conceptual schemas, different relationships to ambiguity and error &mdash; this approach also addresses something the grammar-translation tradition cannot: the affective dimension of acquisition. Antonio Damasio&rsquo;s work on somatic markers makes it clear that emotion is not a distraction from cognition but part of its architecture. A student who is anxious, who fears error, whose identity feels threatened by the foreignness of the language, will not acquire. My role is to create the conditions &mdash; through story, through low-stakes meaning-making, through the gradual building of genuine communicative confidence &mdash; where acquisition becomes possible for every learner in the room, regardless of how they arrived.
-      </p>
-
+    <div class="mt-16 pt-8 border-t border-earth/20 flex items-center justify-between print:hidden">
+      <a href="/cv" class="text-xs uppercase tracking-widest text-earth hover:text-clay font-sans transition-colors">
+        &rarr; Curriculum Vitae
+      </a>
+      <button
+        onclick="window.print()"
+        class="text-xs font-sans uppercase tracking-widest text-ink/50 hover:text-clay transition-colors flex items-center gap-2"
+        aria-label="Print this page"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="1" width="8" height="6" rx="0.5"/>
+          <path d="M2 7v3a.5.5 0 00.5.5h7a.5.5 0 00.5-.5V7"/>
+          <path d="M4 5h4M4 8h4M4 9.5h2"/>
+        </svg>
+        Print
+      </button>
     </div>
   </div>
 </Layout>
+
+<style>
+  :root {
+    --clay:     #8B2020;
+    --earth:    #7a6a52;
+    --ink:      #1a1714;
+    --ink-soft: #4a453f;
+    --sand:     #f5f1ea;
+    --serif:    'Lora', Georgia, serif;
+  }
+
+  .philosophy-prose > p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 3.8rem;
+    font-weight: 300;
+    line-height: 0.78;
+    float: left;
+    margin-right: 4px;
+    margin-top: 4px;
+    color: var(--clay);
+  }
+
+  .philosophy-prose p {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--ink-soft);
+    text-align: justify;
+    hyphens: auto;
+    margin-bottom: 1.4rem;
+  }
+
+  .philosophy-prose h2 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 2.8rem;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--clay);
+  }
+
+  .philosophy-prose h3 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .philosophy-prose em {
+    font-style: italic;
+    color: var(--clay);
+    font-family: var(--serif);
+  }
+
+  .philosophy-prose strong { font-weight: 500; color: var(--ink); }
+
+  .philosophy-prose blockquote {
+    border-left: 2px solid var(--clay);
+    padding-left: 1.2rem;
+    margin-left: 0;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .philosophy-prose a {
+    color: var(--clay);
+    text-decoration: underline;
+    text-decoration-color: rgba(139, 32, 32, 0.35);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+  .philosophy-prose a:hover { text-decoration-color: var(--clay); }
+
+  .philosophy-prose hr {
+    border: none;
+    text-align: center;
+    margin: 2.5rem 0;
+  }
+  .philosophy-prose hr::after {
+    content: '✦  ✦  ✦';
+    font-family: var(--serif);
+    color: var(--clay);
+    opacity: 0.4;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+  }
+
+  @media print {
+    header { margin-bottom: 8mm !important; }
+    .philosophy-prose p { font-size: 10.5pt; line-height: 1.55; }
+    .philosophy-prose h2 { font-size: 11pt; }
+  }
+</style>

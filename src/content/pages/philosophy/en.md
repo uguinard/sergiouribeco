@@ -1,0 +1,20 @@
+---
+---
+
+Wilhelm von Humboldt observed in the nineteenth century that each language is not a different set of labels for the same reality — it is a different vision of reality altogether. George Lakoff and Mark Johnson gave that intuition its neurological grounding in 1980: meaning is embodied, structured by conceptual metaphors rooted in physical experience, and those structures vary across languages in ways that actually change what a speaker can perceive and feel. This is not a philosophical curiosity. It is the most important fact about language teaching, and it is what I work from every day in a classroom.
+
+## Language as Conceptual Access
+
+The practical consequence is this: teaching Spanish is not teaching vocabulary and grammar. It is giving a student access to a conceptual world that does not exist for them in English — one where *añoranza* names a specific texture of longing that has no English equivalent; where *sobremesa* designates the unhurried time after a meal that many cultures do not even recognise as a category worth naming; where the personal *a* marks human beings as grammatically distinct from objects, encoding a respect for personhood directly into the syntax. When a student acquires these words and structures — not memorises them, but actually acquires them — they have gained new perceptual capacity. That is what intercultural empathy looks like at the level of language: not tolerance of difference, but access to it.
+
+## Acquisition, Not Learning
+
+Stephen Krashen's distinction between acquisition and learning is, in this light, not just a pedagogical preference — it is an ethical commitment. Learning, in Krashen's sense, produces declarative knowledge: rules the student can state but not use fluently under the pressure of real communication. Acquisition produces procedural competence: the kind that operates below conscious attention, the way your own language does. In an IB Spanish ab initio class, where students arrive knowing nothing and need to reach genuine oral and written production within two years, only acquisition will do. The question is how to engineer the conditions for it.
+
+## The NeuroSpanish Methodology
+
+My answer is the methodology I call *neuroSpanish*, built from three converging traditions. From Ørberg's *Lingua Latina per se Illustrata*: the demonstration that a language can be acquired entirely through comprehensible narrative, if the input is constructed with cognitive precision. From 4E Cognition — Embodied, Embedded, Enacted, Extended — the understanding that meaning is not computed in the mind but assembled by a body moving through a world. And from Krashen's Input Hypothesis: the *i+1* principle, where acquisition happens at the edge of current competence, in the zone where the student can understand but must stretch to do so. The SENSUM — a multisensory lexical scaffold I developed — is the practical mechanism: each new word enters with gesture, cultural context, emotional weight, and narrative scene, activating multiple neural networks simultaneously, so that the cognitive load of novelty is distributed rather than concentrated. The student does not memorise the word. They recognise it when it returns, because their body has already met it.
+
+## The Affective Dimension
+
+For a diverse international classroom — students from ten or fifteen language backgrounds, each carrying different conceptual schemas, different relationships to ambiguity and error — this approach also addresses something the grammar-translation tradition cannot: the affective dimension of acquisition. Antonio Damasio's work on somatic markers makes it clear that emotion is not a distraction from cognition but part of its architecture. A student who is anxious, who fears error, whose identity feels threatened by the foreignness of the language, will not acquire. My role is to create the conditions — through story, through low-stakes meaning-making, through the gradual building of genuine communicative confidence — where acquisition becomes possible for every learner in the room, regardless of how they arrived.

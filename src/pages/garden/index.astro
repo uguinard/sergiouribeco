@@ -4,16 +4,17 @@ import Layout from '../../layouts/Layout.astro';
 import { useTranslations } from '../../utils/i18n';
 
 const t = useTranslations('en');
-const allGarden = await getCollection('garden');
+const allGarden = await getCollection('garden_en');
 allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="The Pedagogical Garden" description="Pedagogical engineering for Spanish Acquisition.">
+<Layout title="The Lab" description="A workshop for experimental pedagogy — where methodology meets practice.">
   <div class="max-w-4xl">
     <header class="mb-16 border-b border-earth/20 pb-8">
-      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">The Pedagogical Garden</h1>
+      <p class="eyebrow mb-4">El Laboratorio</p>
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">The Lab</h1>
       <p class="text-xl text-ink-light font-serif italic">
-        A behind-the-scenes look at my experiments in Spanish language acquisition, 4E cognition, and comprehensible input design.
+        A workshop for experimental pedagogy. Methodology tested in the field, iterated in practice.
       </p>
     </header>
 
@@ -37,13 +38,13 @@ allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
           
           <a href={`/garden/${entry.id}`} class="block mb-4">
             <h2 class="text-xl font-serif text-ink group-hover:text-clay transition-colors duration-300 leading-tight">
-              {entry.data.title.en}
+              {entry.data.title}
             </h2>
           </a>
           
-          {entry.data.tags?.en && entry.data.tags.en.length > 0 && (
+          {entry.data.tags && entry.data.tags.length > 0 && (
             <div class="flex flex-wrap gap-2 mt-auto">
-              {entry.data.tags.en.map(tag => (
+              {entry.data.tags.map(tag => (
                 <span class="text-[10px] font-sans text-ink/40">
                   #{tag}
                 </span>

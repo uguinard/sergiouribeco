@@ -2,17 +2,18 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const allGeography = await getCollection('geography');
+const allGeography = await getCollection('geography_en');
 // Sort by date mostly
 allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Geography of Ideas" description="A collection of thoughts, travels, and explorations.">
+<Layout title="Field Notes" description="Diary entries from a pedagogue in motion — teaching, traveling, and thinking across four continents.">
   <div class="max-w-4xl">
     <header class="mb-16 border-b border-earth/20 pb-8">
-      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">Geography of Ideas</h1>
+      <p class="eyebrow mb-4">Cuadernos de Campo</p>
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">Field Notes</h1>
       <p class="text-xl text-ink-light font-serif italic">
-        A map of experiences, travel narratives, and interwoven reflections.
+        Diary entries from a pedagogue in motion. Teaching, traveling, and thinking across four continents.
       </p>
     </header>
 
@@ -28,19 +29,19 @@ allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
             
             <a href={`/geography/${entry.id}`} class="block">
               <h2 class="text-2xl font-serif text-ink group-hover:text-clay transition-colors duration-300">
-                {entry.data.title.en}
+                {entry.data.title}
               </h2>
             </a>
             
-            {entry.data.description?.en && (
+            {entry.data.description && (
               <p class="text-ink-light mt-2 max-w-2xl leading-relaxed">
-                {entry.data.description.en}
+                {entry.data.description}
               </p>
             )}
             
-            {entry.data.tags?.en && entry.data.tags.en.length > 0 && (
+            {entry.data.tags && entry.data.tags.length > 0 && (
               <div class="flex gap-2 mt-4">
-                {entry.data.tags.en.map(tag => (
+                {entry.data.tags.map(tag => (
                   <span class="text-[10px] font-sans uppercase tracking-wider text-ink/40 bg-earth/5 px-2 py-1 rounded-sm">
                     {tag}
                   </span>

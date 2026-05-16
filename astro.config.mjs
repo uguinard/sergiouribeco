@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import remarkWikiLink from 'remark-wiki-link';
+import { remarkObsidianCallouts } from './src/utils/remark-obsidian-callouts.mjs';
+import { remarkObsidianImages } from './src/utils/remark-obsidian-images.mjs';
 
 import alpinejs from '@astrojs/alpinejs';
 
@@ -11,7 +13,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [mdx(), alpinejs()],
+  integrations: [mdx({ extendMarkdownConfig: true }), alpinejs()],
   site: 'https://sergiouribe.co',
   base: '/',
   output: 'static',
@@ -24,6 +26,8 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [
+      remarkObsidianImages,
+      remarkObsidianCallouts,
       [remarkWikiLink, {
         pageResolver: (/** @type {string} */ name) => [name.replace(/ /g, '-').toLowerCase()],
         hrefTemplate: (/** @type {string} */ permalink) => `/${permalink}`

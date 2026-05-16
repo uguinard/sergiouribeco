@@ -1,0 +1,19 @@
+date: 2026-03-01
+location: "Bogotá, Colombia"
+lat: 16.056938
+lng: 108.223722
+cover: ./media/dawn.jpg
+cover_position: center center
+draft: true
+title.en: "Test"
+title.es: "Prueba"
+description.en: "This is a test"
+description.es: "Pruebinski"
+tags.en: [vietnam, cycling, dawn, river]
+tags.es: [ciclismo, amanecer, río, colombia]
+photos:
+  - src: ./media/dawn.jpg
+    alt.en: "Han river at dawn, Đà Nẵng"
+    alt.es: "Río Han al amanecer, Đà Nẵng"
+    caption.en: "The Han river at 5:30 AM. Before the city wakes, the water holds the last of the night."
+    caption.es: "El río Han a las 5:30 AM. Antes de que la ciudad despierte, el agua sostiene lo último de la noche."

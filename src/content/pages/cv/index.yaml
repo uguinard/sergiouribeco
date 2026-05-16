@@ -1,0 +1,136 @@
+title.en: "Curriculum Vitae"
+title.es: "Curriculum Vitae"
+name: "Sergio Uribe Guinard"
+role.en: "IB-Certified Language Educator — Spanish · French · English · Secondary & Middle School"
+role.es: "Educador de Idiomas Certificado IB — Español · Francés · Inglés · Secundaria"
+location: "Da Nang, Vietnam"
+availableFrom: "July 2026"
+linkedin: "https://linkedin.com/in/sergiouribe"
+website: "https://sergiouribe.co"
+lastUpdated: 2026-04-01
+printable: true
+
+profile.en: "IB-certified Language Educator with a Master's in ELE (GPA 3.8/4.0) and four years of international classroom experience across Colombia, Turkey, and Thailand. Specialised in Spanish for Secondary and Middle School learners (Grades 6–12), with a track record of outstanding engagement outcomes, DELE accreditation leadership, and 30+ original H5P/digital resources produced. Developer of NeuroSpanish, a proprietary Spanish methodology grounded in SENSUM scaffolding and Comprehensible Input. Fluent in Spanish (native C2), English (C1), and French (B2). Currently in Vietnam; available to relocate from July 2026."
+profile.es: "Educador de Idiomas certificado IB con Máster en ELE (GPA 3.8/4.0) y cuatro años de experiencia internacional en Colombia, Turquía y Tailandia. Especializado en español para Secundaria (Grados 6–12), con resultados sobresalientes en engagement, liderazgo de acreditación DELE y más de 30 recursos H5P/digitales originales. Desarrollador de NeuroSpanish, metodología propia basada en el andamiaje SENSUM y el Input Comprensible."
+
+experience:
+  - role.en: "NeuroSpanish — Research & Curriculum Development"
+    role.es: "NeuroSpanish — Investigación y Desarrollo Curricular"
+    period: "Nov 2025 — Present"
+    location: "Da Nang, Vietnam"
+    highlights.en:
+      - "Developing NeuroSpanish: a proprietary Spanish acquisition methodology built on SENSUM scaffolding, narrative immersion, and 4E Cognition; designed for IB Language Acquisition contexts."
+      - "Building AI-generated Comprehensible Input pipelines and interactive H5P resources for Grades 6–12 secondary learners."
+    highlights.es:
+      - "Desarrollando NeuroSpanish: metodología propia de adquisición del español basada en andamiaje SENSUM, inmersión narrativa y Cognición 4E."
+      - "Construyendo pipelines de Input Comprensible generado por IA y recursos H5P interactivos para secundaria."
+
+  - role.en: "Spanish MFL Teacher · IB MYP Language Acquisition"
+    role.es: "Profesor de Español MFL · IB MYP Adquisición de Lengua"
+    period: "Aug — Oct 2025"
+    location: "UWC Thailand · Phuket, Thailand"
+    highlights.en:
+      - "Delivered IB MYP Spanish Language Acquisition; designed differentiated tasks for mixed-ability Secondary classes across phase levels."
+      - "Served as Grade 6 Co-Advisor (Homeroom): pastoral care, social-emotional transition support, parent communication."
+      - "Facilitated interdisciplinary modules including Experiential Learning and MANTAS outdoor education."
+    highlights.es:
+      - "Impartió IB MYP Spanish Language Acquisition; diseñó tareas diferenciadas para clases de secundaria de habilidades mixtas."
+      - "Co-Asesor del Grado 6 (Homeroom): tutoría, apoyo socioemocional y comunicación con familias."
+      - "Facilitó módulos interdisciplinarios incluyendo Aprendizaje Experiencial y educación al aire libre MANTAS."
+
+  - role.en: "Spanish MFL Teacher"
+    role.es: "Profesor de Español MFL"
+    period: "Nov 2021 — Jul 2023"
+    location: "Tarsus American College · Tarsus, Turkey"
+    highlights.en:
+      - "Designed and delivered full Spanish curriculum (A1–A2 CEFR) for 120+ students, Grades 9 & Preparatory; authored all unit plans, assessments, and scope-and-sequence."
+      - "Led accreditation of the region's first official DELE examination centre with Instituto Cervantes — a first for the province."
+      - "Developed 30+ interactive H5P and web-based resources; achieved a documented 40% improvement in student engagement metrics."
+      - "Implemented data-driven formative assessment via LMS, reducing feedback turnaround by 35%; presented methodology to department."
+    highlights.es:
+      - "Diseñó y entregó el currículo completo de español (A1–A2 MCER) para más de 120 estudiantes."
+      - "Lideró la acreditación del primer centro de examen DELE oficial de la región con el Instituto Cervantes."
+      - "Desarrolló más de 30 recursos interactivos H5P; logró una mejora documentada del 40% en métricas de engagement."
+      - "Implementó evaluación formativa basada en datos via LMS, reduciendo el tiempo de retroalimentación en un 35%."
+
+  - role.en: "Communication & Intercultural World Teacher"
+    role.es: "Profesor de Comunicación y Mundo Intercultural"
+    period: "Jan 2020 — Jul 2021"
+    location: "Colegio Alvernia Bilingüe · Bogotá, Colombia"
+    highlights.en:
+      - "Taught English to 150+ secondary students; led cross-curricular project integrating language learning with ecological awareness."
+      - "Implemented Canvas LMS assessment architecture, reducing grading turnaround by 30%."
+    highlights.es:
+      - "Enseñó inglés a más de 150 estudiantes de secundaria; lideró proyecto transversal integrando aprendizaje de idiomas con conciencia ecológica."
+      - "Implementó arquitectura de evaluación Canvas LMS, reduciendo el tiempo de calificación en un 30%."
+
+  - role.en: "Spanish and English Teacher"
+    role.es: "Profesor de Español e Inglés"
+    period: "Apr — Sep 2019"
+    location: "Vicariato Apostólico de Inírida · Guainía, Colombia"
+    highlights.en:
+      - "Designed place-based language curriculum integrating indigenous cultural context for Primary and Secondary learners in a remote multilingual community."
+    highlights.es:
+      - "Diseñó currículo lingüístico basado en el lugar, integrando contexto cultural indígena para estudiantes de primaria y secundaria en una comunidad multilingüe remota."
+
+education:
+  - degree.en: "IB Certificate in Teaching and Learning"
+    degree.es: "Certificado IB en Enseñanza y Aprendizaje"
+    institution: "Universidad Camilo José Cela · Spain"
+    year: "2025"
+    notes.en: "IB methodologies, CAS, TOK, Approaches to Teaching and Learning (ATL)."
+    notes.es: "Metodologías IB, CAS, TOK, Enfoques de Enseñanza y Aprendizaje (ATL)."
+
+  - degree.en: "Specialisation Diploma in International Education"
+    degree.es: "Diploma de Especialización en Educación Internacional"
+    institution: "Universidad Camilo José Cela · Spain"
+    year: "2025"
+    notes.en: "International curriculum development and global citizenship frameworks."
+    notes.es: "Desarrollo curricular internacional y marcos de ciudadanía global."
+
+  - degree.en: "Master's in Teaching Spanish as a Foreign Language (ELE)"
+    degree.es: "Máster en Enseñanza del Español como Lengua Extranjera (ELE)"
+    institution: "Universidad de Sevilla · Spain · GPA 3.8/4.0"
+    year: "2024"
+    notes.en: "Thesis: The Hero's Journey: A Didactic Proposal from Conceptual Metaphor Theory and 4E Cognition."
+    notes.es: "Tesis: El Viaje del Héroe: Una Propuesta Didáctica desde la Teoría de la Metáfora Conceptual y la Cognición 4E."
+
+  - degree.en: "Bachelor of Education in Spanish and Foreign Languages"
+    degree.es: "Licenciatura en Español y Lenguas Extranjeras"
+    institution: "Universidad Pedagógica Nacional · Colombia"
+    year: "2018"
+    notes.en: "Equivalent to PGCE with QTS for non-UK trained educators. Research: Multisensory Modality for Oral Production in FLE."
+    notes.es: "Equivalente a PGCE con QTS. Investigación: Modalidad Multisensorial para la Producción Oral en FLE."
+
+languages:
+  - name: "Spanish"
+    level.en: "Native C2 — full academic and professional fluency; primary medium of instruction"
+    level.es: "Nativo C2 — fluidez académica y profesional completa; principal lengua de instrucción"
+  - name: "English"
+    level.en: "C1 Advanced — full professional fluency; IB instruction language"
+    level.es: "C1 Avanzado — fluidez profesional completa; lengua de instrucción IB"
+  - name: "French"
+    level.en: "B2 Upper-Intermediate — classroom instruction capability"
+    level.es: "B2 Intermedio Alto — capacidad de instrucción en aula"
+  - name: "Turkish"
+    level.en: "A1 Basic — functional conversational level"
+    level.es: "A1 Básico — nivel conversacional funcional"
+
+skills.en:
+  - "IB: MYP Language Acquisition (all phases), DP Spanish B & ab initio, IB PYP awareness"
+  - "Methodology: Comprehensible Input, CEFR A1–C2, NeuroSpanish/SENSUM (proprietary), 4E Cognition"
+  - "Assessment: DELE Examinations (accredited centre lead), IB criterion-referenced assessment, data-driven formative feedback, GCSE/IGCSE awareness"
+  - "Pastoral: Homeroom advisor, Grade 6 co-advisor, cross-cultural pastoral support"
+  - "LMS: Canvas, ManageBac, Moodle, Blackboard, Google Workspace"
+  - "EdTech: H5P (30+ resources produced), AI-generated CI pipelines, digital storytelling, interactive multimedia"
+  - "Programming: Python 3, HTML5, CSS3, JavaScript (EdTech resource development)"
+  - "Safeguarding: Enhanced DBS-equivalent (Turkey, Thailand); police clearances available for all countries of residence"
+skills.es:
+  - "IB: MYP Adquisición de Lengua (todas las fases), DP Spanish B y ab initio, conocimiento IB PYP"
+  - "Metodología: Input Comprensible, MCER A1–C2, NeuroSpanish/SENSUM (propio), Cognición 4E"
+  - "Evaluación: Exámenes DELE (líder de centro acreditado), evaluación IB por criterios, retroalimentación formativa basada en datos"
+  - "Tutoría: Tutor de Homeroom, Co-asesor Grado 6, apoyo pastoral intercultural"
+  - "LMS: Canvas, ManageBac, Moodle, Blackboard, Google Workspace"
+  - "EdTech: H5P (más de 30 recursos), pipelines de IC generado por IA, narrativa digital, multimedia interactiva"
+  - "Programación: Python 3, HTML5, CSS3, JavaScript"
+  - "Salvaguarda: DBS equivalente mejorado (Turquía, Tailandia); certificados de antecedentes disponibles"

@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 
-const allGeography = await getCollection('geography');
+const allGeography = await getCollection('geography_es');
 // Sort by date mostly
 allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
@@ -28,19 +28,19 @@ allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
             
             <a href={`/es/geography/${entry.id}`} class="block">
               <h2 class="text-2xl font-serif text-ink group-hover:text-clay transition-colors duration-300">
-                {entry.data.title.es}
+                {entry.data.title}
               </h2>
             </a>
             
-            {entry.data.description?.es && (
+            {entry.data.description && (
               <p class="text-ink-light mt-2 max-w-2xl leading-relaxed">
-                {entry.data.description.es}
+                {entry.data.description}
               </p>
             )}
             
-            {entry.data.tags?.es && entry.data.tags.es.length > 0 && (
+            {entry.data.tags && entry.data.tags.length > 0 && (
               <div class="flex gap-2 mt-4">
-                {entry.data.tags.es.map(tag => (
+                {entry.data.tags.map(tag => (
                   <span class="text-[10px] font-sans uppercase tracking-wider text-ink/40 bg-earth/5 px-2 py-1 rounded-sm">
                     {tag}
                   </span>

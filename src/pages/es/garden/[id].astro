@@ -8,7 +8,7 @@ import ArticleFallback from '../../../components/ArticleFallback.astro';
 import { useTranslations } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  const gardenEntries = await getCollection('garden');
+  const gardenEntries = await getCollection('garden_es');
   return gardenEntries.map(entry => ({
     params: { id: entry.id }, props: { entry },
   }));
@@ -29,7 +29,7 @@ try {
 }
 ---
 
-<Layout title={entry.data.title.es} lang="es">
+<Layout title={entry.data.title} lang="es">
   <div class="max-w-3xl mx-auto mt-8">
     <a href="/es/garden" class="text-xs uppercase tracking-widest text-earth hover:text-clay font-sans mb-12 inline-block">
       {t('ui', 'backToGarden')}
@@ -49,7 +49,7 @@ try {
         </span>
       </div>
       
-      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight">{entry.data.title.es}</h1>
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight">{entry.data.title}</h1>
     </header>
 
     <div class="prose prose-lg prose-headings:font-serif prose-headings:text-ink prose-p:text-ink-light prose-p:leading-relaxed prose-a:text-clay hover:prose-a:text-earth max-w-none">

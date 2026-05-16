@@ -4,7 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import { useTranslations } from '../../../utils/i18n';
 
 const t = useTranslations('es');
-const allGarden = await getCollection('garden');
+const allGarden = await getCollection('garden_es');
 allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
@@ -37,13 +37,13 @@ allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
           
           <a href={`/es/garden/${entry.id}`} class="block mb-4">
             <h2 class="text-xl font-serif text-ink group-hover:text-clay transition-colors duration-300 leading-tight">
-              {entry.data.title.es}
+              {entry.data.title}
             </h2>
           </a>
           
-          {entry.data.tags?.es && entry.data.tags.es.length > 0 && (
+          {entry.data.tags && entry.data.tags.length > 0 && (
             <div class="flex flex-wrap gap-2 mt-auto">
-              {entry.data.tags.es.map(tag => (
+              {entry.data.tags.map(tag => (
                 <span class="text-[10px] font-sans text-ink/40">
                   #{tag}
                 </span>

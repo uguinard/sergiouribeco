@@ -1,0 +1,82 @@
+{
+  "aiProviders": {
+    "main": "id-1776928105918",
+    "embedding": "id-1776928105918",
+    "vision": "id-1776928105918"
+  },
+  "actionPalette": {
+    "systemPromptActionId": null
+  },
+  "defaults": {
+    "creativity": "medium",
+    "contextLimit": "local"
+  },
+  "actions": [
+    {
+      "name": "Reply message",
+      "prompt": "help me reply to this email/message",
+      "system": "",
+      "replace": false,
+      "id": "874729f6-0477-4464-b09c-ff0f15e8d5b5"
+    },
+    {
+      "name": "Write an Email - CV",
+      "prompt": "Write a brief email to apply to the mentioned position. \nParameters: be organic, authentic, disruptive and a bit poetical. Avoid cliché words or sentences.\nSteps:\nFirst check the job offer info provided.\nSecond check my CV to include some relevant info in the body and footer of the email.\nThird  write a brief email specifying where did I find the offer, who shared it (if mentioned), the position I am applying for, and the attached documents.\n\nSergio Uribe Guinard IB-Certified Language Educator — Spanish · French · EnglishSecondary & Middle School\nContact: uguinard@gmail.com | (+84) 037 271 9522 | (+34) 666 209 033Location: Da Nang, Vietnam | Website: sergiouribe.coProfessional ProfileIB-certified Language Educator with a Master’s in ELE (GPA 3.8/4.0) and four years of international classroom experience across Colombia, Turkey, and Thailand. Specialised in Spanish for Secondary and Middle School learners (Grades 6–12), with a track record of outstanding engagement outcomes, DELE accreditation leadership, and 30+ original H5P/digital resources produced. Developer of NeuroSpanish, a proprietary Spanish methodology grounded in SENSUM scaffolding and Comprehensible Input. Fluent in Spanish (native C2), English (C1), and French (B2). Currently in Vietnam; available to relocate from July 2026.● Available July 2026 — passport, degrees, police clearances obtainable on request.Professional ExperienceSpanish MFL Teacher · IB MYP Language AcquisitionUWC Thailand | Phuket, Thailand | August – October 2025Delivered IB MYP Spanish Language Acquisition; designed differentiated tasks for mixed-ability Secondary classes across phase levels.Served as Grade 6 Co-Advisor (Homeroom): pastoral care, social-emotional transition support, parent communication.Facilitated interdisciplinary modules including Experiential Learning and MANTAS outdoor education.References available from Head of School, Secondary Principal, and MYP Coordinator.Spanish MFL TeacherTarsus American College | Tarsus, Turkey | November 2021 – July 2023Designed and delivered full Spanish curriculum (A1–A2 CEFR) for 120+ students, Grades 9 & Preparatory; authored all unit plans, assessments, and scope-and-sequence.Led accreditation of the region’s first official DELE examination centre with Instituto Cervantes — a first for the province.Developed 30+ interactive H5P and web-based resources; achieved a documented 40% improvement in student engagement metrics.Implemented data-driven formative assessment via LMS, reducing feedback turnaround by 35%; presented methodology to department.Communication & Intercultural World TeacherColegio Alvernia Bilingüe | Bogotá, Colombia | January 2020 – July 2021Taught English to 150+ secondary students; led cross-curricular project integrating language learning with ecological awareness.Implemented Canvas LMS assessment architecture, reducing grading turnaround by 30%.Spanish and English TeacherVicariato Apostólico de Inírida | Guainía, Colombia | April – September 2019Designed place-based language curriculum integrating indigenous cultural context for Primary and Secondary learners in a remote multilingual community.Methodology DevelopmentNeuroSpanish — Research & Curriculum DevelopmentDa Nang, Vietnam | November 2025 – PresentDeveloping NeuroSpanish: a proprietary Spanish acquisition methodology built on SENSUM scaffolding, narrative immersion, and 4E Cognition; designed for IB Language Acquisition contexts.Building AI-generated Comprehensible Input pipelines and interactive H5P resources for Grades 6–12 secondary learners.EducationIB Certificate in Teaching and LearningUniversidad Camilo José Cela · Spain · 2025IB methodologies, CAS, TOK, Approaches to Teaching and Learning (ATL).Specialisation Diploma in International EducationUniversidad Camilo José Cela · Spain · 2025International curriculum development and global citizenship frameworks.Master’s in Teaching Spanish as a Foreign Language (ELE)Universidad de Sevilla · Spain · 2024 · GPA 3.8/4.0Thesis: The Hero’s Journey: A Didactic Proposal from Conceptual Metaphor Theory and 4E Cognition.Bachelor of Education in Spanish and Foreign LanguagesUniversidad Pedagógica Nacional · Colombia · 2018Equivalent to PGCE with QTS. Research: Multisensory Modality for Oral Production in FLE.LanguagesLanguageProficiency LevelSpanishNative C2 — full academic and professional fluency.EnglishC1 Advanced — full professional fluency; IB instruction language.FrenchB2 Upper-Intermediate — classroom instruction capability.TurkishA1 Basic — functional conversational level.Teaching Skills & TechnologyPedagogy & AssessmentIB: MYP Language Acquisition (all phases), DP Spanish B & ab initio, IB PYP awareness.Methodology: Comprehensible Input, CEFR A1–C2, NeuroSpanish/SENSUM, 4E Cognition.Assessment: DELE Accredited Centre Lead, IB criterion-referenced assessment, GCSE/IGCSE awareness.Pastoral: Homeroom advisor, Grade 6 co-advisor, cross-cultural pastoral support.Technical SkillsLMS: Canvas, ManageBac, Moodle, Google Workspace.EdTech: H5P (30+ resources), AI-generated CI pipelines, digital storytelling.Programming: Python 3, HTML5, CSS3, JavaScript (for EdTech resource development).Safeguarding: Enhanced DBS-equivalent (Turkey, Thailand).Professional ReferencesDavid Griffiths — Head of School, UWC ThailandMichael Sheridan — Secondary Principal, UWC ThailandChantal Kruger — Vice Principal & MYP Coordinator, UWC ThailandJavier Muñoz-Basols — President ASELE / Director, Instituto Cervantes LALola Pons — PhD Professor, Universidad de SevillaAhu Tereci Dursun — Head of Foreign Languages, Tarsus American College",
+      "system": "",
+      "replace": false,
+      "id": "36c1ceb2-bb77-4ac6-97ef-91bda81fd1d6"
+    },
+    {
+      "name": "Analizar Texto",
+      "prompt": "Tarea: Realiza una auditoría técnica profunda del texto que te proporcionaré. Tu objetivo no es solo corregir, sino diagnosticar cómo el texto afecta la mente del lector y proponer mejoras estructurales.\n\nDimensiones de Análisis:\n\nLingüística y Estilística: Evalúa la precisión léxica, vicios de dicción (queísmos, cosismos), la cadencia de la prosa y la \"huella digital\" del autor. Identifica si el estilo (sobrio, barroco, directo) es consistente.\n\nPragmática y Retórica: ¿Se cumple la intención comunicativa? Analiza el balance entre Ethos (credibilidad), Pathos (emoción) y Logos (lógica). Detecta si hay saltos lógicos o presuposiciones no aclaradas.\n\nCognitiva (Carga y Procesamiento): Evalúa la \"imagenabilidad\" del texto y la carga en la memoria de trabajo. ¿Es fácil de procesar o requiere demasiado esfuerzo cognitivo? ¿El lenguaje evoca sensaciones físicas (4E Cognition)?\n\nNarrativa y Coherencia: Analiza la progresión temática (flujo de ideas nuevas vs. conocidas) y el pacing (ritmo). ¿El \"esqueleto\" del texto sostiene el argumento de principio a fin?\n\nLegibilidad y UX: Evalúa la escaneabilidad y la jerarquía de la información. ¿Cómo se comportaría este texto en un entorno digital?\n\nSociolingüística: Revisa si el registro, el tono y la variedad de lengua son adecuados para el público objetivo y el contexto cultural.\n\nOutput deseado:\n\nDiagnóstico por Dimensión: Un resumen ejecutivo de hallazgos (lo que funciona y lo que genera fricción).\n\nMapa de \"Puntos de Fricción\": Identifica 3 momentos específicos donde el lector podría abandonar la lectura o confundirse.\n\nPropuesta de Reescritura: Toma un fragmento clave del texto y presenta una versión \"optimizada\" aplicando todos los criterios anteriores, explicando los cambios realizados.\n\nChecklist de Mejora: 3 pasos concretos que debo seguir para elevar este texto al siguiente nivel.",
+      "system": "Actúa como un comité editorial de élite compuesto por un lingüista clínico, un experto en ciencias cognitivas aplicadas a la lectura, un filólogo y un arquitecto de contenido UX.",
+      "replace": false,
+      "id": "954a83a3-8e43-477c-8dc7-a8916056783e"
+    },
+    {
+      "name": "Translate into English",
+      "prompt": "Translate into English",
+      "system": "",
+      "replace": false,
+      "id": "1aefecb1-9ece-44b3-8432-1324fe09eea4"
+    },
+    {
+      "name": "🪄 General help",
+      "prompt": "",
+      "system": "You are an assistant helping a user write more content in a document based on a prompt. Output in markdown format. Do not use links. Do not include literal content from the original document.",
+      "id": "5be5e8a9-be55-4892-952f-a780866b38e2"
+    },
+    {
+      "name": "✍️ Continue writing",
+      "prompt": "Act as a professional editor with many years of experience as a writer. Carefully finalize the following text, add details, use facts and make sure that the meaning and original style are preserved. Purposely write in detail, with examples, so that your reader is comfortable, even if they don't understand the specifics. Don't use clericalisms, evaluations without proof with facts, passive voice. Use Markdown markup language for formatting. Answer only content and nothing else, no introductory words, only substance.",
+      "system": "You are an AI assistant that follows instruction extremely well. Help as much as you can.",
+      "id": "4033b413-294d-4d65-9231-65467bbb1620"
+    },
+    {
+      "name": "🍭 Summarize",
+      "prompt": "Make a concise summary of the key points of the following text.",
+      "system": "You are an AI assistant that follows instruction extremely well. Help as much as you can.",
+      "id": "464d5243-c969-4f00-8ae6-6f897d5796e9"
+    },
+    {
+      "name": "📖 Fix spelling and grammar",
+      "prompt": "Proofread the below for spelling and grammar.",
+      "system": "You are an AI assistant that follows instruction extremely well. Help as much as you can.",
+      "replace": true,
+      "id": "dbf40f67-efd2-43c7-9ccd-77d8f98509e3"
+    },
+    {
+      "name": "✅ Find action items",
+      "prompt": "Act as an assistant helping find action items inside a document. An action item is an extracted task or to-do found inside of an unstructured document. Use Markdown checkbox format: each line starts with \"- [ ] \"",
+      "system": "You are an AI assistant that follows instruction extremely well. Help as much as you can.",
+      "id": "f04f43b6-25ff-4069-8dc1-7e9969a5a10b"
+    },
+    {
+      "name": "🧠 New System Prompt",
+      "prompt": "",
+      "system": "You are a highly skilled AI prompt engineer with expertise in creating tailored prompts for a wide range of professional roles. You have a deep knowledge of how to craft prompts that effectively guide the language model to produce high-quality, contextually appropriate responses.\n\nYour task is to generate a custom system prompt for different roles based on user input. This involves understanding the specific requirements of each role, the context in which the prompt will be used, and the desired output format. You are skilled in structuring prompts that ensure clarity, relevance, and utility.\n\nCreate a custom system prompt for an LLM to assist users in generating contextually appropriate and highly effective responses for various roles. The prompt should provide clear instructions to the LLM on how to handle specific scenarios related to the role, including the tone and format of the response.\n\nStart by providing a role \"You are...\" and context as a summary of the situation or background information relevant to the prompt. Define the main objective, outlining what the LLM needs to accomplish.\n\nInclude instructions on the appropriate style and tone (e.g., formal, casual, technical, empathetic) based on the role and audience. Identify the target audience to tailor the LLM's output effectively. Specify the format of the response, whether it should be a narrative, bullet points, step-by-step guide, code, or another format. Avoid using headings or examples; the prompt should read as a continuous, cohesive set of instructions.\nANSWER PROMPT AND NOTHING ELSE!",
+      "id": "b0577fec-300c-4411-872b-9360d813774f"
+    }
+  ],
+  "_version": 10
+}
