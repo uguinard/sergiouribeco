@@ -23,9 +23,9 @@ allGarden.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
           <div class="absolute top-0 left-0 w-full h-[2px] bg-earth opacity-0 group-hover:opacity-100 transition-opacity"></div>
           
           <div class="flex justify-between items-start mb-4">
-            <time class="text-xs font-sans uppercase tracking-widest text-ink/50" datetime={entry.data.date.toISOString()}>
-              {entry.data.date.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </time>
+        <time class="text-xs font-sans uppercase tracking-widest text-ink/50" datetime={entry.data.date?.toISOString?.()}>
+          {entry.data.date?.toLocaleDateString?.('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
+        </time>
             <span class={`text-[10px] font-sans uppercase tracking-wider px-2 py-1 rounded-sm ${
               entry.data.status === 'completed' ? 'bg-ink/5 text-ink/60' : 
               entry.data.status === 'in-progress' ? 'bg-clay/10 text-clay' : 

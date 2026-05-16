@@ -34,7 +34,15 @@ type Props = {
 
 const { entry, prevSlug, nextSlug } = Astro.props;
 const { data } = entry;
-const { Content } = await render(entry);
+let Content: any = null;
+let renderError = false;
+try {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+} catch (e) {
+  console.error(`[Astro] Error rendering ${entry.id}:`, e);
+  renderError = true;
+}
 
 const allPhotos = data.photos.length > 0
   ? data.photos
@@ -131,7 +139,7 @@ const hasMap = data.lat != null && data.lng != null;
             {data.title}
           </h1>
           <time class="text-[10px] uppercase tracking-[0.2em] text-neutral-500">
-            {data.date.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+            {data.date?.toLocaleDateString?.('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
           </time>
         </div>
 
@@ -155,7 +163,7 @@ const hasMap = data.lat != null && data.lng != null;
           prose-img:rounded prose-img:my-6 prose-img:w-full
           prose-strong:text-neutral-200 prose-a:text-clay hover:prose-a:text-white
           mb-12">
-          <Content />
+          {!renderError && Content ? <Content /> : <p>Error loading content.</p>}
         </div>
 
         <!-- Pie de foto -->
