@@ -37,8 +37,8 @@ try {
     
     <header class="mb-12">
       <div class="flex items-center gap-4 mb-6">
-        <time class="text-sm font-sans uppercase tracking-widest text-ink/60" datetime={entry.data.date.toISOString()}>
-          {entry.data.date.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+        <time class="text-sm font-sans uppercase tracking-widest text-ink/60" datetime={entry.data.date?.toISOString?.()}>
+          {entry.data.date?.toLocaleDateString?.('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
         </time>
         <span class={`text-[10px] font-sans uppercase tracking-wider px-2 py-1 rounded-sm ${
           entry.data.status === 'completed' ? 'bg-ink/5 text-ink/60' : 
