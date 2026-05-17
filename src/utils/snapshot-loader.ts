@@ -94,10 +94,13 @@ export function snapshotLoader(lang: 'en' | 'es'): Loader {
         // Register the file for rendering
         store.addModuleImport(absFile);
 
+        // Pre-render body so remark plugins (callouts, wiki-links, images) run
+        const rendered = body ? await renderMarkdown(body) : { html: '' };
+
         store.set({
           id,
           data: parsedData,
-          body,
+          body: rendered.html ?? body,
           filePath: relativeFilePath,
           digest,
           deferredRender: true,
