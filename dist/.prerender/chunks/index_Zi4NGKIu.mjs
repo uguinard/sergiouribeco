@@ -1,0 +1,26 @@
+import { c as createComponent, $ as $$Layout } from './Layout_Bg3NhFLQ.mjs';
+import 'piccolore';
+import { r as renderComponent, a as renderTemplate, m as maybeRenderHead, b as addAttribute } from './prerender_U-PYTyhn.mjs';
+import { g as getCollection } from './_astro_content_DKu9nj99.mjs';
+
+const $$Index = createComponent(async ($$result, $$props, $$slots) => {
+  const allGeography = await getCollection("geography_es");
+  allGeography.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Geografía de Ideas", "description": "Una colección de relatos, viajes y exploraciones.", "lang": "es" }, { "default": async ($$result2) => renderTemplate` ${maybeRenderHead()}<div class="max-w-4xl"> <header class="mb-16 border-b border-earth/20 pb-8"> <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">Geografía de Ideas</h1> <p class="text-xl text-ink-light font-serif italic">
+Un mapa de experiencias, relatos de viaje y reflexiones entrelazadas.
+</p> </header> <div class="space-y-12"> ${allGeography.map((entry) => renderTemplate`<article class="group relative pl-8 border-l border-earth/30 hover:border-clay transition-colors duration-500"> <div class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-sand border-2 border-earth group-hover:border-clay transition-colors duration-500"></div> <div class="flex flex-col gap-2"> <time class="text-xs font-sans uppercase tracking-widest text-ink/50"${addAttribute(entry.data.date.toISOString(), "datetime")}> ${entry.data.date.toLocaleDateString("es-ES", { month: "long", day: "numeric", year: "numeric" })} </time> <a${addAttribute(`/es/geography/${entry.id}`, "href")} class="block"> <h2 class="text-2xl font-serif text-ink group-hover:text-clay transition-colors duration-300"> ${entry.data.title} </h2> </a> ${entry.data.description && renderTemplate`<p class="text-ink-light mt-2 max-w-2xl leading-relaxed"> ${entry.data.description} </p>`} ${entry.data.tags && entry.data.tags.length > 0 && renderTemplate`<div class="flex gap-2 mt-4"> ${entry.data.tags.map((tag) => renderTemplate`<span class="text-[10px] font-sans uppercase tracking-wider text-ink/40 bg-earth/5 px-2 py-1 rounded-sm"> ${tag} </span>`)} </div>`} </div> </article>`)} </div> </div> ` })}`;
+}, "/Users/mac/Documents/01_ProyectoEspanol/SergioUribe.co/website/github/sergiouribeco/src/pages/es/geography/index.astro", void 0);
+
+const $$file = "/Users/mac/Documents/01_ProyectoEspanol/SergioUribe.co/website/github/sergiouribeco/src/pages/es/geography/index.astro";
+const $$url = "/es/geography";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Index,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
