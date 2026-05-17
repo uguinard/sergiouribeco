@@ -23,6 +23,7 @@ import type { Loader } from 'astro/loaders';
 import { load as parseYaml } from 'js-yaml';
 import { readFileSync, existsSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
+import { pathToFileURL } from 'url';
 import { glob } from 'tinyglobby';
 
 export function snapshotLoader(lang: 'en' | 'es'): Loader {
@@ -77,10 +78,6 @@ export function snapshotLoader(lang: 'en' | 'es'): Loader {
         });
 
         const digest = generateDigest(contents);
-        const relativePath = relative(
-          new URL('.', config.root).pathname,
-          absFile
-        );
 
         // Validate through Astro's schema
         const parsedData = await parseData({
@@ -91,19 +88,19 @@ export function snapshotLoader(lang: 'en' | 'es'): Loader {
 
         const relativeFilePath = relative(config.root.pathname, absFile);
 
-        // Register the file for rendering
-        store.addModuleImport(absFile);
-
-        // Pre-render body so remark plugins (callouts, wiki-links, images) run
-        const rendered = body ? await renderMarkdown(body) : { html: '' };
+        // Render body through Astro's markdown pipeline so remark plugins
+        // (callouts, wiki-links, images) are applied.
+        const rendered = body
+          ? await renderMarkdown(body, { fileURL: pathToFileURL(absFile) })
+          : { html: '' };
 
         store.set({
           id,
           data: parsedData,
-          body: rendered.html ?? body,
+          body,
           filePath: relativeFilePath,
           digest,
-          deferredRender: true,
+          rendered,
         });
       }
     },
