@@ -14,7 +14,7 @@ export const ui = {
     'nav.cv': 'CV',
     'nav.snapshots': 'Snapshots',
     'footer.rights': `© ${new Date().getFullYear()} Sergio Uribe. All rights reserved.`,
-    'footer.motto': 'A humanist digital ecosystem.',
+    'footer.motto': 'Language. Community. Purpose.',
   },
   es: {
     'nav.name': 'Sergio Uribe',
@@ -24,6 +24,6 @@ export const ui = {
     'nav.cv': 'CV',
     'nav.snapshots': 'Instantes',
     'footer.rights': `© ${new Date().getFullYear()} Sergio Uribe. Todos los derechos reservados.`,
-    'footer.motto': 'Un ecosistema digital humanista.',
+    'footer.motto': 'Lenguaje. Comunidad. Propósito.',
   },
 } as const;

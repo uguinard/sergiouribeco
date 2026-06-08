@@ -5,16 +5,71 @@ import '../styles/home.css';
 ---
 <Layout title="Home">
 
-  <div class="screen-fill">
-    <MapGame />
-  </div>
+  <main class="page-content">
+    <section class="intro">
+      <p class="intro__eyebrow">Hello — I’m Sergio Uribe.</p>
+      <h1 class="intro__title">I build communities through language.</h1>
+      <p class="intro__body">
+        Colombian educator. I work with young people as a Spanish teacher, focused
+        on connection, curiosity, and real conversation. I’ve lived and taught
+        across four continents, and I keep coming back to the same idea: language
+        is a way of letting other people into your experience.
+      </p>
+    </section>
+
+    <section class="intro__map">
+      <MapGame />
+    </section>
+  </main>
 
 </Layout>
 
 <style>
-  .screen-fill {
-    min-height: calc(100vh - 10rem);
+  .page-content {
     display: flex;
     flex-direction: column;
+    gap: 5rem;
+  }
+
+  .intro {
+    max-width: 68ch;
+  }
+
+  .intro__eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--earth, #7a6a52);
+    margin: 0 0 1.2rem;
+  }
+
+  .intro__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ink, #1a1714);
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .intro__body {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink-soft, #4a453f);
+    max-width: 54ch;
+  }
+
+  .intro__map {
+    width: 100%;
+  }
+
+  @media (max-width: 639px) {
+    .page-content {
+      gap: 3.5rem;
+    }
   }
 </style>
