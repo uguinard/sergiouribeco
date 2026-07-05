@@ -1,20 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import MapGame from '../../components/MapGame.astro';
-import '../../styles/home.css';
+import OrbitalHome from '../../components/OrbitalHome.astro';
 ---
+
 <Layout title="Inicio" lang="es">
-
-  <div class="screen-fill">
-    <MapGame lang="es" />
-  </div>
-
+  <main class="page-content">
+    <OrbitalHome lang="es" />
+  </main>
 </Layout>
 
 <style>
-  .screen-fill {
-    min-height: calc(100vh - 10rem);
-    display: flex;
-    flex-direction: column;
+  .page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
   }
 </style>

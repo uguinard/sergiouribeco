@@ -1,93 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/home.css';
+import OrbitalHome from '../components/OrbitalHome.astro';
 ---
+
 <Layout title="Home">
-
   <main class="page-content">
-    <section class="intro">
-      <p class="intro__eyebrow">Hello — I’m Sergio Uribe.</p>
-      <h1 class="intro__title">I build communities through language.</h1>
-      <p class="intro__body">
-        Colombian educator focused on connection, curiosity, and real conversation.
-        I work with young people as a Spanish teacher and keep coming back to the
-        same idea: language is a way of letting other people into your experience.
-      </p>
-    </section>
-
-    <section class="intro__map">
-      <div class="home-placeholder">
-        <p class="home-placeholder__text">
-          Projects and fieldwork will appear here as this season takes shape.
-        </p>
-      </div>
-    </section>
+    <OrbitalHome lang="en" />
   </main>
-
 </Layout>
 
 <style>
-  .home-placeholder {
-    border: 1px dashed var(--earth, #8C7B6A);
-    border-radius: 0.5rem;
-    padding: 2.5rem 2rem;
-    background: linear-gradient(180deg, rgba(255,253,252,0.65), rgba(255,253,252,0.45));
-  }
-
-  .home-placeholder__text {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: var(--ink-light, #4A4743);
-    max-width: 62ch;
-  }
-
   .page-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .intro {
-    max-width: 68ch;
-  }
-
-  .intro__eyebrow {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--earth, #8C7B6A);
-      margin: 0 0 1.4rem;
-  }
-
-  .intro__title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    font-weight: 500;
-    line-height: 1.15;
-    color: var(--ink, #2D2A26);
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .intro__body {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.85;
-    color: var(--ink-light, #4A4743);
-    max-width: 58ch;
-  }
-
-  @media (max-width: 639px) {
-    .page-content {
-      gap: 2.25rem;
-    }
-  }
-
-  .page-content > section:not(:first-child) {
-    margin-top: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
   }
 </style>

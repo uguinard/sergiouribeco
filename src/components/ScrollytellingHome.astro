@@ -1,0 +1,333 @@
+---
+interface Props {
+  lang?: 'en' | 'es';
+}
+
+const { lang = 'en' } = Astro.props;
+
+const content = {
+  en: {
+    // Section 1: Philosophy
+    sec1Label: "01 / PHILOSOPHY",
+    sec1Title: "The Beginner's Mind",
+    sec1Body1: "O",
+    sec1Body1Text: "ur teaching is only as deep as our capacity to listen. In the pursuit of academic rigor, it is easy to center our own authority. But true education requires a constant decentering—approaching each classroom with a beginner's mind, ready to let student inquiry and natural curiosity lead the dialogue.",
+    sec1Body2: "Guided by Ubuntu ('I am because we are'), I believe language is not a collection of grammar tables to memorize, but a shared space to inhabit. Restorative circles, somatic emotional support, and collaborative problem-solving form the bedrock of my practice.",
+    
+    // Section 2: Video
+    sec2Label: "02 / THE ANCHOR",
+    sec2Title: "An Inquiry Into Voice",
+    sec2Sub: "A widescreen cinematic capture of educational design, pedagogy, and language acquisition.",
+
+    // Section 3: Experience
+    sec3Label: "03 / THE LANDSCAPE",
+    sec3Title: "Global Teaching Experience",
+    places: [
+      {
+        title: "UWC Thailand",
+        desc: "Designing EAL frameworks and language acquisition scaffolding in a diverse, holistic international baccalaureate school environment."
+      },
+      {
+        title: "Tarsus, Turkey",
+        desc: "Leading DELE examination preparation and humanities courses, aligning language instruction with cultural connection."
+      },
+      {
+        title: "Guainía, Colombia",
+        desc: "Field teaching in the remote Amazonian watershed, unlearning institutional constraints to learn from ancestral voices and silence."
+      }
+    ],
+
+    // Section 4: Passions
+    sec4Label: "04 / THE ROAD",
+    sec4Title: "1,200 KM of Road and Rhythm",
+    sec4Body: "Cycling across the Andes from Colombia to Ecuador with no support vehicle forces an absolute reliance on the road, the weather, and the kindness of strangers. This physical journey mirrors the pedagogical one: letting go of predictions, trusting the process, and remaining fully present with the humans in front of me.",
+
+    // Footer
+    footerLabel: "READ THE CURRICULUM VITAE ➔",
+    footerPdf: "DOWNLOAD DOSSIER (PDF) ⬇"
+  },
+  es: {
+    // Section 1: Philosophy
+    sec1Label: "01 / FILOSOFÍA",
+    sec1Title: "La Mente de Principiante",
+    sec1Body1: "N",
+    sec1Body1Text: "uestra enseñanza es tan profunda como nuestra capacidad de escuchar. En la búsqueda del rigor académico, es fácil centrar nuestra propia autoridad. Pero la verdadera educación exige un constante desaprendizaje: acercarse al aula con la mente de principiante, listo para que la indagación del alumno guíe el diálogo.",
+    sec1Body2: "Guiado por Ubuntu ('Soy porque somos'), entiendo el lenguaje no como tablas gramaticales para memorizar, sino como un mundo a habitar. Los círculos restaurativos, el apoyo socioemocional somático y la resolución colectiva de problemas forman la base de mi práctica.",
+
+    // Section 2: Video
+    sec2Label: "02 / EL ANCLA",
+    sec2Title: "Una Indagación sobre la Voz",
+    sec2Sub: "Un fotograma cinematográfico de diseño educativo, pedagogía y adquisición de lenguas.",
+
+    // Section 3: Experience
+    sec3Label: "03 / EL MAPA",
+    sec3Title: "Experiencia Docente Global",
+    places: [
+      {
+        title: "UWC Thailand",
+        desc: "Diseño de marcos EAL y andamiaje para la adquisición del lenguaje en un entorno escolar holístico e internacional del Bachillerato Internacional."
+      },
+      {
+        title: "Tarsus, Turquía",
+        desc: "Liderando la preparación de exámenes DELE y cursos de humanidades, alineando la instrucción de lenguas con la conexión cultural."
+      },
+      {
+        title: "Guainía, Colombia",
+        desc: "Docencia de campo en la cuenca amazónica, desaprendiendo esquemas institucionales para aprender de las voces ancestrales y el silencio."
+      }
+    ],
+
+    // Section 4: Passions
+    sec4Label: "04 / EL CAMINO",
+    sec4Title: "1,200 KM de Ruta y Ritmo",
+    sec4Body: "Recorrer en bicicleta los Andes de Colombia a Ecuador sin vehículo de asistencia impone una absoluta dependencia de la ruta, el clima y la generosidad de los desconocidos. Este viaje físico refleja el pedagógico: soltar el control y permanecer presente ante los estudiantes.",
+
+    // Footer
+    footerLabel: "VER CURRICULUM VITAE ➔",
+    footerPdf: "DESCARGAR DOSSIER (PDF) ⬇"
+  }
+};
+
+const t = content[lang] || content.en;
+---
+
+<div class="scrollytelling-container relative w-full">
+  
+  <!-- Fixed Progress Tracker (Minimalist Editorial Dot Indicator) -->
+  <div class="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4 font-mono text-[9px] text-[#1C1A17]/60 pointer-events-none">
+    <div class="indicator-step flex items-center justify-end gap-2" data-step="philosophy">
+      <span>01</span>
+      <span class="w-1.5 h-1.5 rounded-full border border-[#1C1A17] bg-transparent transition-all duration-300"></span>
+    </div>
+    <div class="indicator-step flex items-center justify-end gap-2" data-step="video">
+      <span>02</span>
+      <span class="w-1.5 h-1.5 rounded-full border border-[#1C1A17] bg-transparent transition-all duration-300"></span>
+    </div>
+    <div class="indicator-step flex items-center justify-end gap-2" data-step="experience">
+      <span>03</span>
+      <span class="w-1.5 h-1.5 rounded-full border border-[#1C1A17] bg-transparent transition-all duration-300"></span>
+    </div>
+    <div class="indicator-step flex items-center justify-end gap-2" data-step="passions">
+      <span>04</span>
+      <span class="w-1.5 h-1.5 rounded-full border border-[#1C1A17] bg-transparent transition-all duration-300"></span>
+    </div>
+  </div>
+
+  <!-- Section 1: Philosophy -->
+  <section 
+    class="scrolly-section min-h-screen flex flex-col justify-center items-center px-6 md:px-12 py-24 transition-all duration-1000"
+    data-section="philosophy"
+  >
+    <div class="max-w-3xl w-full text-center md:text-left">
+      <span class="font-sans font-bold text-[10px] tracking-[0.4em] text-[#8B2020] uppercase block mb-4">
+        {t.sec1Label}
+      </span>
+      <h2 class="font-serif text-4xl md:text-6xl text-[#1C1A17] font-normal leading-tight tracking-tight mb-8">
+        {t.sec1Title}
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-serif text-base leading-relaxed text-justify text-[#1C1A17]/90">
+        <div>
+          <p>
+            <span class="float-left text-6xl font-serif text-[#8B2020] leading-[0.8] mt-1.5 mr-3">
+              {t.sec1Body1}
+            </span>
+            {t.sec1Body1Text}
+          </p>
+        </div>
+        <div class="flex flex-col justify-between">
+          <p>{t.sec1Body2}</p>
+          <div class="h-[1px] w-12 bg-[#8B2020]/30 my-6 hidden md:block"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Cinematic Video Still -->
+  <section 
+    class="scrolly-section min-h-screen flex flex-col justify-center items-center px-4 md:px-12 py-24 transition-all duration-1000"
+    data-section="video"
+  >
+    <div class="max-w-4xl w-full">
+      <span class="font-sans font-bold text-[10px] tracking-[0.4em] text-[#8B2020] uppercase block mb-4 text-center">
+        {t.sec2Label}
+      </span>
+      <h2 class="font-serif text-3xl md:text-4xl text-center text-inherit font-normal mb-8">
+        {t.sec2Title}
+      </h2>
+      
+      <!-- Video letterbox still design -->
+      <div class="border border-current/10 p-2 bg-[#F7F4EE]/5 backdrop-blur shadow-2xl rounded-lg">
+        <div class="relative w-full aspect-[21/9] rounded bg-black overflow-hidden shadow-inner border-t-8 border-b-8 border-black">
+          <iframe 
+            class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/AusbshtWUnE" 
+            title="Sergio Uribe Guinard - Introduction" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <p class="font-serif italic text-xs text-center mt-4 max-w-xl mx-auto opacity-75">
+        {t.sec2Sub}
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Global Experience -->
+  <section 
+    class="scrolly-section min-h-screen flex flex-col justify-center items-center px-6 md:px-12 py-24 transition-all duration-1000"
+    data-section="experience"
+  >
+    <div class="max-w-4xl w-full">
+      <span class="font-sans font-bold text-[10px] tracking-[0.4em] text-[#8B2020] uppercase block mb-4">
+        {t.sec3Label}
+      </span>
+      <h2 class="font-serif text-4xl md:text-5xl text-inherit font-normal mb-12">
+        {t.sec3Title}
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {t.places.map((place, idx) => (
+          <div class="border-t border-[#1C1A17]/15 pt-6 flex flex-col justify-between min-h-[220px]">
+            <div>
+              <span class="font-mono text-[9px] text-[#8B2020] block uppercase mb-3">
+                LOC. 0{idx + 1}
+              </span>
+              <h3 class="font-serif text-2xl font-normal mb-3 text-inherit">
+                {place.title}
+              </h3>
+              <p class="font-serif text-xs leading-relaxed opacity-95 text-justify">
+                {place.desc}
+              </p>
+            </div>
+            <div class="h-1.5 w-1.5 rounded-full bg-[#8B2020] mt-6"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Passions -->
+  <section 
+    class="scrolly-section min-h-screen flex flex-col justify-center items-center px-6 md:px-12 py-24 transition-all duration-1000"
+    data-section="passions"
+  >
+    <div class="max-w-3xl w-full text-center md:text-left">
+      <span class="font-sans font-bold text-[10px] tracking-[0.4em] text-[#8B2020] uppercase block mb-4">
+        {t.sec4Label}
+      </span>
+      <h2 class="font-serif text-4xl md:text-5xl text-inherit font-normal mb-8 leading-tight">
+        {t.sec4Title}
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- SVG Graphic illustrating a bike / topo pattern -->
+        <div class="md:col-span-4 flex justify-center py-6">
+          <svg class="w-32 h-32 opacity-40 text-[#8B2020]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+          </svg>
+        </div>
+        
+        <p class="md:col-span-8 font-serif text-base leading-relaxed text-justify opacity-95">
+          {t.sec4Body}
+        </p>
+      </div>
+
+      <!-- Footnote Call to Action -->
+      <div class="border-t border-[#1C1A17]/15 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <a 
+          href={`/${lang === 'en' ? '' : lang + '/'}cv`}
+          class="font-sans font-bold text-xs tracking-widest text-[#1C1A17] hover:text-[#8B2020] uppercase transition-colors"
+        >
+          {t.footerLabel}
+        </a>
+        <a 
+          href="/cv"
+          class="font-sans font-bold text-xs tracking-widest text-[#8B2020] hover:text-[#1C1A17] uppercase transition-colors"
+        >
+          {t.footerPdf}
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Simple, high-performance Intersection Observer to trigger background color shifting on body
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.getAttribute('data-section');
+        document.body.setAttribute('data-active-section', sectionId || '');
+        
+        // Highlight active tracker dot
+        document.querySelectorAll('.indicator-step').forEach(dot => {
+          if (dot.getAttribute('data-step') === sectionId) {
+            dot.querySelector('span:last-child')?.classList.add('bg-[#8B2020]', 'w-2.5', 'h-2.5');
+            dot.querySelector('span:last-child')?.classList.remove('bg-transparent', 'w-1.5', 'h-1.5');
+            dot.classList.add('text-[#8B2020]', 'font-bold');
+          } else {
+            dot.querySelector('span:last-child')?.classList.remove('bg-[#8B2020]', 'w-2.5', 'h-2.5');
+            dot.querySelector('span:last-child')?.classList.add('bg-transparent', 'w-1.5', 'h-1.5');
+            dot.classList.remove('text-[#8B2020]', 'font-bold');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-section]').forEach(section => {
+    observer.observe(section);
+  });
+</script>
+
+<style>
+  /* Base Scrollytelling Transitions */
+  .scrolly-section {
+    opacity: 0.85;
+    transform: scale(0.98);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .scrolly-section:global(.is-intersecting),
+  [data-section] {
+    /* Auto active styles via body attribute styling */
+  }
+
+  /* Body states mapped to sections for smooth aesthetic transitions */
+  :global(body) {
+    transition: background-color 1.2s cubic-bezier(0.25, 1, 0.5, 1), color 1.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  :global(body[data-active-section="philosophy"]) {
+    background-color: #F7F4EE !important; /* Cream */
+    color: #1C1A17 !important;
+  }
+
+  :global(body[data-active-section="video"]) {
+    background-color: #1C1A17 !important; /* Dark Ink */
+    color: #F7F4EE !important;
+  }
+  
+  :global(body[data-active-section="video"] .indicator-step) {
+    color: #F7F4EE !important;
+  }
+  
+  :global(body[data-active-section="video"] .indicator-step span:last-child) {
+    border-color: #F7F4EE !important;
+  }
+
+  :global(body[data-active-section="experience"]) {
+    background-color: #ECE8DF !important; /* Slightly darker wash */
+    color: #1C1A17 !important;
+  }
+
+  :global(body[data-active-section="passions"]) {
+    background-color: #E2DDD3 !important; /* Earthier shade */
+    color: #1C1A17 !important;
+  }
+</style>
