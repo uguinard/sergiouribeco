@@ -20,6 +20,7 @@ import type { Loader } from 'astro/loaders';
 import { load as parseYaml } from 'js-yaml';
 import { readFileSync, existsSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
+import { pathToFileURL } from 'url';
 import { glob } from 'tinyglobby';
 
 export function pageLoader(lang: 'en' | 'es', base: string): Loader {
@@ -86,6 +87,9 @@ export function pageLoader(lang: 'en' | 'es', base: string): Loader {
         const relativeFilePath = relative(config.root.pathname, absFile);
 
         // Register the file for rendering
+        const rendered = body
+          ? await renderMarkdown(body, { fileURL: pathToFileURL(absFile) })
+          : { html: '' };
         store.addModuleImport(absFile);
 
         store.set({
@@ -94,6 +98,7 @@ export function pageLoader(lang: 'en' | 'es', base: string): Loader {
           body,
           filePath: relativeFilePath,
           digest,
+          rendered,
           deferredRender: true,
         });
       }

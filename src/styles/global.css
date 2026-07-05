@@ -136,3 +136,39 @@
     @apply max-w-5xl mx-auto px-6 md:px-8 py-4 md:py-8;
   }
 }
+
+/* ── Editorial polish — shared across pages ───────────────────── */
+@layer components {
+  .page-content > section {
+    margin-top: 4rem;
+  }
+
+  .page-content > section:first-child {
+    margin-top: 0;
+  }
+
+  h1, h2 {
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    line-height: 1.35;
+  }
+
+  p {
+    margin-bottom: 1.35rem;
+  }
+
+  a {
+    transition:
+      color 0.3s ease,
+      text-decoration-color 0.3s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-earth, #8C7B6A);
+    outline-offset: 2px;
+    border-radius: 0.125rem;
+  }
+}
