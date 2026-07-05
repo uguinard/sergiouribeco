@@ -1,5 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/sxcipmrdkq/sergiouribe.co/
-    - /usr/bin/rsync -avz --delete ./dist/ $DEPLOYPATH
+    - rsync -avz --delete ./dist/ /home/sxcipmrdkq/sergiouribe.co/
