@@ -1,18 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import OrbitalHome from '../components/OrbitalHome.astro';
+
+const description =
+  'Sergio Uribe Guinard — IB-Certified Language Educator. EAL & Spanish Specialist. ' +
+  'Cognitive Linguistics, 4E Cognition, restorative practice. Available internationally.';
 ---
 
-<Layout title="Home">
-  <main class="page-content">
-    <OrbitalHome lang="en" />
-  </main>
+<Layout
+  title="Home"
+  description={description}
+  lang="en"
+>
+  <OrbitalHome lang="en" />
 </Layout>
-
-<style>
-  .page-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-</style>

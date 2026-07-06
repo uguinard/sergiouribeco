@@ -99,7 +99,6 @@ export function pageLoader(lang: 'en' | 'es', base: string): Loader {
           filePath: relativeFilePath,
           digest,
           rendered,
-          deferredRender: true,
         });
       }
     },
