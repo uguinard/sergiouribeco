@@ -85,6 +85,7 @@ export function pageLoader(lang: 'en' | 'es', base: string): Loader {
         });
 
         const relativeFilePath = relative(config.root.pathname, absFile);
+        console.log(`[pageLoader debug] ID: ${id}, relativeFilePath: ${relativeFilePath}, absFile: ${absFile}`);
 
         // Register the file for rendering
         const rendered = body

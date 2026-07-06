@@ -7,12 +7,12 @@ const allPages = await getCollection('pages_en');
 const entry = allPages.find(p => p.id === 'philosophy');
 if (!entry) throw new Error(`philosophy not found. IDs: ${allPages.map(p => p.id).join(', ')}`);
 
-let Content: any = null;
+let MarkdownContent: any = null;
 let headings: any[] = [];
 let renderError = false;
 try {
   const rendered = await render(entry);
-  Content = rendered.Content;
+  MarkdownContent = rendered.Content;
   headings = rendered.headings || [];
 } catch (e) {
   console.error(`[Astro] Error rendering philosophy:`, e);
@@ -59,7 +59,7 @@ const { title, description } = entry.data;
       </header>
 
       <div class="philosophy-prose prose prose-lg max-w-none">
-        {!renderError && Content ? <Content /> : <p>Error loading content.</p>}
+        {!renderError && MarkdownContent ? <MarkdownContent /> : <p>Error loading content.</p>}
       </div>
 
       <div class="mt-16 pt-8 border-t border-earth/20 flex items-center justify-between print:hidden">
