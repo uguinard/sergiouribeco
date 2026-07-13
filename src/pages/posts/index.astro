@@ -105,7 +105,10 @@ const allTags = Array.from(new Set(allPosts.flatMap(p => p.data.tags)));
               >
                 <div class="flex flex-col md:flex-row gap-6 items-start">
                   {post.data.thumbnail && (
-                    <div class="w-full md:w-48 aspect-video md:h-32 shrink-0 rounded-xl overflow-hidden border border-earth/10 relative z-20">
+                    <a 
+                      href={`/posts/${post.id}`} 
+                      class="block w-full md:w-48 aspect-video md:h-32 shrink-0 rounded-xl overflow-hidden border border-earth/10 relative z-20 hover:border-clay/40 transition-colors duration-300"
+                    >
                       <Image 
                         src={post.data.thumbnail} 
                         alt={post.data.title} 
@@ -113,7 +116,7 @@ const allTags = Array.from(new Set(allPosts.flatMap(p => p.data.tags)));
                         width={300}
                         height={180}
                       />
-                    </div>
+                    </a>
                   )}
                   
                   <div class="flex-1">
