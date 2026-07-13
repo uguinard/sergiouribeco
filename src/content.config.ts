@@ -146,12 +146,13 @@ const snapshots_es = defineCollection({
 });
 
 // ── posts ──────────────────────────────────────────────────────────────────────
-const postsSchema = z.object({
+const postsSchema = ({ image }: { image: () => z.ZodType<any> }) => z.object({
   title: z.string(),
   description: z.string().optional(),
   pubDate: z.coerce.date(),
   category: z.string().default('General'),
   tags: z.array(z.string()).default([]),
+  thumbnail: image().optional(),
   draft: z.boolean().default(false),
 });
 

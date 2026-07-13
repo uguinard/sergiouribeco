@@ -8,3 +8,4 @@ category.es: "Tecnología"
 tags.en: ["Interactive", "MDX", "Somatic", "360 Video"]
 tags.es: ["Interactivo", "MDX", "Somático", "Video 360"]
 draft: false
+thumbnail: "./media/thumbnail.jpg"

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 
 const allPosts = await getCollection('posts_en', ({ data }) => 
@@ -8,6 +9,8 @@ const allPosts = await getCollection('posts_en', ({ data }) =>
 
 // Sort posts by pubDate desc
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+console.log("POST DATA DEBUGLOG:", allPosts.map(p => ({ id: p.id, thumbnail: p.data.thumbnail })));
 
 // Get all unique categories
 const categories = Array.from(new Set(allPosts.map(p => p.data.category)));
@@ -100,33 +103,47 @@ const allTags = Array.from(new Set(allPosts.flatMap(p => p.data.tags)));
                 data-tags={JSON.stringify(post.data.tags)}
                 class="group p-6 md:p-8 rounded-2xl border border-earth/10 bg-paper/35 hover:bg-paper/70 hover:shadow-md hover:border-earth/20 transition-all duration-300 flex flex-col justify-between"
               >
-                <div>
-                  <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                      <span class="text-[10px] font-sans font-bold uppercase tracking-wider bg-clay/5 text-clay border border-clay/10 px-2 py-0.5 rounded">
-                        {post.data.category}
-                      </span>
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                  {post.data.thumbnail && (
+                    <div class="w-full md:w-44 h-28 shrink-0 rounded-xl overflow-hidden border border-earth/10 relative">
+                      <Image 
+                        src={post.data.thumbnail} 
+                        alt={post.data.title} 
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        width={300}
+                        height={180}
+                      />
                     </div>
-                    <time class="text-xs font-sans text-ink-soft/60 tracking-wider" datetime={post.data.pubDate.toISOString()}>
-                      {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </time>
-                  </div>
-
-                  <h2 class="font-serif text-xl md:text-2xl text-ink font-medium tracking-tight mb-3 group-hover:text-clay transition-colors duration-300">
-                    <a href={`/posts/${post.id}`}>
-                      {post.data.title}
-                    </a>
-                  </h2>
-
-                  {post.data.description && (
-                    <p class="font-sans text-sm text-ink-soft leading-relaxed text-justify mb-4">
-                      {post.data.description}
-                    </p>
                   )}
+                  
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                        <span class="text-[10px] font-sans font-bold uppercase tracking-wider bg-clay/5 text-clay border border-clay/10 px-2 py-0.5 rounded">
+                          {post.data.category}
+                        </span>
+                      </div>
+                      <time class="text-xs font-sans text-ink-soft/60 tracking-wider" datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </time>
+                    </div>
+
+                    <h2 class="font-serif text-xl md:text-2xl text-ink font-medium tracking-tight mb-3 group-hover:text-clay transition-colors duration-300">
+                      <a href={`/posts/${post.id}`}>
+                        {post.data.title}
+                      </a>
+                    </h2>
+
+                    {post.data.description && (
+                      <p class="font-sans text-sm text-ink-soft leading-relaxed text-justify">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 {post.data.tags.length > 0 && (
-                  <div class="flex flex-wrap gap-2 pt-4 border-t border-earth/5">
+                  <div class="flex flex-wrap gap-2 pt-4 border-t border-earth/5 mt-4">
                     {post.data.tags.map(tag => (
                       <span class="text-[10px] font-sans text-earth/80">#{tag}</span>
                     ))}

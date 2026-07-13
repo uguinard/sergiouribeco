@@ -8,3 +8,4 @@ category.es: "Metodología"
 tags.en: ["Comprehensible Input", "Pedagogy", "Acquisition"]
 tags.es: ["Input Comprensible", "Pedagogía", "Adquisición"]
 draft: false
+thumbnail: "./media/thumbnail.jpg"
