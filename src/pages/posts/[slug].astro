@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import ImmersiveViewer from '../../components/ImmersiveViewer.astro';
+import En from '../../components/En.astro';
+import Es from '../../components/Es.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts_en');
@@ -61,9 +64,8 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
         <h1 class="text-3xl md:text-5xl font-serif text-ink tracking-tight mb-6 font-light">{entry.data.title}</h1>
       </header>
 
-      <!-- Content rendered with typography styles matching the Philosophy page -->
       <div class="post-prose prose prose-lg max-w-none">
-        <Content />
+        <Content components={{ ImmersiveViewer, En, Es }} />
       </div>
 
       {entry.data.tags.length > 0 && (
