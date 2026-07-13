@@ -11,65 +11,234 @@ allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Get all unique categories
 const categories = Array.from(new Set(allPosts.map(p => p.data.category)));
+const allTags = Array.from(new Set(allPosts.flatMap(p => p.data.tags)));
 ---
 
 <Layout title="Artículos" lang="es">
-  <div class="max-w-3xl mx-auto mt-12 px-4 md:px-0">
-    <header class="mb-16 pb-12 border-b border-earth/10">
+  <div class="max-w-4xl mx-auto mt-12 px-4 md:px-6">
+    <header class="mb-12 pb-10 border-b border-earth/10">
       <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4 font-light">Artículos y Reflexiones</h1>
-      <p class="font-serif text-lg text-ink-soft italic leading-relaxed">
+      <p class="font-serif text-lg text-ink-soft italic leading-relaxed max-w-2xl">
         Escritos sobre la enacción del lenguaje, la cognición 4E y la seguridad relacional en aulas internacionales.
       </p>
     </header>
 
-    {categories.length > 0 && (
-      <div class="mb-12 flex flex-wrap gap-2 items-center">
-        <span class="font-sans text-[10px] font-bold tracking-widest uppercase text-earth mr-2">Categorías:</span>
-        {categories.map(cat => (
-          <span class="bg-paper/50 text-clay border border-earth/10 text-xs px-3 py-1 rounded-full font-serif">
-            {cat}
-          </span>
-        ))}
-      </div>
-    )}
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative">
+      <!-- Left Column: Search & Filters (ToC outline style) -->
+      <aside class="lg:col-span-1 space-y-8 lg:sticky lg:top-24 h-fit">
+        <!-- Search Input -->
+        <div class="space-y-2">
+          <label for="post-search" class="font-sans text-[10px] font-bold tracking-[0.2em] text-[#c07c64] uppercase block">Buscar</label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="post-search" 
+              placeholder="Buscar artículos..." 
+              class="w-full px-4 py-2 text-sm font-sans rounded-xl bg-paper/50 border border-earth/15 text-ink placeholder:text-ink/40 focus:outline-none focus:border-clay/60 transition-colors duration-300"
+            />
+          </div>
+        </div>
 
-    <div class="space-y-12">
-      {allPosts.length === 0 ? (
-        <p class="font-serif text-ink-soft italic">No hay publicaciones disponibles todavía.</p>
-      ) : (
-        allPosts.map(post => (
-          <article class="group relative pb-8 border-b border-earth/5 hover:border-earth/10 transition-colors duration-300">
-            <div class="flex items-center gap-4 mb-3">
-              <time class="text-xs font-sans text-ink-soft uppercase tracking-widest" datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </time>
-              <span class="bg-clay/5 text-clay text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-clay/10 font-sans font-semibold">
-                {post.data.category}
-              </span>
+        <!-- Categories Filter -->
+        {categories.length > 0 && (
+          <div class="space-y-3">
+            <p class="font-sans text-[10px] font-bold tracking-[0.2em] text-[#c07c64] uppercase">Categorías</p>
+            <div class="flex flex-wrap lg:flex-col gap-2">
+              <button 
+                data-category-btn="all"
+                class="category-btn active text-left px-3 py-1.5 rounded-lg text-xs font-sans font-medium bg-clay/10 text-clay transition-all duration-300 hover:bg-clay/15"
+              >
+                Todas las categorías
+              </button>
+              {categories.map(cat => (
+                <button 
+                  data-category-btn={cat}
+                  class="category-btn text-left px-3 py-1.5 rounded-lg text-xs font-sans text-earth hover:text-clay hover:bg-paper/50 transition-all duration-300"
+                >
+                  {cat}
+                </button>
+              ))}
             </div>
-            
-            <h2 class="font-serif text-2xl text-ink font-medium mb-3 group-hover:text-clay transition-colors duration-300">
-              <a href={`/es/posts/${post.id}`}>
-                {post.data.title}
-              </a>
-            </h2>
-            
-            {post.data.description && (
-              <p class="font-sans text-sm text-ink-soft leading-relaxed mb-4 text-justify">
-                {post.data.description}
-              </p>
-            )}
+          </div>
+        )}
 
-            {post.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-2">
-                {post.data.tags.map(tag => (
-                  <span class="text-[10px] font-sans text-earth/80">#{tag}</span>
-                ))}
-              </div>
-            )}
-          </article>
-        ))
-      )}
+        <!-- Tags Cloud -->
+        {allTags.length > 0 && (
+          <div class="space-y-3">
+            <p class="font-sans text-[10px] font-bold tracking-[0.2em] text-[#c07c64] uppercase">Etiquetas populares</p>
+            <div class="flex flex-wrap gap-1.5">
+              {allTags.map(tag => (
+                <button 
+                  data-tag-btn={tag}
+                  class="tag-btn text-xs font-sans px-2.5 py-1 bg-paper/30 hover:bg-paper/60 border border-earth/10 text-earth-soft hover:text-clay hover:border-clay rounded-md transition-all duration-300"
+                >
+                  #{tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+
+      <!-- Right Column: Articles Grid -->
+      <div class="lg:col-span-3 space-y-6">
+        <!-- Vertical Divider (LG screen only) -->
+        <div class="absolute -left-6 top-0 bottom-0 w-[1px] bg-earth/15 hidden lg:block"></div>
+
+        <div id="posts-container" class="grid grid-cols-1 gap-6">
+          {allPosts.length === 0 ? (
+            <div class="p-8 text-center border border-dashed border-earth/25 rounded-2xl">
+              <p class="font-serif text-ink-soft italic">No se encontraron artículos.</p>
+            </div>
+          ) : (
+            allPosts.map(post => (
+              <article 
+                data-post-card
+                data-title={post.data.title.toLowerCase()}
+                data-desc={(post.data.description || '').toLowerCase()}
+                data-category={post.data.category}
+                data-tags={JSON.stringify(post.data.tags)}
+                class="group p-6 md:p-8 rounded-2xl border border-earth/10 bg-paper/35 hover:bg-paper/70 hover:shadow-md hover:border-earth/20 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                      <span class="text-[10px] font-sans font-bold uppercase tracking-wider bg-clay/5 text-clay border border-clay/10 px-2 py-0.5 rounded">
+                        {post.data.category}
+                      </span>
+                    </div>
+                    <time class="text-xs font-sans text-ink-soft/60 tracking-wider" datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
+                  </div>
+
+                  <h2 class="font-serif text-xl md:text-2xl text-ink font-medium tracking-tight mb-3 group-hover:text-clay transition-colors duration-300">
+                    <a href={`/es/posts/${post.id}`}>
+                      {post.data.title}
+                    </a>
+                  </h2>
+
+                  {post.data.description && (
+                    <p class="font-sans text-sm text-ink-soft leading-relaxed text-justify mb-4">
+                      {post.data.description}
+                    </p>
+                  )}
+                </div>
+
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 pt-4 border-t border-earth/5">
+                    {post.data.tags.map(tag => (
+                      <span class="text-[10px] font-sans text-earth/80">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            ))
+          )}
+          <!-- Empty State (js controlled) -->
+          <div id="posts-empty" class="hidden p-12 text-center border border-dashed border-earth/20 rounded-2xl">
+            <span class="text-2xl mb-2 block">🔍</span>
+            <p class="font-serif text-ink-soft italic">No hay artículos que coincidan con los parámetros de búsqueda.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </Layout>
+
+<script>
+  function initFilters() {
+    const searchInput = document.getElementById('post-search') as HTMLInputElement | null;
+    const catBtns = document.querySelectorAll('[data-category-btn]');
+    const tagBtns = document.querySelectorAll('[data-tag-btn]');
+    const cards = document.querySelectorAll('[data-post-card]');
+    const emptyState = document.getElementById('posts-empty');
+
+    let activeCategory = 'all';
+    let activeTag: string | null = null;
+    let searchQuery = '';
+
+    function filterPosts() {
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const el = card as HTMLElement;
+        const title = el.dataset.title || '';
+        const desc = el.dataset.desc || '';
+        const category = el.dataset.category || '';
+        const tags = JSON.parse(el.dataset.tags || '[]');
+
+        const matchesSearch = title.includes(searchQuery) || desc.includes(searchQuery);
+        const matchesCategory = activeCategory === 'all' || category === activeCategory;
+        const matchesTag = !activeTag || tags.includes(activeTag);
+
+        if (matchesSearch && matchesCategory && matchesTag) {
+          el.style.display = 'flex';
+          visibleCount++;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        if (visibleCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+    }
+
+    // Search input handler
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
+      filterPosts();
+    });
+
+    // Category button handler
+    catBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => {
+          b.classList.remove('active', 'bg-clay/10', 'text-clay');
+          b.classList.add('text-earth');
+        });
+        btn.classList.add('active', 'bg-clay/10', 'text-clay');
+        btn.classList.remove('text-earth');
+
+        activeCategory = btn.getAttribute('data-category-btn') || 'all';
+        filterPosts();
+      });
+    });
+
+    // Tag button handler
+    tagBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selectedTag = btn.getAttribute('data-tag-btn');
+        
+        if (activeTag === selectedTag) {
+          // Toggle off
+          activeTag = null;
+          btn.classList.remove('bg-clay/10', 'text-clay', 'border-clay');
+          btn.classList.add('bg-paper/30', 'text-earth', 'border-earth/10');
+        } else {
+          // Toggle on
+          tagBtns.forEach(b => {
+            b.classList.remove('bg-clay/10', 'text-clay', 'border-clay');
+            b.classList.add('bg-paper/30', 'text-earth', 'border-earth/10');
+          });
+          activeTag = selectedTag;
+          btn.classList.add('bg-clay/10', 'text-clay', 'border-clay');
+          btn.classList.remove('bg-paper/30', 'text-earth', 'border-earth/10');
+        }
+        filterPosts();
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFilters);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFilters);
+  } else {
+    initFilters();
+  }
+</script>
