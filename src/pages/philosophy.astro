@@ -105,7 +105,7 @@ const { title, description } = entry.data;
     color: var(--clay);
   }
 
-  .philosophy-prose p {
+  .philosophy-prose :global(p) {
     font-family: var(--serif);
     font-size: 1.05rem;
     line-height: 1.82;
@@ -115,7 +115,7 @@ const { title, description } = entry.data;
     margin-bottom: 1.4rem;
   }
 
-  .philosophy-prose h2 {
+  .philosophy-prose :global(h2) {
     font-family: var(--serif);
     font-size: 1.3rem;
     font-weight: 500;
@@ -128,7 +128,7 @@ const { title, description } = entry.data;
     scroll-margin-top: 6.5rem;
   }
 
-  .philosophy-prose h3 {
+  .philosophy-prose :global(h3) {
     font-family: var(--serif);
     font-size: 1.05rem;
     font-weight: 500;
@@ -138,15 +138,15 @@ const { title, description } = entry.data;
     scroll-margin-top: 6.5rem;
   }
 
-  .philosophy-prose em {
+  .philosophy-prose :global(em) {
     font-style: italic;
     color: var(--clay);
     font-family: var(--serif);
   }
 
-  .philosophy-prose strong { font-weight: 500; color: var(--ink); }
+  .philosophy-prose :global(strong) { font-weight: 500; color: var(--ink); }
 
-  .philosophy-prose blockquote {
+  .philosophy-prose :global(blockquote) {
     border-left: 2px solid var(--clay);
     padding-left: 1.2rem;
     margin-left: 0;
@@ -154,21 +154,21 @@ const { title, description } = entry.data;
     color: var(--ink-soft);
   }
 
-  .philosophy-prose a {
+  .philosophy-prose :global(a) {
     color: var(--clay);
     text-decoration: underline;
     text-decoration-color: rgba(139, 32, 32, 0.35);
     text-underline-offset: 3px;
     transition: text-decoration-color 0.2s;
   }
-  .philosophy-prose a:hover { text-decoration-color: var(--clay); }
+  .philosophy-prose :global(a:hover) { text-decoration-color: var(--clay); }
 
-  .philosophy-prose hr {
+  .philosophy-prose :global(hr) {
     border: none;
     text-align: center;
     margin: 2.5rem 0;
   }
-  .philosophy-prose hr::after {
+  .philosophy-prose :global(hr::after) {
     content: '✦  ✦  ✦';
     font-family: var(--serif);
     color: var(--clay);
