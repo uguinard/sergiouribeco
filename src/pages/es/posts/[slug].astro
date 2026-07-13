@@ -82,6 +82,26 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
 </Layout>
 
 <style>
+  :root {
+    --clay:     #c07c64;
+    --earth:    #7a6a52;
+    --ink:      #1a1714;
+    --ink-soft: #4a453f;
+    --sand:     #f5f1ea;
+    --serif:    'Lora', Georgia, serif;
+  }
+
+  .post-prose > :global(p:first-of-type::first-letter) {
+    font-family: var(--serif);
+    font-size: 3.8rem;
+    font-weight: 300;
+    line-height: 0.78;
+    float: left;
+    margin-right: 8px;
+    margin-top: 4px;
+    color: var(--clay);
+  }
+
   /* Align paragraph/heading typography style tokens with the rest of the site */
   .post-prose :global(p) {
     font-family: var(--font-sans);
@@ -162,6 +182,20 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
     line-height: 1.82;
     color: var(--ink-soft);
     margin-bottom: 0.5rem;
+  }
+
+  .post-prose :global(hr) {
+    border: none;
+    text-align: center;
+    margin: 2.5rem 0;
+  }
+  .post-prose :global(hr::after) {
+    content: '✦  ✦  ✦';
+    font-family: var(--serif);
+    color: var(--clay);
+    opacity: 0.4;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
   }
 </style>
 
