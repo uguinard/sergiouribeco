@@ -7,13 +7,22 @@ import Es from '../../../components/Es.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts_es');
-  return posts.map(entry => ({
-    params: { slug: entry.id },
-    props: { entry }
-  }));
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return posts.map((entry, index) => {
+    const nextPost = index > 0 ? posts[index - 1] : null;
+    const prevPost = index < posts.length - 1 ? posts[index + 1] : null;
+    return {
+      params: { slug: entry.id },
+      props: { 
+        entry,
+        prevSlug: prevPost ? prevPost.id : null,
+        nextSlug: nextPost ? nextPost.id : null
+      }
+    };
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, prevSlug, nextSlug } = Astro.props;
 const { Content, headings } = await render(entry);
 const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
 ---
@@ -79,6 +88,8 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
           </div>
         </footer>
       )}
+
+      <div id="post-navigation-data" data-prev={prevSlug} data-next={nextSlug} class="hidden"></div>
     </div>
   </div>
 </Layout>
@@ -233,10 +244,39 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
     headings.forEach((heading) => observer.observe(heading));
   }
 
-  document.addEventListener('astro:page-load', initScrollSpy);
+  function initKeyboardNavigation() {
+    const navData = document.getElementById('post-navigation-data');
+    if (!navData) return;
+    const prev = navData.getAttribute('data-prev');
+    const next = navData.getAttribute('data-next');
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Avoid firing navigation if user is typing inside search inputs or interactive fields
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
+        return;
+      }
+      
+      if (e.key === 'ArrowRight' && next) {
+        window.location.href = `/es/posts/${next}`;
+      } else if (e.key === 'ArrowLeft' && prev) {
+        window.location.href = `/es/posts/${prev}`;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initScrollSpy();
+    initKeyboardNavigation();
+  });
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollSpy);
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollSpy();
+      initKeyboardNavigation();
+    });
   } else {
     initScrollSpy();
+    initKeyboardNavigation();
   }
 </script>
