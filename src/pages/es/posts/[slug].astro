@@ -11,45 +11,73 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
 ---
 
 <Layout title={entry.data.title} description={entry.data.description} lang="es">
-  <div class="max-w-3xl mx-auto mt-12 px-4 md:px-0">
-    <!-- Back button -->
-    <a href="/es/posts" class="text-xs uppercase tracking-widest text-earth hover:text-clay font-sans mb-12 inline-block font-bold">
-      ← Volver a artículos
-    </a>
+  <div class="max-w-5xl mx-auto mt-8 flex flex-col lg:flex-row gap-12 relative">
+    
+    <!-- Left Column: Sticky Outline (ToC) -->
+    <aside class="w-full lg:w-56 shrink-0 print:hidden">
+      <div class="lg:sticky lg:top-28">
+        <!-- Back button -->
+        <a href="/es/posts" class="text-xs uppercase tracking-widest text-[#c07c64] hover:text-clay font-sans mb-8 inline-block font-bold">
+          ← Volver a artículos
+        </a>
+        
+        {h2Headings.length > 0 && (
+          <nav class="p-5 border border-earth/10 lg:border-none bg-paper/30 lg:bg-transparent rounded-2xl lg:p-0 space-y-4">
+            <p class="font-sans text-[10px] font-bold tracking-[0.2em] text-[#c07c64] uppercase">Esquema</p>
+            <ul class="space-y-3">
+              {h2Headings.map(h => (
+                <li>
+                  <a href={`#${h.slug}`} class="toc-link font-sans text-[11px] font-bold tracking-wider uppercase text-earth hover:text-clay transition-colors block py-1 pl-3 border-l border-earth/15 hover:border-clay">
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </div>
+    </aside>
 
-    <header class="mb-12 pb-8 border-b border-earth/10">
-      <div class="flex items-center gap-4 mb-4">
-        <time class="text-xs font-sans text-ink-soft uppercase tracking-widest" datetime={entry.data.pubDate.toISOString()}>
-          {entry.data.pubDate.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
-        </time>
-        <span class="bg-clay/5 text-clay text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-clay/10 font-sans font-semibold">
-          {entry.data.category}
-        </span>
+    <!-- Right Column: Content -->
+    <div class="flex-1 max-w-3xl relative">
+      <!-- One elegant vertical divider line -->
+      <div class="absolute -left-6 top-0 bottom-0 w-[1px] bg-earth/15 hidden lg:block"></div>
+
+      <header class="mb-12 pb-8 border-b border-earth/10">
+        <div class="flex items-center gap-4 mb-4">
+          <time class="text-xs font-sans text-ink-soft uppercase tracking-widest" datetime={entry.data.pubDate.toISOString()}>
+            {entry.data.pubDate.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          <span class="bg-clay/5 text-clay text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-clay/10 font-sans font-semibold">
+            {entry.data.category}
+          </span>
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-serif text-ink tracking-tight mb-6 font-light">{entry.data.title}</h1>
+      </header>
+
+      <!-- Content rendered with typography styles matching the Philosophy page -->
+      <div class="post-prose prose prose-lg max-w-none">
+        <Content />
       </div>
 
-      <h1 class="text-3xl md:text-5xl font-serif text-ink tracking-tight mb-6 font-light">{entry.data.title}</h1>
-    </header>
-
-    <!-- Content rendered with typography styles matching the Philosophy page -->
-    <div class="post-prose prose prose-lg max-w-none">
-      <Content />
+      {entry.data.tags.length > 0 && (
+        <footer class="mt-16 pt-8 border-t border-earth/10">
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.map(tag => (
+              <span class="bg-paper/40 text-earth text-xs px-3 py-1 rounded-sm border border-earth/10 font-sans">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </footer>
+      )}
     </div>
-
-    {entry.data.tags.length > 0 && (
-      <footer class="mt-16 pt-8 border-t border-earth/10">
-        <div class="flex flex-wrap gap-2">
-          {entry.data.tags.map(tag => (
-            <span class="bg-paper/40 text-earth text-xs px-3 py-1 rounded-sm border border-earth/10 font-sans">
-              #{tag}
-            </span>
-          ))}
-        </div>
-      </footer>
-    )}
   </div>
 </Layout>
 
@@ -75,6 +103,7 @@ const { Content } = await render(entry);
     margin-bottom: 1rem;
     padding-left: 0.75rem;
     border-left: 2px solid var(--clay);
+    scroll-margin-top: 6.5rem;
   }
 
   .post-prose :global(h3) {
@@ -84,6 +113,7 @@ const { Content } = await render(entry);
     color: var(--ink);
     margin-top: 2rem;
     margin-bottom: 0.75rem;
+    scroll-margin-top: 6.5rem;
   }
 
   .post-prose :global(em) {
@@ -134,3 +164,43 @@ const { Content } = await render(entry);
     margin-bottom: 0.5rem;
   }
 </style>
+
+<script>
+  function initScrollSpy() {
+    const headings = Array.from(document.querySelectorAll('.post-prose h2'));
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    if (!headings.length || !tocLinks.length) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -75% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('text-clay', 'border-clay');
+              link.classList.remove('text-earth', 'border-earth/15');
+            } else {
+              link.classList.remove('text-clay', 'border-clay');
+              link.classList.add('text-earth', 'border-earth/15');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+  }
+
+  document.addEventListener('astro:page-load', initScrollSpy);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollSpy);
+  } else {
+    initScrollSpy();
+  }
+</script>
