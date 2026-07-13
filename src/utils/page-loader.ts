@@ -30,7 +30,7 @@ export function pageLoader(lang: 'en' | 'es', base: string): Loader {
       const { store, parseData, generateDigest, renderMarkdown, logger, config } = context;
 
       const absBase = resolve(base);
-      const pattern = `*/${lang}.md`;
+      const pattern = `*/${lang}.{md,mdx}`;
       const files = await glob(pattern, { cwd: absBase, expandDirectories: false });
 
       if (files.length === 0) {

@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const allPosts = await getCollection('posts', ({ data }) => 
-  data.lang === 'en' && (import.meta.env.PROD ? data.draft !== true : true)
+const allPosts = await getCollection('posts_en', ({ data }) => 
+  import.meta.env.PROD ? data.draft !== true : true
 );
 
 // Sort posts by pubDate desc

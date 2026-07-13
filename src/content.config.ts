@@ -152,12 +152,16 @@ const postsSchema = z.object({
   pubDate: z.coerce.date(),
   category: z.string().default('General'),
   tags: z.array(z.string()).default([]),
-  lang: z.enum(['en', 'es']).default('en'),
   draft: z.boolean().default(false),
 });
 
-const posts = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/posts' }),
+const posts_en = defineCollection({
+  loader: pageLoader('en', './src/content/posts'),
+  schema: postsSchema,
+});
+
+const posts_es = defineCollection({
+  loader: pageLoader('es', './src/content/posts'),
   schema: postsSchema,
 });
 
@@ -172,5 +176,6 @@ export const collections = {
   garden_es,
   snapshots_en,
   snapshots_es,
-  posts,
+  posts_en,
+  posts_es,
 };

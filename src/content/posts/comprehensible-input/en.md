@@ -1,11 +1,4 @@
 ---
-title: "Comprehensible Input in Multi-Ability Classrooms"
-description: "How to design language acquisition pathways that lower the affective filter and engage learners dynamically."
-pubDate: 2026-07-12
-category: "Methodology"
-tags: ["Comprehensible Input", "Pedagogy", "Acquisition"]
-lang: "en"
-draft: false
 ---
 
 Language acquisition is not an analytical puzzle of memorizing syntax at a desk. It is a biological necessity, an enactment of reality that happens at the edge of current understanding. To facilitate this in mixed-ability classrooms, we must design context-rich environments.
