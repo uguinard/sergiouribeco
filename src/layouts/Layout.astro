@@ -54,6 +54,7 @@ const t = ui[lang];
           <div id="nav-menu" class="hidden md:flex gap-6 md:gap-8 items-center absolute md:static top-full left-0 w-full md:w-auto bg-sand/95 md:bg-transparent p-8 md:p-0 border-b md:border-none border-earth/10">
             <a href={`/${lang === 'en' ? '' : lang + '/'}philosophy`} class="nav-item">{t['nav.philosophy']}</a>
             <a href={`/${lang === 'en' ? '' : lang + '/'}cv`} class="nav-item">{t['nav.cv']}</a>
+            <a href={`/${lang === 'en' ? '' : lang + '/'}posts`} class="nav-item">{t['nav.posts']}</a>
             <div class="h-3 w-[1px] bg-ink/10 mx-1 hidden md:block"></div>
             <a href={lang === 'en' ? `/es${Astro.url.pathname}` : Astro.url.pathname.replace(/^\/es/, '') || '/'} class="hover:text-clay transition-colors duration-300 text-earth font-medium">
               {lang === 'en' ? 'ES' : 'EN'}

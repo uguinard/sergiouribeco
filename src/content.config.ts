@@ -1,4 +1,5 @@
 import { z, defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
 import { snapshotLoader } from "./utils/snapshot-loader";
 import { pageLoader } from "./utils/page-loader";
 
@@ -144,6 +145,22 @@ const snapshots_es = defineCollection({
   schema: snapshotSchema,
 });
 
+// ── posts ──────────────────────────────────────────────────────────────────────
+const postsSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  pubDate: z.coerce.date(),
+  category: z.string().default('General'),
+  tags: z.array(z.string()).default([]),
+  lang: z.enum(['en', 'es']).default('en'),
+  draft: z.boolean().default(false),
+});
+
+const posts = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/posts' }),
+  schema: postsSchema,
+});
+
 // ── exports ───────────────────────────────────────────────────────────────────
 
 export const collections = {
@@ -155,4 +172,5 @@ export const collections = {
   garden_es,
   snapshots_en,
   snapshots_es,
+  posts,
 };

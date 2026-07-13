@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => 
+  data.lang === 'es' && (import.meta.env.PROD ? data.draft !== true : true)
+);
+
+// Sort posts by pubDate desc
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get all unique categories
+const categories = Array.from(new Set(allPosts.map(p => p.data.category)));
+---
+
+<Layout title="Artículos" lang="es">
+  <div class="max-w-3xl mx-auto mt-12 px-4 md:px-0">
+    <header class="mb-16 pb-12 border-b border-earth/10">
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4 font-light">Artículos y Reflexiones</h1>
+      <p class="font-serif text-lg text-ink-soft italic leading-relaxed">
+        Escritos sobre la enacción del lenguaje, la cognición 4E y la seguridad relacional en aulas internacionales.
+      </p>
+    </header>
+
+    {categories.length > 0 && (
+      <div class="mb-12 flex flex-wrap gap-2 items-center">
+        <span class="font-sans text-[10px] font-bold tracking-widest uppercase text-earth mr-2">Categorías:</span>
+        {categories.map(cat => (
+          <span class="bg-paper/50 text-clay border border-earth/10 text-xs px-3 py-1 rounded-full font-serif">
+            {cat}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div class="space-y-12">
+      {allPosts.length === 0 ? (
+        <p class="font-serif text-ink-soft italic">No hay publicaciones disponibles todavía.</p>
+      ) : (
+        allPosts.map(post => (
+          <article class="group relative pb-8 border-b border-earth/5 hover:border-earth/10 transition-colors duration-300">
+            <div class="flex items-center gap-4 mb-3">
+              <time class="text-xs font-sans text-ink-soft uppercase tracking-widest" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </time>
+              <span class="bg-clay/5 text-clay text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-clay/10 font-sans font-semibold">
+                {post.data.category}
+              </span>
+            </div>
+            
+            <h2 class="font-serif text-2xl text-ink font-medium mb-3 group-hover:text-clay transition-colors duration-300">
+              <a href={`/es/posts/${post.id}`}>
+                {post.data.title}
+              </a>
+            </h2>
+            
+            {post.data.description && (
+              <p class="font-sans text-sm text-ink-soft leading-relaxed mb-4 text-justify">
+                {post.data.description}
+              </p>
+            )}
+
+            {post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map(tag => (
+                  <span class="text-[10px] font-sans text-earth/80">#{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      )}
+    </div>
+  </div>
+</Layout>
