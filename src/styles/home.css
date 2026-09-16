@@ -1,25 +1,11 @@
-/* ── Tokens ─────────────────────────────── */
-:root {
-  --ink:       #1a1714;
-  --ink-soft:  #4a453f;
-  --cream:     #f5f1ea;
-  --clay:      #8B2020;
-  --clay-soft: #b04040;
-  --earth:     #7a6a52;
-  --earth-lt:  #c2b49a;
-  --rule:      rgba(26,23,20,0.12);
-  --serif:     'Lora', 'Georgia', 'Times New Roman', serif;
-  --sans:      'Albert Sans', system-ui, -apple-system, sans-serif;
-}
-
 /* ── Eyebrow ─────────────────────────────── */
 .eyebrow {
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--earth);
+  color: var(--color-earth);
   margin-bottom: 1.5rem;
 }
 
@@ -40,26 +26,26 @@
 }
 
 .hero h1 {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: clamp(2.4rem, 5vw, 4.5rem);
   font-weight: 500;
   line-height: 1.1;
-  color: var(--ink);
+  color: var(--color-ink);
   margin: 0 0 2rem;
   letter-spacing: -0.02em;
 }
 .hero h1 em {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
-  color: var(--clay);
+  color: var(--color-clay);
 }
 
 .subhead {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--ink-soft);
+  color: var(--color-ink-soft);
   max-width: 38rem;
   margin-bottom: 2.5rem;
 }
@@ -73,17 +59,17 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--color-ink);
   text-decoration: none;
   transition: color 0.25s;
 }
-.nav-link.secondary { color: var(--earth); }
-.nav-link:hover { color: var(--clay); }
-.nav-link.secondary:hover { color: var(--clay-soft); }
+.nav-link.secondary { color: var(--color-earth); }
+.nav-link:hover { color: var(--color-clay); }
+.nav-link.secondary:hover { color: var(--color-clay-soft); }
 
 .nav-line {
   display: inline-block;
@@ -149,20 +135,20 @@
   z-index: 1;
 }
 .glyph-core span {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.8rem;
-  color: var(--clay);
+  color: var(--color-clay);
 }
 
 /* Floating coords */
 .coord {
   position: absolute;
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.6rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--earth);
+  color: var(--color-earth);
   opacity: 0.6;
 }
 .coord-bogota  { top: 10%;  left: -10%; }
@@ -180,11 +166,11 @@
 .divider-rule {
   flex: 1;
   height: 1px;
-  background: var(--rule);
+  background: var(--color-rule);
 }
 .divider-mark {
-  font-family: var(--serif);
-  color: var(--earth-lt);
+  font-family: var(--font-serif);
+  color: var(--color-earth-lt);
   font-size: 0.9rem;
 }
 
@@ -202,36 +188,36 @@
   }
 }
 .about-label {
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--earth);
+  color: var(--color-earth);
   padding-top: 0.4rem;
 }
 .about-body {
-  font-family: var(--sans);
-  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  color: var(--color-ink-soft);
   line-height: 1.8;
 }
 .about-lead {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 1.15rem;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--color-ink);
   margin-bottom: 1.2rem;
 }
 .about-body p { margin: 0 0 1rem; }
-.about-body strong { color: var(--ink); font-weight: 600; }
-.about-body em { font-style: italic; color: var(--clay-soft); }
+.about-body strong { color: var(--color-ink); font-weight: 600; }
+.about-body em { font-style: italic; color: var(--color-clay-soft); }
 
 /* ── Pillars ─────────────────────────────── */
-.pillars-title {
-  font-family: var(--serif);
+.section-title {
+  font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--color-ink);
   margin: 0 0 2.5rem;
   letter-spacing: -0.01em;
 }
@@ -244,47 +230,39 @@
   .pillars-grid { grid-template-columns: repeat(3, 1fr); }
 }
 .pillar {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--color-rule);
   padding-top: 1.5rem;
 }
 .pillar-num {
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.65rem;
   letter-spacing: 0.14em;
-  color: var(--clay);
+  color: var(--color-clay);
   margin-bottom: 0.8rem;
 }
 .pillar h3 {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--color-ink);
   margin: 0 0 0.8rem;
 }
 .pillar p {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 0.9rem;
   line-height: 1.75;
-  color: var(--ink-soft);
+  color: var(--color-ink-soft);
   margin: 0;
 }
-.pillar strong { color: var(--ink); }
-.pillar em { font-style: italic; color: var(--clay-soft); }
+.pillar strong { color: var(--color-ink); }
+.pillar em { font-style: italic; color: var(--color-clay-soft); }
 
 /* ── Trajectory ──────────────────────────── */
-.trajectory-title {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 0 0 2.5rem;
-  letter-spacing: -0.01em;
-}
 .timeline {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-left: 1px solid var(--rule);
+  border-left: 1px solid var(--color-rule);
   margin-left: 0.5rem;
 }
 .tl-item {
@@ -301,11 +279,11 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--earth-lt);
+  background: var(--color-earth-lt);
   flex-shrink: 0;
 }
 .tl-dot--now {
-  background: var(--clay);
+  background: var(--color-clay);
   box-shadow: 0 0 0 3px rgba(139,32,32,0.12);
 }
 .tl-content {
@@ -314,30 +292,30 @@
   gap: 0.3rem;
 }
 .tl-place {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 1rem;
-  color: var(--ink);
+  color: var(--color-ink);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 .tl-detail {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--color-ink-soft);
   line-height: 1.6;
 }
 .now-badge {
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: var(--clay);
+  background: var(--color-clay);
   color: #fff;
   padding: 0.1em 0.5em;
   border-radius: 2px;
 }
-.tl-item--now .tl-place { color: var(--clay); }
+.tl-item--now .tl-place { color: var(--color-clay); }
 
 /* ── CTA ─────────────────────────────────── */
 .cta {
@@ -345,9 +323,9 @@
   padding: 2rem 0 5rem;
 }
 .cta-intro {
-  font-family: var(--serif);
+  font-family: var(--font-serif);
   font-size: 1.1rem;
-  color: var(--ink-soft);
+  color: var(--color-ink-soft);
   margin-bottom: 2rem;
   font-style: italic;
 }
@@ -358,30 +336,30 @@
   justify-content: center;
 }
 .cta-btn {
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.7rem 1.6rem;
-  border: 1px solid var(--clay);
+  border: 1px solid var(--color-clay);
   color: #fff;
-  background: var(--clay);
+  background: var(--color-clay);
   transition: background 0.2s, color 0.2s;
 }
 .cta-btn:hover {
   background: transparent;
-  color: var(--clay);
+  color: var(--color-clay);
 }
 .cta-btn--ghost {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--rule);
+  color: var(--color-ink);
+  border-color: var(--color-rule);
 }
 .cta-btn--ghost:hover {
-  border-color: var(--clay);
-  color: var(--clay);
+  border-color: var(--color-clay);
+  color: var(--color-clay);
 }
 
 /* ── Animations ──────────────────────────── */
@@ -392,4 +370,13 @@
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: 0.6; transform: scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-1,
+  .orbit-2,
+  .orbit-3,
+  .glyph-core {
+    animation: none !important;
+  }
 }

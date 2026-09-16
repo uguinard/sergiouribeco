@@ -28,10 +28,7 @@ export default defineConfig({
     remarkPlugins: [
       remarkObsidianImages,
       remarkObsidianCallouts,
-      [remarkWikiLink, {
-        pageResolver: (/** @type {string} */ name) => [name.replace(/ /g, '-').toLowerCase()],
-        hrefTemplate: (/** @type {string} */ permalink) => `/${permalink}`
-      }]
+      [remarkWikiLink, { pathFormat: 'obsidian-absolute', wikiLinkClassName: 'wiki-link' }]
     ]
   }
 });

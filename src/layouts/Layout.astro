@@ -17,6 +17,7 @@ const {
   isDarkroom = false
 } = Astro.props;
 const t = ui[lang];
+const pathname = Astro.url.pathname;
 ---
 
 <!DOCTYPE html>
@@ -36,25 +37,24 @@ const t = ui[lang];
   </head>
   <body class={`min-h-screen selection:bg-earth selection:text-paper antialiased ${isDarkroom ? "darkroom bg-neutral-950 text-neutral-100" : "text-ink bg-sand font-serif"}`}>
     {!isDarkroom && (
-      <!-- Sticky Header -->
-      <header class="sticky top-0 z-50 bg-sand/80 backdrop-blur-md border-b border-earth/5 py-4 md:py-6 transition-all duration-300">
+      <header id="site-header" class="fixed w-full top-0 z-50 py-4 md:py-6 transition-all duration-300 border-b border-transparent bg-transparent">
         <nav class="max-w-5xl mx-auto px-4 md:px-6 flex justify-between items-center font-sans text-xs md:text-sm tracking-widest text-ink-light uppercase">
           <a href={`/${lang === 'en' ? '' : lang}`} class="hover:text-clay transition-colors duration-300 font-medium tracking-[0.2em] text-ink">
             {t['nav.name']}
           </a>
 
           <!-- Mobile Menu Toggle -->
-          <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Toggle Menu">
+          <button id="menu-toggle" class="z-[60] md:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Toggle Menu">
             <span class="w-5 h-[1px] bg-ink transition-all duration-300 origin-center"></span>
             <span class="w-5 h-[1px] bg-ink transition-all duration-300"></span>
             <span class="w-5 h-[1px] bg-ink transition-all duration-300 origin-center"></span>
           </button>
 
           <!-- Navigation Menu -->
-          <div id="nav-menu" class="hidden md:flex gap-6 md:gap-8 items-center absolute md:static top-full left-0 w-full md:w-auto bg-sand/95 md:bg-transparent p-8 md:p-0 border-b md:border-none border-earth/10">
-            <a href={`/${lang === 'en' ? '' : lang + '/'}philosophy`} class="nav-item">{t['nav.philosophy']}</a>
-            <a href={`/${lang === 'en' ? '' : lang + '/'}cv`} class="nav-item">{t['nav.cv']}</a>
-            <a href={`/${lang === 'en' ? '' : lang + '/'}posts`} class="nav-item">{t['nav.posts']}</a>
+          <div id="nav-menu" class="fixed inset-0 bg-sand/98 backdrop-blur-xl z-50 flex flex-col justify-center items-center gap-10 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:static md:flex-row md:translate-x-0 md:bg-transparent md:backdrop-blur-none md:p-0 md:border-none md:gap-8">
+            <a href={`/${lang === 'en' ? '' : lang + '/'}philosophy`} class={`nav-item ${pathname.includes('/philosophy') ? 'active' : ''}`}>{t['nav.philosophy']}</a>
+            <a href={`/${lang === 'en' ? '' : lang + '/'}cv`} class={`nav-item ${pathname.includes('/cv') ? 'active' : ''}`}>{t['nav.cv']}</a>
+            <a href={`/${lang === 'en' ? '' : lang + '/'}posts`} class={`nav-item ${pathname.includes('/posts') ? 'active' : ''}`}>{t['nav.posts']}</a>
             <div class="h-3 w-[1px] bg-ink/10 mx-1 hidden md:block"></div>
             <a href={lang === 'en' ? `/es${Astro.url.pathname}` : Astro.url.pathname.replace(/^\/es/, '') || '/'} class="hover:text-clay transition-colors duration-300 text-earth font-medium">
               {lang === 'en' ? 'ES' : 'EN'}
@@ -64,7 +64,7 @@ const t = ui[lang];
       </header>
     )}
 
-    <div class={isDarkroom ? "w-full min-h-screen" : "page-content"}>
+    <div class={isDarkroom ? "w-full min-h-screen" : "page-content pt-28 md:pt-32"}>
       <main class={isDarkroom ? "" : "animate-fade-in-up"}>
         <slot />
       </main>
@@ -134,50 +134,73 @@ const t = ui[lang];
         });
       })();
 
-      // ── Mobile menu ──────────────────────────────────────────────────
-      const menuToggle = document.getElementById('menu-toggle');
-      const navMenu = document.getElementById('nav-menu');
-      const spans = menuToggle?.querySelectorAll('span');
-
-      menuToggle?.addEventListener('click', () => {
-        const isExpanded = navMenu?.classList.toggle('hidden');
-        navMenu?.classList.toggle('flex');
+      // ── Scroll-linked Header state ──────────────────────────────────
+      function initHeaderScroll() {
+        const header = document.getElementById('site-header');
+        if (!header) return;
         
-        if (!isExpanded) {
-          spans?.[0].setAttribute('style', 'transform: translateY(7px) rotate(45deg);');
-          spans?.[1].setAttribute('style', 'opacity: 0;');
-          spans?.[2].setAttribute('style', 'transform: translateY(-7px) rotate(-45deg);');
-        } else {
-          spans?.[0].setAttribute('style', '');
-          spans?.[1].setAttribute('style', '');
-          spans?.[2].setAttribute('style', '');
+        function handleScroll() {
+          if (window.scrollY > 20) {
+            header.classList.add('bg-sand/90', 'backdrop-blur-md', 'border-earth/10', 'shadow-sm');
+            header.classList.remove('bg-transparent', 'border-transparent');
+          } else {
+            header.classList.remove('bg-sand/90', 'backdrop-blur-md', 'border-earth/10', 'shadow-sm');
+            header.classList.add('bg-transparent', 'border-transparent');
+          }
         }
+        
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Run once on load
+      }
+      document.addEventListener('astro:page-load', initHeaderScroll);
+
+      // ── Mobile menu ──────────────────────────────────────────────────
+      document.addEventListener('astro:page-load', () => {
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const spans = menuToggle?.querySelectorAll('span');
+
+        if (!menuToggle || !navMenu || !spans) return;
+
+        function closeMenu() {
+          navMenu.classList.add('translate-x-full');
+          document.body.classList.remove('overflow-hidden');
+          spans[0].setAttribute('style', '');
+          spans[1].setAttribute('style', '');
+          spans[2].setAttribute('style', '');
+        }
+
+        menuToggle.addEventListener('click', () => {
+          const isExpanded = !navMenu.classList.contains('translate-x-full');
+
+          // Toggle the sliding drawer
+          navMenu.classList.toggle('translate-x-full');
+
+          // Lock/unlock body scroll
+          document.body.classList.toggle('overflow-hidden');
+
+          // Animate the hamburger icon
+          if (!isExpanded) {
+            spans[0].setAttribute('style', 'transform: translateY(7px) rotate(45deg);');
+            spans[1].setAttribute('style', 'opacity: 0;');
+            spans[2].setAttribute('style', 'transform: translateY(-7px) rotate(-45deg);');
+          } else {
+            spans[0].setAttribute('style', '');
+            spans[1].setAttribute('style', '');
+            spans[2].setAttribute('style', '');
+          }
+        });
+
+        // Close drawer when clicking a link inside it
+        navMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', closeMenu);
+        });
       });
     </script>
   </body>
 </html>
 
 <style is:global>
-  :root {
-    --font-display: 'Lora', serif;
-    --font-body: 'Albert Sans', sans-serif;
-  }
-
-  body {
-    font-family: var(--font-body);
-    line-height: 1.8;
-  }
-
-  h1, h2 {
-    font-family: var(--font-display);
-    font-weight: 500;
-  }
-
-  em {
-    font-family: var(--font-display);
-    font-style: italic;
-  }
-
   /* Navigation & Labels */
   .nav-item, .eyebrow, .about-label, .cta-btn {
     font-family: var(--font-body);
@@ -190,7 +213,7 @@ const t = ui[lang];
   .nav-item {
     position: relative;
     padding: 0.2rem 0;
-    color: var(--ink-light);
+    color: var(--color-ink-light);
     transition: color 0.3s ease;
     text-decoration: none;
     font-size: 0.75rem;
@@ -202,15 +225,22 @@ const t = ui[lang];
     left: 50%;
     width: 0;
     height: 1px;
-    background-color: var(--clay);
+    background-color: var(--color-clay);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(-50%);
     opacity: 0;
   }
   .nav-item:hover {
-    color: var(--ink);
+    color: var(--color-ink);
   }
   .nav-item:hover::after {
+    width: 100%;
+    opacity: 1;
+  }
+  .nav-item.active {
+    color: var(--color-ink);
+  }
+  .nav-item.active::after {
     width: 100%;
     opacity: 1;
   }

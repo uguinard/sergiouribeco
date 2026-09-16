@@ -4,6 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import ImmersiveViewer from '../../../components/ImmersiveViewer.astro';
 import En from '../../../components/En.astro';
 import Es from '../../../components/Es.astro';
+import SemanticNetwork from '../../../components/SemanticNetwork.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts_es');
@@ -25,6 +26,15 @@ export async function getStaticPaths() {
 const { entry, prevSlug, nextSlug } = Astro.props;
 const { Content, headings } = await render(entry);
 const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
+
+const allPosts = await getCollection('posts_es');
+const currentPostTitle = entry.data.title;
+
+// Find any post whose raw body contains a wikilink to this post
+const backlinks = allPosts.filter(p => 
+  p.id !== entry.id && 
+  p.body?.includes(`[[${currentPostTitle}]]`)
+);
 ---
 
 <Layout title={entry.data.title} description={entry.data.description} lang="es">
@@ -52,6 +62,8 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
             </ul>
           </nav>
         )}
+
+        <SemanticNetwork currentSlug={entry.id} lang="es" />
       </div>
     </aside>
 
@@ -87,6 +99,21 @@ const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
             ))}
           </div>
         </footer>
+      )}
+
+      {backlinks.length > 0 && (
+        <div class="mt-16 pt-8 border-t border-earth/20">
+          <h3 class="text-xl font-serif text-ink mb-4">Nodos Conectados</h3>
+          <ul class="space-y-2">
+            {backlinks.map(bl => (
+              <li>
+                <a href={`/es/posts/${bl.id}`} class="text-clay hover:underline">
+                  &rarr; {bl.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
 
       <div id="post-navigation-data" data-prev={prevSlug} data-next={nextSlug} class="hidden"></div>

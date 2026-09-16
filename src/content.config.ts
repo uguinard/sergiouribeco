@@ -154,6 +154,24 @@ const postsSchema = ({ image }: { image: () => z.ZodType<any> }) => z.object({
   tags: z.array(z.string()).default([]),
   thumbnail: image().optional(),
   draft: z.boolean().default(false),
+  // Semantic Network Fields
+  related_concepts: z.array(z.string()).optional(),
+  // Multimodal Fields
+  sensory_modality: z.enum(['visual', 'auditory', 'textual', 'interactive']).optional(),
+  audio_asset: z.string().optional(),
+  visual_asset: z.string().optional(),
+  // Affective & Emotional Schemas
+  affective_state: z.enum([
+    'grounding',      // Evokes safety, foundational concepts
+    'disruptive',     // Challenges paradigms, cognitive dissonance
+    'expansive',      // Curiosity, wide-reaching theories
+    'reflective',     // Deep introspection, pedagogical posture
+    'kinetic'         // High energy, active methodologies
+  ]).optional(),
+  emotional_resonance: z.array(z.string()).optional(),
+  // Cognitive & Enactive Anchors
+  conceptual_metaphors: z.array(z.string()).optional(),
+  affordances: z.array(z.string()).optional(),
 });
 
 const posts_en = defineCollection({

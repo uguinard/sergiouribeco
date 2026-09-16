@@ -23,11 +23,11 @@ const sections = [
 ---
 
 <Layout title={title}>
-  <div class="max-w-5xl mx-auto mt-12 flex flex-col lg:flex-row gap-16 relative">
+  <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-16 relative">
 
     <!-- Left Column: Sticky Outline (ToC) -->
     <aside class="w-full lg:w-48 shrink-0 print:hidden">
-      <nav class="lg:sticky lg:top-28 p-5 border border-earth/5 lg:border-none bg-paper/20 lg:bg-transparent rounded-2xl lg:p-0 space-y-4">
+      <nav class="lg:sticky lg:top-24 p-5 border border-earth/5 lg:border-none bg-paper/20 lg:bg-transparent rounded-2xl lg:p-0 space-y-4">
         <p class="font-sans text-[10px] font-bold tracking-[0.25em] text-clay/80 uppercase">Navigation</p>
         <ul class="space-y-3">
           {sections.map(s => (
@@ -212,21 +212,14 @@ const sections = [
 </Layout>
 
 <style>
-  :root {
-    --clay:  #8B2020;
-    --earth: #7a6a52;
-    --ink:   #1a1714;
-    --ink-soft: #4a453f;
-    --sand:  #f5f1ea;
-  }
   section {
     scroll-margin-top: 6.5rem;
   }
   .cv-section-head {
-    font-family: var(--serif);
+    font-family: var(--font-serif);
     font-size: 1.3rem;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--color-ink);
     letter-spacing: -0.01em;
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
@@ -238,7 +231,7 @@ const sections = [
     font-family: var(--font-sans);
     font-size: 1.05rem;
     line-height: 1.82;
-    color: var(--ink-soft);
+    color: var(--color-ink-soft);
   }
   @media print {
     header { margin-bottom: 6mm !important; }
