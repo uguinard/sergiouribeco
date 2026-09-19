@@ -12,7 +12,7 @@ export const ui = {
     'nav.garden': 'The Lab',
     'nav.philosophy': 'Philosophy',
     'nav.cv': 'CV',
-    'nav.snapshots': 'Snapshots',
+    'nav.snapshots': 'Insights',
     'nav.posts': 'Posts',
     'footer.rights': `© ${new Date().getFullYear()} Sergio Uribe. All rights reserved.`,
     'footer.motto': 'Language. Community. Purpose.',

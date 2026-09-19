@@ -55,6 +55,7 @@ const pathname = Astro.url.pathname;
             <a href={`/${lang === 'en' ? '' : lang + '/'}philosophy`} class={`nav-item ${pathname.includes('/philosophy') ? 'active' : ''}`}>{t['nav.philosophy']}</a>
             <a href={`/${lang === 'en' ? '' : lang + '/'}cv`} class={`nav-item ${pathname.includes('/cv') ? 'active' : ''}`}>{t['nav.cv']}</a>
             <a href={`/${lang === 'en' ? '' : lang + '/'}posts`} class={`nav-item ${pathname.includes('/posts') ? 'active' : ''}`}>{t['nav.posts']}</a>
+            <a href={`/${lang === 'en' ? '' : lang + '/'}snapshots`} class={`nav-item ${pathname.includes('/snapshots') ? 'active' : ''}`}>{t['nav.snapshots']}</a>
             <div class="h-3 w-[1px] bg-ink/10 mx-1 hidden md:block"></div>
             <a href={lang === 'en' ? `/es${Astro.url.pathname}` : Astro.url.pathname.replace(/^\/es/, '') || '/'} class="hover:text-clay transition-colors duration-300 text-earth font-medium">
               {lang === 'en' ? 'ES' : 'EN'}
