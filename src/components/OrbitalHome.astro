@@ -7,7 +7,7 @@ const { lang = 'en' } = Astro.props;
 
 const content = {
   en: {
-    eyebrow: "IB-Certified Educator · EAL & Spanish Specialist",
+    eyebrow: "IB-Certified Language Educator • Spanish, English & French",
     title: "Sergio Uribe Guinard",
     location: "Đà Nẵng, Vietnam",
     manifesto: "I teach Spanish by letting students live it. Language is not a subject to memorise — it is a way to move through the world with other people.",
@@ -74,7 +74,7 @@ const content = {
     ],
   },
   es: {
-    eyebrow: "Educador Certificado IB · Especialista EAL y Español",
+    eyebrow: "Educador Certificado IB • Español, Inglés y Francés",
     title: "Sergio Uribe Guinard",
     location: "Đà Nẵng, Vietnam",
     manifesto: "Enseño español dejando que los estudiantes lo vivan. El lenguaje no es una asignatura para memorizar — es una forma de moverse por el mundo con otras personas.",
@@ -151,6 +151,10 @@ const t = content[lang] || content.en;
        HEADER — Title Role
   ═══════════════════════════════════════════════════ -->
   <header class="orbital-header">
+    <div class="inline-flex items-center gap-2 mb-3">
+      <span class="badge-pulse-dot"></span>
+      <span class="text-xs uppercase tracking-widest font-sans font-semibold text-earth">Active Pedagogy & Research</span>
+    </div>
     <h1 class="main-page-title">{t.eyebrow}</h1>
   </header>
 
@@ -290,19 +294,19 @@ const t = content[lang] || content.en;
   </div>
 
   <!-- ═══════════════════════════════════════════════════
-       MANIFESTO — Prose
+       MANIFESTO — Prose & Readability
   ═══════════════════════════════════════════════════ -->
-  <div class="manifesto-block">
+  <div class="manifesto-block glass-card">
     <p class="manifesto-lead">{t.manifesto}</p>
     <p class="manifesto-body">{t.bioParagraph}</p>
   </div>
 
   <!-- ═══════════════════════════════════════════════════
-       EXPERIENCE STRIP
+       EXPERIENCE STRIP — Glassmorphic Cards
   ═══════════════════════════════════════════════════ -->
   <div class="experience-strip" role="list" aria-label="Teaching experience">
     {t.experience.map(e => (
-      <div class="exp-card" role="listitem">
+      <div class="exp-card glass-card" role="listitem">
         <span class="exp-flag" aria-hidden="true">{e.flag}</span>
         <div class="exp-text">
           <strong class="exp-place">{e.place}</strong>
@@ -658,34 +662,34 @@ const t = content[lang] || content.en;
   }
 
   /* ═══════════════════════════════════════════════════
-     MANIFESTO
+     MANIFESTO — Readability Enhanced
   ═══════════════════════════════════════════════════ */
   .manifesto-block {
-    max-width: 680px;
+    max-width: 720px;
     text-align: center;
-    padding: 2rem 0;
-    border-top: 1px solid var(--ink-20);
-    border-bottom: 1px solid var(--ink-20);
+    padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
     width: 100%;
+    box-shadow: 0 4px 20px rgba(28, 26, 23, 0.04);
   }
 
   .manifesto-lead {
     font-family: 'Lora', serif;
-    font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
     font-style: italic;
-    line-height: 1.65;
+    line-height: 1.7;
     color: var(--forest);
-    margin-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
+    font-weight: 500;
   }
 
   .manifesto-body {
     font-family: 'Albert Sans', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: var(--ink-60);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
     margin: 0;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.015em;
   }
 
   /* ═══════════════════════════════════════════════════

@@ -126,7 +126,8 @@ const pathname = Astro.url.pathname;
 
         // Save scroll when clicking into a snapshot entry
         document.addEventListener('click', function(e) {
-          var a = e.target.closest('a[href]');
+          var target = e.target as HTMLElement | null;
+          var a = target ? target.closest('a[href]') : null;
           if (!a) return;
           var href = a.getAttribute('href') || '';
           if (href.match(/\/snapshots\/[^/]+/)) {
@@ -141,6 +142,7 @@ const pathname = Astro.url.pathname;
         if (!header) return;
         
         function handleScroll() {
+          if (!header) return;
           if (window.scrollY > 20) {
             header.classList.add('bg-sand/90', 'backdrop-blur-md', 'border-earth/10', 'shadow-sm');
             header.classList.remove('bg-transparent', 'border-transparent');
@@ -161,17 +163,19 @@ const pathname = Astro.url.pathname;
         const navMenu = document.getElementById('nav-menu');
         const spans = menuToggle?.querySelectorAll('span');
 
-        if (!menuToggle || !navMenu || !spans) return;
+        if (!menuToggle || !navMenu || !spans || spans.length < 3) return;
 
         function closeMenu() {
+          if (!navMenu || !spans) return;
           navMenu.classList.add('translate-x-full');
           document.body.classList.remove('overflow-hidden');
-          spans[0].setAttribute('style', '');
-          spans[1].setAttribute('style', '');
-          spans[2].setAttribute('style', '');
+          spans[0]?.setAttribute('style', '');
+          spans[1]?.setAttribute('style', '');
+          spans[2]?.setAttribute('style', '');
         }
 
         menuToggle.addEventListener('click', () => {
+          if (!navMenu || !spans) return;
           const isExpanded = !navMenu.classList.contains('translate-x-full');
 
           // Toggle the sliding drawer
@@ -182,13 +186,13 @@ const pathname = Astro.url.pathname;
 
           // Animate the hamburger icon
           if (!isExpanded) {
-            spans[0].setAttribute('style', 'transform: translateY(7px) rotate(45deg);');
-            spans[1].setAttribute('style', 'opacity: 0;');
-            spans[2].setAttribute('style', 'transform: translateY(-7px) rotate(-45deg);');
+            spans[0]?.setAttribute('style', 'transform: translateY(7px) rotate(45deg);');
+            spans[1]?.setAttribute('style', 'opacity: 0;');
+            spans[2]?.setAttribute('style', 'transform: translateY(-7px) rotate(-45deg);');
           } else {
-            spans[0].setAttribute('style', '');
-            spans[1].setAttribute('style', '');
-            spans[2].setAttribute('style', '');
+            spans[0]?.setAttribute('style', '');
+            spans[1]?.setAttribute('style', '');
+            spans[2]?.setAttribute('style', '');
           }
         });
 
