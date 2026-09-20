@@ -8,6 +8,7 @@ import { remarkObsidianImages } from './src/utils/remark-obsidian-images.mjs';
 
 import alpinejs from '@astrojs/alpinejs';
 
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
