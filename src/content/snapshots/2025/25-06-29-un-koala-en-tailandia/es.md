@@ -1,7 +1,0 @@
-¿Qué hace un koala en la playa de Naiyang? Este esponjoso amiguito ha viajado desde Australia a Colombia y de ahí hasta Tailandia. Es cierto, no se trata de un verdadero Koala. Es un peluche que me regaló mi sobrina estando en Colombia y como ella no podía ir de viaje conmigo, se me ocurrió que el koalita me podría acompañar en el viaje. Le sacaría fotos a él para luego enviárselas a mi sobrina. Pienso que de esta manera ella podría tener mayor cercanía y conexión con el viaje y los paisajes.
-
-Esta idea me recordó a la historia de un señor que viajaba por el mundo tomando fotos de peluches. Las fotos transmitían la sensación de que el muñeco estaba disfrutando de la travesía. Estos felpudos pertenecían a gente que no podía viajar por motivos de salud, y esta era una forma de conectar con una aventura de la que ellos eran partícipes.
-
-> [!note] El Nui-dori
-> El **Nui-dori** (ぬい撮り) es la práctica fotográfica de retratar peluches en escenarios del mundo real, capturándolos como si fueran **protagonistas vivos** de una escena y no simples objetos. A diferencia de una foto casual, esta técnica utiliza ángulos creativos y accesorios a escala para que el juguete parezca estar interactuando con su entorno, ya sea comiendo en un restaurante, admirando un paisaje o viajando. Es una forma de **narrativa visual** donde el dueño actúa como documentalista de las aventuras de su acompañante inanimado, compartiendo los resultados en redes sociales como un diario de viaje alternativo y personal.
-

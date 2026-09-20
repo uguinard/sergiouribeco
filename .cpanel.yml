@@ -1,4 +1,0 @@
----
-deployment:
-  tasks:
-    - rsync -avz --delete ./dist/ /home/sxcipmrdkq/sergiouribe.co/
