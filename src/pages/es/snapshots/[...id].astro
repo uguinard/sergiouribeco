@@ -1,0 +1,330 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allEntries = await getCollection('snapshots_es', ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  );
+  allEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  const paths = allEntries.map((entry, index) => {
+    const slug = entry.id.replace(/\/es$/, '');
+    const prev = index > 0 ? allEntries[index - 1] : null;
+    const next = index < allEntries.length - 1 ? allEntries[index + 1] : null;
+    return {
+      params: { id: slug },
+      props: {
+        entry,
+        prevSlug: prev ? prev.id.replace(/\/es$/, '') : null,
+        nextSlug: next ? next.id.replace(/\/es$/, '') : null,
+      },
+    };
+  });
+
+  return paths;
+}
+
+type Props = {
+  entry: CollectionEntry<'snapshots_es'>;
+  prevSlug: string | null;
+  nextSlug: string | null;
+};
+
+const { entry, prevSlug, nextSlug } = Astro.props;
+const { data } = entry;
+let Content: any = null;
+let renderError = false;
+try {
+  const rendered = await render(entry);
+  Content = rendered.Content;
+} catch (e) {
+  console.error(`[Astro] Error rendering ${entry.id}:`, e);
+  renderError = true;
+}
+
+const allPhotos = data.photos.length > 0
+  ? data.photos
+  : [{ src: data.cover, alt: data.title, caption: undefined }];
+
+const photosJson = JSON.stringify(
+  allPhotos.map((p: any) => ({
+    src: typeof p.src === 'string' ? p.src : p.src.src,
+    caption: p.caption ?? '',
+    alt: p.alt ?? '',
+    position: p.position ?? 'center center',
+  }))
+);
+
+const hasMap = data.lat != null && data.lng != null;
+---
+
+<Layout title={data.title} description={data.description} lang="es" isDarkroom={true}>
+  <div
+    class="fixed inset-0 z-[60] bg-neutral-950 flex flex-col md:flex-row overflow-hidden text-neutral-100 font-sans"
+    data-next-slug={nextSlug}
+    data-prev-slug={prevSlug}
+    data-photos={photosJson}
+    data-lang="es"
+  >
+    <!-- Botón Cerrar -->
+    <a
+      href="/es/snapshots"
+      class="fixed top-6 right-6 z-[100] w-12 h-12 flex items-center justify-center bg-black/20 hover:bg-black/40 backdrop-blur-sm text-white/50 hover:text-white transition-all duration-300 rounded-full group"
+      aria-label="Cerrar"
+    >
+      <span class="text-2xl font-light transform group-hover:rotate-90 transition-transform duration-300">&times;</span>
+    </a>
+
+    <!-- Izquierda: Visor de Fotos -->
+    <div
+      id="photo-viewer"
+      class="relative flex-1 bg-neutral-950 overflow-hidden min-h-[50vh] md:h-full"
+    >
+      <div
+        data-photo-strip
+        class="flex transition-transform duration-500 ease-in-out h-full"
+        style="transform: translateX(0%)"
+      >
+        {allPhotos.map((photo: any) => (
+          <div class="w-full h-full flex-shrink-0 flex items-center justify-center">
+            <img
+              src={typeof photo.src === 'string' ? photo.src : photo.src.src}
+              alt={photo.alt || data.title}
+              class="max-w-full max-h-full w-auto h-auto object-contain block"
+              loading="eager"
+              draggable={false}
+            />
+          </div>
+        ))}
+      </div>
+
+      {allPhotos.length > 1 && (
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {allPhotos.map((_: any, i: number) => (
+            <button
+              data-dot
+              class="h-1.5 rounded-full transition-all duration-300 cursor-pointer"
+              style={i === 0 ? 'width:1rem;background-color:white' : 'width:0.375rem;background-color:rgba(255,255,255,0.3)'}
+            ></button>
+          ))}
+        </div>
+      )}
+
+      <div class="hidden md:flex absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black/20 to-transparent pointer-events-none items-center justify-end px-4">
+        <span class="text-white/20 text-[9px] uppercase tracking-[0.3em] vertical-text select-none">Siguiente Abajo</span>
+      </div>
+    </div>
+
+    <!-- Derecha: Panel de Información -->
+    <aside
+      class="w-full md:w-[400px] lg:w-[450px] bg-neutral-950 border-t md:border-t-0 md:border-l border-white/10 flex flex-col h-[50vh] md:h-full overflow-y-auto custom-scrollbar relative"
+    >
+      <div class="p-8 md:p-12 flex-1">
+
+        {prevSlug && (
+          <div class="md:hidden text-center py-4 text-neutral-700 animate-pulse">
+            <p class="text-[8px] uppercase tracking-widest">↑ Desliza para Recientes</p>
+          </div>
+        )}
+
+        <!-- Meta -->
+        <div class="mb-10">
+          <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-clay font-bold mb-4">
+            <span class="w-8 h-[1px] bg-clay"></span>
+            <span>{data.location || 'Observación'}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-serif text-white tracking-tight leading-tight mb-2">
+            {data.title}
+          </h1>
+          <time class="text-[10px] uppercase tracking-[0.2em] text-neutral-500">
+            {data.date?.toLocaleDateString?.('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+        </div>
+
+        <!-- Mini Mapa -->
+        {hasMap && (
+          <div class="mb-10">
+            <div
+              id="snapshot-map"
+              class="w-full h-40 rounded overflow-hidden border border-white/10"
+              data-lat={data.lat}
+              data-lng={data.lng}
+              data-location={data.location}
+            ></div>
+          </div>
+        )}
+
+        <!-- Cuerpo -->
+        <div class="darkroom prose prose-invert prose-neutral prose-sm max-w-none
+          prose-p:font-sans prose-p:text-base prose-p:text-neutral-300 prose-p:leading-relaxed
+          prose-headings:font-serif prose-headings:text-white
+          prose-img:rounded prose-img:my-6 prose-img:w-full
+          prose-strong:text-neutral-200 prose-a:text-clay hover:prose-a:text-white
+          mb-12">
+          {!renderError && Content ? <Content /> : <p>Error loading content.</p>}
+        </div>
+
+        <!-- Pie de foto -->
+        <div id="photo-caption-wrap" class="mt-8 pt-8 border-t border-white/5" style="display:none">
+          <p class="text-[11px] uppercase tracking-widest text-neutral-500 mb-2">Anotación</p>
+          <p id="photo-caption" class="text-sm text-neutral-400 font-sans leading-relaxed"></p>
+        </div>
+
+        <!-- Etiquetas -->
+        {data.tags.length > 0 && (
+          <div class="mt-12 flex flex-wrap gap-2">
+            {data.tags.map((tag: string) => (
+              <span class="text-[9px] uppercase tracking-widest text-neutral-600 bg-white/5 px-2 py-1 border border-white/5">#{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <!-- EN link -->
+        <div class="mt-8 pt-8 border-t border-white/5">
+          <a href={`/snapshots/${entry.id.replace(/\/es$/, '')}`} class="text-[10px] uppercase tracking-widest text-neutral-600 hover:text-clay transition-colors">
+            Read in English →
+          </a>
+        </div>
+
+        {nextSlug && (
+          <div class="md:hidden text-center py-8 text-neutral-700 animate-pulse border-t border-white/5 mt-8">
+            <p class="text-[8px] uppercase tracking-widest">↓ Desliza para Antiguas</p>
+          </div>
+        )}
+      </div>
+
+      <!-- Navegación Footer -->
+      <nav class="p-6 border-t border-white/10 grid grid-cols-2 gap-px bg-neutral-950 sticky bottom-0 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <a
+          href={prevSlug ? '/es/snapshots/' + prevSlug : '#'}
+          class={`bg-neutral-900 p-4 text-center group transition-colors ${!prevSlug ? 'opacity-20 cursor-not-allowed pointer-events-none' : 'hover:bg-neutral-800'}`}
+        >
+          <span class="block text-[8px] uppercase tracking-widest text-neutral-500 group-hover:text-clay transition-colors mb-1">Reciente</span>
+          <span class="block text-[10px] text-neutral-300 truncate">← Anterior</span>
+        </a>
+        <a
+          href={nextSlug ? '/es/snapshots/' + nextSlug : '#'}
+          class={`bg-neutral-900 p-4 text-center group transition-colors ${!nextSlug ? 'opacity-20 cursor-not-allowed pointer-events-none' : 'hover:bg-neutral-800'}`}
+        >
+          <span class="block text-[8px] uppercase tracking-widest text-neutral-500 group-hover:text-clay transition-colors mb-1">Antigua</span>
+          <span class="block text-[10px] text-neutral-300 truncate">Siguiente →</span>
+        </a>
+      </nav>
+    </aside>
+  </div>
+</Layout>
+
+<style>
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; }
+</style>
+
+<script>
+  let currentPhoto = 0;
+  let totalPhotos = 0;
+
+  function updateSlider() {
+    const strip = document.querySelector('[data-photo-strip]') as HTMLElement | null;
+    if (strip) strip.style.transform = `translateX(-${currentPhoto * 100}%)`;
+    document.querySelectorAll('[data-dot]').forEach((dot, i) => {
+      const el = dot as HTMLElement;
+      el.style.width = i === currentPhoto ? '1rem' : '0.375rem';
+      el.style.backgroundColor = i === currentPhoto ? 'white' : 'rgba(255,255,255,0.3)';
+    });
+    const photos = JSON.parse(
+      (document.querySelector('[data-photos]') as HTMLElement | null)?.getAttribute('data-photos') || '[]'
+    );
+    const captionEl = document.getElementById('photo-caption');
+    const captionWrap = document.getElementById('photo-caption-wrap');
+    if (captionEl && captionWrap) {
+      const caption = photos[currentPhoto]?.caption || '';
+      captionEl.textContent = caption;
+      captionWrap.style.display = caption ? 'block' : 'none';
+    }
+  }
+
+  function nextPhoto() { if (currentPhoto < totalPhotos - 1) { currentPhoto++; updateSlider(); } }
+  function prevPhoto() { if (currentPhoto > 0) { currentPhoto--; updateSlider(); } }
+
+  function handleKeydown(e: KeyboardEvent) {
+    const main = document.querySelector('[data-next-slug]') as HTMLElement | null;
+    if (!main) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); nextPhoto(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); prevPhoto(); }
+  }
+  window.removeEventListener('keydown', handleKeydown);
+  window.addEventListener('keydown', handleKeydown);
+
+  function init() {
+    const main = document.querySelector('[data-next-slug]') as HTMLElement | null;
+    if (!main) return;
+    const photos = JSON.parse(main.getAttribute('data-photos') || '[]');
+    totalPhotos = photos.length;
+    currentPhoto = 0;
+    updateSlider();
+    document.querySelectorAll('[data-dot]').forEach((dot, i) => {
+      dot.addEventListener('click', () => { currentPhoto = i; updateSlider(); });
+    });
+  }
+
+  async function initMap() {
+    const el = document.getElementById('snapshot-map');
+    if (!el) return;
+    const lat = parseFloat(el.dataset.lat || '0');
+    const lng = parseFloat(el.dataset.lng || '0');
+    const location = el.dataset.location || '';
+    if (!(window as any).maplibregl) {
+      await Promise.all([
+        new Promise<void>(resolve => {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.css';
+          link.onload = () => resolve();
+          document.head.appendChild(link);
+        }),
+        new Promise<void>((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://unpkg.com/maplibre-gl@4.5.0/dist/maplibre-gl.js';
+          script.onload = () => resolve();
+          script.onerror = reject;
+          document.head.appendChild(script);
+        }),
+      ]);
+    }
+    const maplibregl = (window as any).maplibregl;
+    if ((el as any)._mapInstance) { (el as any)._mapInstance.remove(); }
+    const map = new maplibregl.Map({
+      container: el,
+      style: 'https://api.maptiler.com/maps/streets-v4/style.json?key=WIozkPRpvkrdDCVmrTxR',
+      center: [lng, lat],
+      zoom: 4,
+      interactive: true,
+      attributionControl: false,
+      projection: 'globe',
+    });
+    (el as any)._mapInstance = map;
+    map.on('load', () => {
+      new maplibregl.Marker({ color: '#ff4444' })
+        .setLngLat([lng, lat])
+        .setPopup(new maplibregl.Popup({ offset: 25 }).setText(location))
+        .addTo(map);
+      setTimeout(() => { map.easeTo({ zoom: 11, center: [lng, lat], duration: 12000 }); }, 1200);
+    });
+  }
+
+  init();
+  initMap();
+
+  document.addEventListener('astro:after-swap', () => {
+    currentPhoto = 0;
+    init();
+    setTimeout(initMap, 50);
+  });
+</script>

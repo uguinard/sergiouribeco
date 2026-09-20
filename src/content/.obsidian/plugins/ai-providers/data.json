@@ -1,0 +1,112 @@
+{
+  "_version": 1,
+  "debugLogging": false,
+  "debugChunkLogging": false,
+  "useNativeFetch": false,
+  "providers": [
+    {
+      "id": "id-1776737691683",
+      "name": "Ollama (Open WebUI)",
+      "apiKey": "",
+      "url": "http://localhost:11434/",
+      "type": "ollama-openwebui",
+      "model": "translategemma:latest",
+      "availableModels": [
+        "phi4-reasoning:latest",
+        "gemma3:12b",
+        "llama3.1:latest",
+        "bakllava:latest",
+        "translategemma:latest",
+        "gemma3:4b",
+        "kimi-k2.5:cloud",
+        "qwen3-coder:480b-cloud",
+        "gpt-oss:120b-cloud",
+        "deepseek-r1:8b",
+        "qwen3-coder:30b",
+        "gemma3:1b",
+        "glm-4.6:cloud",
+        "deepseek-v3.1:671b-cloud"
+      ]
+    },
+    {
+      "id": "id-1776927652569",
+      "name": "Ollama (phi4)",
+      "apiKey": "",
+      "url": "http://localhost:11434/",
+      "type": "ollama-openwebui",
+      "model": "phi4-reasoning:latest",
+      "availableModels": [
+        "phi4-reasoning:latest",
+        "gemma3:12b",
+        "llama3.1:latest",
+        "bakllava:latest",
+        "translategemma:latest",
+        "gemma3:4b",
+        "kimi-k2.5:cloud",
+        "qwen3-coder:480b-cloud",
+        "gpt-oss:120b-cloud",
+        "deepseek-r1:8b",
+        "qwen3-coder:30b",
+        "gemma3:1b",
+        "glm-4.6:cloud",
+        "deepseek-v3.1:671b-cloud"
+      ]
+    },
+    {
+      "id": "id-1776927700902",
+      "name": "Ollama (llama3.1)",
+      "apiKey": "",
+      "url": "http://localhost:11434/",
+      "type": "ollama-openwebui",
+      "model": "llama3.1:latest",
+      "availableModels": [
+        "phi4-reasoning:latest",
+        "gemma3:12b",
+        "llama3.1:latest",
+        "bakllava:latest",
+        "translategemma:latest",
+        "gemma3:4b",
+        "kimi-k2.5:cloud",
+        "qwen3-coder:480b-cloud",
+        "gpt-oss:120b-cloud",
+        "deepseek-r1:8b",
+        "qwen3-coder:30b",
+        "gemma3:1b",
+        "glm-4.6:cloud",
+        "deepseek-v3.1:671b-cloud"
+      ]
+    },
+    {
+      "id": "id-1776928105918",
+      "name": "Ollama (Gemma4)",
+      "apiKey": "",
+      "url": "http://localhost:11434/",
+      "type": "ollama-openwebui",
+      "model": "gemma4:e2b",
+      "availableModels": [
+        "phi4-reasoning:latest",
+        "gemma3:12b",
+        "llama3.1:latest",
+        "bakllava:latest",
+        "translategemma:latest",
+        "gemma3:4b",
+        "kimi-k2.5:cloud",
+        "qwen3-coder:480b-cloud",
+        "gpt-oss:120b-cloud",
+        "deepseek-r1:8b",
+        "qwen3-coder:30b",
+        "gemma3:1b",
+        "glm-4.6:cloud",
+        "deepseek-v3.1:671b-cloud"
+      ],
+      "modelCapabilities": {
+        "gemma4:e2b": {
+          "embedding": false,
+          "text": true,
+          "tools": true,
+          "vision": true
+        }
+      }
+    }
+  ]
+}

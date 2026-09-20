@@ -1,0 +1,309 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import ImmersiveViewer from '../../../components/ImmersiveViewer.astro';
+import En from '../../../components/En.astro';
+import Es from '../../../components/Es.astro';
+import SemanticNetwork from '../../../components/SemanticNetwork.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts_es');
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return posts.map((entry, index) => {
+    const nextPost = index > 0 ? posts[index - 1] : null;
+    const prevPost = index < posts.length - 1 ? posts[index + 1] : null;
+    return {
+      params: { slug: entry.id },
+      props: { 
+        entry,
+        prevSlug: prevPost ? prevPost.id : null,
+        nextSlug: nextPost ? nextPost.id : null
+      }
+    };
+  });
+}
+
+const { entry, prevSlug, nextSlug } = Astro.props;
+const { Content, headings } = await render(entry);
+const h2Headings = headings ? headings.filter(h => h.depth === 2) : [];
+
+const allPosts = await getCollection('posts_es');
+const currentPostTitle = entry.data.title;
+
+// Find any post whose raw body contains a wikilink to this post
+const backlinks = allPosts.filter(p => 
+  p.id !== entry.id && 
+  p.body?.includes(`[[${currentPostTitle}]]`)
+);
+---
+
+<Layout title={entry.data.title} description={entry.data.description} lang="es">
+  <div class="max-w-5xl mx-auto mt-8 flex flex-col lg:flex-row gap-12 relative">
+    
+    <!-- Left Column: Sticky Outline (ToC) -->
+    <aside class="w-full lg:w-56 shrink-0 print:hidden">
+      <div class="lg:sticky lg:top-28">
+        <!-- Back button -->
+        <a href="/es/posts" class="text-xs uppercase tracking-widest text-[#c07c64] hover:text-clay font-sans mb-8 inline-block font-bold">
+          ← Volver a artículos
+        </a>
+        
+        {h2Headings.length > 0 && (
+          <nav class="p-5 border border-earth/10 lg:border-none bg-paper/30 lg:bg-transparent rounded-2xl lg:p-0 space-y-4">
+            <p class="font-sans text-[10px] font-bold tracking-[0.2em] text-[#c07c64] uppercase">Esquema</p>
+            <ul class="space-y-3">
+              {h2Headings.map(h => (
+                <li>
+                  <a href={`#${h.slug}`} class="toc-link font-sans text-[11px] font-bold tracking-wider uppercase text-earth hover:text-clay transition-colors block py-1 pl-3 border-l border-earth/15 hover:border-clay">
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        <SemanticNetwork currentSlug={entry.id} lang="es" />
+      </div>
+    </aside>
+
+    <!-- Right Column: Content -->
+    <div class="flex-1 max-w-3xl relative">
+      <!-- One elegant vertical divider line -->
+      <div class="absolute -left-6 top-0 bottom-0 w-[1px] bg-earth/15 hidden lg:block"></div>
+
+      <header class="mb-12 pb-8 border-b border-earth/10">
+        <div class="flex items-center gap-4 mb-4">
+          <time class="text-xs font-sans text-ink-soft uppercase tracking-widest" datetime={entry.data.pubDate.toISOString()}>
+            {entry.data.pubDate.toLocaleDateString('es-ES', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          <span class="bg-clay/5 text-clay text-[10px] uppercase tracking-wider px-2 py-0.5 rounded border border-clay/10 font-sans font-semibold">
+            {entry.data.category}
+          </span>
+        </div>
+
+        <h1 class="text-3xl md:text-5xl font-serif text-ink tracking-tight mb-6 font-light">{entry.data.title}</h1>
+      </header>
+
+      <div class="post-prose prose prose-lg max-w-none">
+        <Content components={{ ImmersiveViewer, En, Es }} />
+      </div>
+
+      {entry.data.tags.length > 0 && (
+        <footer class="mt-16 pt-8 border-t border-earth/10">
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.map(tag => (
+              <span class="bg-paper/40 text-earth text-xs px-3 py-1 rounded-sm border border-earth/10 font-sans">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </footer>
+      )}
+
+      {backlinks.length > 0 && (
+        <div class="mt-16 pt-8 border-t border-earth/20">
+          <h3 class="text-xl font-serif text-ink mb-4">Nodos Conectados</h3>
+          <ul class="space-y-2">
+            {backlinks.map(bl => (
+              <li>
+                <a href={`/es/posts/${bl.id}`} class="text-clay hover:underline">
+                  &rarr; {bl.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div id="post-navigation-data" data-prev={prevSlug} data-next={nextSlug} class="hidden"></div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  :root {
+    --clay:     #c07c64;
+    --earth:    #7a6a52;
+    --ink:      #1a1714;
+    --ink-soft: #4a453f;
+    --sand:     #f5f1ea;
+    --serif:    'Lora', Georgia, serif;
+  }
+
+  .post-prose > :global(p:first-of-type::first-letter) {
+    font-family: var(--serif);
+    font-size: 3.8rem;
+    font-weight: 300;
+    line-height: 0.78;
+    float: left;
+    margin-right: 8px;
+    margin-top: 4px;
+    color: var(--clay);
+  }
+
+  /* Align paragraph/heading typography style tokens with the rest of the site */
+  .post-prose :global(p) {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--ink-soft);
+    text-align: justify;
+    hyphens: auto;
+    margin-bottom: 1.4rem;
+  }
+
+  .post-prose :global(h2) {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 2.8rem;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--clay);
+    scroll-margin-top: 6.5rem;
+  }
+
+  .post-prose :global(h3) {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    scroll-margin-top: 6.5rem;
+  }
+
+  .post-prose :global(em) {
+    font-style: italic;
+    color: var(--clay);
+    font-family: var(--serif);
+  }
+
+  .post-prose :global(strong) {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .post-prose :global(blockquote) {
+    border-left: 2px solid var(--clay);
+    padding-left: 1.2rem;
+    margin-left: 0;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .post-prose :global(a) {
+    color: var(--clay);
+    text-decoration: underline;
+    text-decoration-color: rgba(139, 32, 32, 0.35);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+  .post-prose :global(a:hover) {
+    text-decoration-color: var(--clay);
+  }
+
+  .post-prose :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.4rem;
+  }
+  .post-prose :global(ol) {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.4rem;
+  }
+  .post-prose :global(li) {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-prose :global(hr) {
+    border: none;
+    text-align: center;
+    margin: 2.5rem 0;
+  }
+  .post-prose :global(hr::after) {
+    content: '✦  ✦  ✦';
+    font-family: var(--serif);
+    color: var(--clay);
+    opacity: 0.4;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+  }
+</style>
+
+<script>
+  function initScrollSpy() {
+    const headings = Array.from(document.querySelectorAll('.post-prose h2'));
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    if (!headings.length || !tocLinks.length) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -75% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('text-clay', 'border-clay');
+              link.classList.remove('text-earth', 'border-earth/15');
+            } else {
+              link.classList.remove('text-clay', 'border-clay');
+              link.classList.add('text-earth', 'border-earth/15');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+  }
+
+  function initKeyboardNavigation() {
+    const navData = document.getElementById('post-navigation-data');
+    if (!navData) return;
+    const prev = navData.getAttribute('data-prev');
+    const next = navData.getAttribute('data-next');
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Avoid firing navigation if user is typing inside search inputs or interactive fields
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
+        return;
+      }
+      
+      if (e.key === 'ArrowRight' && next) {
+        window.location.href = `/es/posts/${next}`;
+      } else if (e.key === 'ArrowLeft' && prev) {
+        window.location.href = `/es/posts/${prev}`;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initScrollSpy();
+    initKeyboardNavigation();
+  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollSpy();
+      initKeyboardNavigation();
+    });
+  } else {
+    initScrollSpy();
+    initKeyboardNavigation();
+  }
+</script>

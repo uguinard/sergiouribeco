@@ -1,0 +1,209 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+const allSnapshotsRaw = await getCollection('snapshots_en', ({ data }) =>
+  import.meta.env.PROD ? data.draft !== true : true
+);
+const sortedSnapshots = allSnapshotsRaw.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const years = [...new Set(sortedSnapshots.map(entry => entry.data.date.getFullYear().toString()))];
+const locations = [...new Set(sortedSnapshots.map(entry => entry.data.location).filter(Boolean))] as string[];
+const allTags = [...new Set(sortedSnapshots.flatMap(entry => entry.data.tags.map((t: string) => t.toLowerCase())))].sort();
+---
+
+<Layout title="Insights" description="A visual diary — moments caught between places, languages, and reflections.">
+  <div class="max-w-6xl">
+    <header class="mb-16 border-b border-earth/20 pb-8">
+      <p class="eyebrow mb-4">Insights</p>
+      <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-4">Insights</h1>
+      <p class="text-xl text-ink-light font-serif italic max-w-2xl">
+        A visual diary. Moments caught between places, languages, and reflections — each image a sentence in a language without grammar.
+      </p>
+    </header>
+
+    <!-- Filters -->
+    <div class="mb-10 space-y-4">
+
+      <!-- Search + dropdowns -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search snapshots..."
+          class="flex-1 px-4 py-2 border border-earth/20 bg-paper text-ink focus:outline-none focus:border-clay transition-colors font-sans text-sm"
+        />
+        <select
+          id="location-filter"
+          class="px-4 py-2 border border-earth/20 bg-paper text-ink focus:outline-none focus:border-clay transition-colors font-sans text-sm"
+        >
+          <option value="">All locations</option>
+          {locations.map(loc => (
+            <option value={loc.toLowerCase()}>{loc}</option>
+          ))}
+        </select>
+        <select
+          id="year-filter"
+          class="px-4 py-2 border border-earth/20 bg-paper text-ink focus:outline-none focus:border-clay transition-colors font-sans text-sm"
+        >
+          <option value="">All years</option>
+          {years.map(year => (
+            <option value={year}>{year}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Tag pills -->
+      <div class="flex flex-wrap gap-2 items-center">
+        <button
+          class="tag-pill active font-sans text-[10px] uppercase tracking-widest px-3 py-1 border border-earth/30 transition-all duration-200"
+          data-tag=""
+        >All</button>
+        {allTags.map(tag => (
+          <button
+            class="tag-pill font-sans text-[10px] uppercase tracking-widest px-3 py-1 border border-earth/20 text-earth/50 transition-all duration-200 hover:border-clay hover:text-clay"
+            data-tag={tag}
+          >#{tag}</button>
+        ))}
+      </div>
+
+      <!-- Active filters summary -->
+      <p id="filter-summary" class="font-sans text-[10px] uppercase tracking-widest text-earth/40 hidden"></p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 snapshots-grid">
+      {sortedSnapshots.map(entry => {
+        const slug = entry.id.replace(/\/en$/, '');
+        const year = entry.data.date.getFullYear();
+        return (
+          <a
+            href={`/snapshots/${slug}`}
+            class="group flex flex-col bg-paper border border-earth/10 overflow-hidden hover:border-earth/40 transition-all duration-500 hover:shadow-lg snapshot-card"
+            data-year={year}
+            data-title={entry.data.title.toLowerCase()}
+            data-location={(entry.data.location || '').toLowerCase()}
+            data-tags={entry.data.tags.map((t: string) => t.toLowerCase()).join(',')}
+          >
+           <div class="relative overflow-hidden aspect-[4/3] flex-shrink-0">
+             <img
+               src={typeof entry.data.cover === 'string' ? entry.data.cover : (entry.data.cover as any).src}
+               alt={entry.data.title}
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               style={`object-position:${entry.data.cover_position}`}
+             />
+             {entry.data.photos.length > 1 && (
+               <div class="absolute top-3 right-3 bg-ink/60 text-paper font-sans text-[9px] tracking-widest uppercase px-2 py-1 backdrop-blur-sm">
+                 {entry.data.photos.length} photos
+               </div>
+             )}
+           </div>
+
+           <div class="p-5 flex flex-col flex-1">
+             <time class="font-sans text-[10px] uppercase tracking-widest text-earth/60 mb-2 block">
+               {entry.data.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+               {entry.data.location && ` · ${entry.data.location}`}
+             </time>
+             <h2 class="font-serif text-lg text-ink group-hover:text-clay transition-colors leading-snug mb-2">
+               {entry.data.title}
+             </h2>
+             {entry.data.description && (
+               <p class="font-sans text-sm text-ink-light line-clamp-2 leading-relaxed">
+                 {entry.data.description}
+               </p>
+             )}
+             {entry.data.tags.length > 0 && (
+               <div class="flex flex-wrap gap-2 mt-3">
+                 {entry.data.tags.map((tag: string) => (
+                   <span class="font-sans text-[9px] uppercase tracking-widest text-earth/50">#{tag}</span>
+                 ))}
+               </div>
+             )}
+           </div>
+         </a>
+       );
+     })}
+   </div>
+
+   <div id="empty-state" class="text-center py-24 text-earth/40 font-serif italic hidden">
+     No snapshots match the current filters.
+   </div>
+
+   {sortedSnapshots.length === 0 && (
+     <div class="text-center py-24 text-earth/40 font-serif italic">
+       No entries yet. Create a folder <code>src/content/snapshots/yy-mm-dd-name/</code> with <code>en.md</code>, <code>es.md</code> and a <code>media/</code> folder inside.
+     </div>
+   )}
+  </div>
+
+  <style>
+    .tag-pill.active {
+      border-color: var(--color-clay, #b5651d);
+      color: var(--color-clay, #b5651d);
+    }
+  </style>
+
+  <script>
+    (function() {
+      const searchInput  = document.getElementById('search-input') as HTMLInputElement;
+      const locationFilter = document.getElementById('location-filter') as HTMLSelectElement;
+      const yearFilter   = document.getElementById('year-filter') as HTMLSelectElement;
+      const tagPills     = document.querySelectorAll('.tag-pill');
+      const cards        = document.querySelectorAll('.snapshot-card') as NodeListOf<HTMLElement>;
+      const emptyState   = document.getElementById('empty-state');
+      const summary      = document.getElementById('filter-summary');
+
+      let activeTag = '';
+
+      // ── Filters ───────────────────────────────────────────
+      function updateSummary() {
+        const parts: string[] = [];
+        if (activeTag)                parts.push(`#${activeTag}`);
+        if (locationFilter.value)     parts.push(locationFilter.options[locationFilter.selectedIndex].text);
+        if (yearFilter.value)         parts.push(yearFilter.value);
+        if (searchInput.value.trim()) parts.push(`"${searchInput.value.trim()}"`);
+        if (parts.length && summary) {
+          summary.textContent = `Filtering by: ${parts.join(' · ')}`;
+          summary.classList.remove('hidden');
+        } else if (summary) {
+          summary.classList.add('hidden');
+        }
+      }
+
+      function filterSnapshots() {
+        const searchTerm       = searchInput.value.toLowerCase().trim();
+        const selectedYear     = yearFilter.value;
+        const selectedLocation = locationFilter.value;
+        let visible = 0;
+        cards.forEach(card => {
+          const title    = card.dataset.title    || '';
+          const location = card.dataset.location || '';
+          const tags     = card.dataset.tags     || '';
+          const year     = card.dataset.year     || '';
+          const matchesSearch   = !searchTerm       || title.includes(searchTerm) || location.includes(searchTerm) || tags.includes(searchTerm);
+          const matchesYear     = !selectedYear     || year === selectedYear;
+          const matchesLocation = !selectedLocation || location === selectedLocation;
+          const matchesTag      = !activeTag        || tags.split(',').includes(activeTag);
+          const show = matchesSearch && matchesYear && matchesLocation && matchesTag;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (emptyState) emptyState.classList.toggle('hidden', visible > 0);
+        updateSummary();
+      }
+
+      tagPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          activeTag = (pill as HTMLElement).dataset.tag || '';
+          tagPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          filterSnapshots();
+        });
+      });
+
+      searchInput.addEventListener('input', filterSnapshots);
+      locationFilter.addEventListener('change', filterSnapshots);
+      yearFilter.addEventListener('change', filterSnapshots);
+    })();
+  </script>
+</Layout>

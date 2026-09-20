@@ -1,0 +1,130 @@
+title.en: "Curriculum Vitae"
+title.es: "Curriculum Vitae"
+name: "Sergio Uribe Guinard"
+role.en: "IB-Certified Dual-Language Educator (Spanish & EAL) · EdTech Innovator"
+role.es: "Educador de Idiomas Certificado IB (Español y EAL) · Innovador EdTech"
+location: "Da Nang, Vietnam"
+availableFrom: "July 2026"
+linkedin: "https://linkedin.com/in/sergiouribe"
+website: "https://sergiouribe.co"
+lastUpdated: 2026-04-01
+printable: true
+
+profile.en: "Versatile and IB-Certified Educator offering a dual-capability profile: the architectural expertise to launch and lead a rigorous Spanish program, combined with the pedagogical depth to deliver high-impact Secondary English, EAL, and Humanities instruction. Grounded in 4E Cognition, inquiry-based learning, and experiential education, I bridge the gap between academic rigor and holistic student well-being. Proven track record in establishing international examination centers, developing custom EdTech pipelines (H5P/Python), and fostering restorative school communities. I am seeking to leverage my cross-disciplinary expertise to elevate language and humanities departments in forward-thinking international schools."
+profile.es: "Educador versátil y certificado por el IB que ofrece un perfil de doble capacidad: la experiencia arquitectónica para lanzar y liderar un programa riguroso de español, combinada con la profundidad pedagógica para impartir instrucción de alto impacto en inglés secundario, EAL y humanidades. Basado en la Cognición 4E, el aprendizaje por indagación y la educación experiencial, tiendo un puente entre el rigor académico y el bienestar holístico del estudiante. Historial comprobado en el establecimiento de centros de exámenes internacionales, el desarrollo de pipelines EdTech personalizados (H5P/Python) y el fomento de comunidades escolares restaurativas. Busco aprovechar mi experiencia de manera interdisciplinaria."
+
+experience:
+  - role.en: "Online English & Spanish Teacher (Remote)"
+    role.es: "Profesor Online de Inglés y Español (Remoto)"
+    period: "Nov 2025 — Present"
+    location: "Remote"
+    highlights.en:
+      - "Facilitating customized online sessions focusing on natural language acquisition, integrating self-directed exploration and contextual induction into digital spaces to build student agency and reading fluency."
+    highlights.es:
+      - "Facilitación de sesiones en línea personalizadas enfocadas en la adquisición natural del idioma, integrando la exploración autodirigida y la inducción contextual."
+
+  - role.en: "Spanish MFL Teacher"
+    role.es: "Profesor de Español MFL"
+    period: "Aug – Oct 2025"
+    location: "UWC Thailand · Phuket, Thailand"
+    highlights.en:
+      - "Integrated IB teaching and learning methodologies to deliver transdisciplinary, project-based Spanish language experiences for mixed-ability cohorts, moving away from rote memorization."
+      - "Served as Grade 6 Co-Advisor (Homeroom), prioritizing somatic emotional support, restorative community circles, and deep interpersonal connection to support students during their transitional middle-years."
+      - "Facilitated interdisciplinary modules including Experiential Learning and outdoor education, anchoring vocabulary in physical movement, environmental interaction, and 4E Cognition principles."
+    highlights.es:
+      - "Integré metodologías del IB para ofrecer experiencias de español basadas en proyectos y transdisciplinarias para grupos de habilidades mixtas."
+      - "Co-asesor de Grado 6 (Homeroom), priorizando el apoyo emocional somático, círculos comunitarios restaurativos y una conexión interpersonal profunda."
+      - "Facilité módulos de aprendizaje experiencial y educación al aire libre, anclando el vocabulario en el movimiento físico y la interacción ambiental."
+
+  - role.en: "Spanish MFL Teacher & DELE Centre Lead"
+    role.es: "Profesor de Español MFL y Líder del Centro DELE"
+    period: "Nov 2021 – July 2023"
+    location: "Tarsus American College · Tarsus, Turkey"
+    highlights.en:
+      - "Spearheaded and led the region’s first DELE examination centre accreditation, creating a tangible university-prep credential pathway for senior students while maintaining a focus on communicative language use."
+      - "Scaffolded the transition of prep and 9th-grade students from an encyclopedic learning system toward inquiry-based, student-centered environments aligned with TAC's educational philosophy."
+      - "Fostered intrinsic motivation by weaving interactive storytelling and dynamic resources into the curriculum, personally developing 30+ interactive H5P resources for blended learning."
+    highlights.es:
+      - "Lideró la acreditación del primer centro de exámenes DELE de la región, creando una vía de credenciales de preparación universitaria."
+      - "Andamié la transición de estudiantes de preparatoria y noveno grado desde un sistema enciclopédico hacia entornos de indagación centrados en el estudiante."
+      - "Fomenté la motivación intrínseca mediante narración interactiva, desarrollando personalmente más de 30 recursos interactivos H5P."
+
+  - role.en: "Secondary English & Humanities Teacher"
+    role.es: "Profesor de Inglés y Humanidades en Secundaria"
+    period: "Jan 2020 – July 2021"
+    location: "Colegio Alvernia Bilingüe · Bogotá, Colombia"
+    highlights.en:
+      - "Taught English to 150+ secondary students, focusing heavily on reading comprehension, academic writing, and oral communication skills."
+      - "Implemented targeted EAL scaffolding techniques to support multilingual learners in developing strong foundational literacy, academic vocabulary, and effective study habits."
+      - "Led interdisciplinary projects integrating English language and informational texts with ecological awareness and environmental stewardship."
+    highlights.es:
+      - "Enseñó inglés a más de 150 estudiantes de secundaria, enfocándose en la comprensión lectora, escritura académica y comunicación oral."
+      - "Implementó técnicas de andamiaje EAL para apoyar a estudiantes multilingües en el desarrollo de alfabetización y vocabulario académico."
+      - "Lideró proyectos interdisciplinarios integrando la lengua inglesa con la conciencia ecológica y el cuidado del medio ambiente."
+
+  - role.en: "English & Spanish Teacher"
+    role.es: "Profesor de Inglés y Español"
+    period: "Apr – Sept 2019"
+    location: "Vicariato Apostólico de Inírida · Guainía, Colombia"
+    highlights.en:
+      - "Designed and delivered dual-language instruction in a remote, multicultural Amazonian watershed setting."
+      - "Adapted teaching strategies for diverse learning profiles and multilingual Indigenous students, decentering traditional teaching authority in favor of observation and centering local environmental knowledge."
+    highlights.es:
+      - "Diseñó y entregó instrucción bilingüe en un entorno de cuenca amazónica remota y multicultural."
+      - "Adaptó estrategias de enseñanza para estudiantes indígenas multilingües, descentralizando la autoridad docente a favor del conocimiento ambiental local."
+
+education:
+  - degree.en: "IB Certificate in Teaching and Learning"
+    degree.es: "Certificado IB en Enseñanza y Aprendizaje"
+    institution: "Universidad Camilo José Cela · Spain"
+    year: "2025"
+    notes.en: "IB methodologies, CAS, TOK, Approaches to Teaching and Learning (ATL)."
+    notes.es: "Metodologías IB, CAS, TOK, Enfoques de Enseñanza y Aprendizaje (ATL)."
+
+  - degree.en: "Specialisation Diploma in International Education"
+    degree.es: "Diploma de Especialización en Educación Internacional"
+    institution: "Universidad Camilo José Cela · Spain"
+    year: "2025"
+    notes.en: "International curriculum development and global citizenship frameworks."
+    notes.es: "Desarrollo curricular internacional y marcos de ciudadanía global."
+
+  - degree.en: "Master’s in Teaching Spanish as a Foreign Language (ELE)"
+    degree.es: "Máster en Enseñanza del Español como Lengua Extranjera (ELE)"
+    institution: "Universidad de Sevilla · Spain · GPA 3.8/4.0"
+    year: "2024"
+    notes.en: "Thesis: The Hero’s Journey: A Didactic Proposal from Conceptual Metaphor Theory and 4E Cognition."
+    notes.es: "Tesis: El Viaje del Héroe: Una Propuesta Didáctica desde la Teoría de la Metáfora Conceptual y la Cognición 4E."
+
+  - degree.en: "Bachelor of Education in Spanish and Foreign Languages"
+    degree.es: "Licenciatura en Español y Lenguas Extranjeras"
+    institution: "Universidad Pedagógica Nacional · Colombia"
+    year: "2018"
+    notes.en: "Equivalent to PGCE with QTS. Research: Multisensory Modality for Oral Production in FLE."
+    notes.es: "Equivalente a PGCE con QTS. Investigación: Modalidad Multisensorial para la Producción Oral en FLE."
+
+languages:
+  - name: "Spanish"
+    level.en: "Native — Full academic and professional fluency"
+    level.es: "Nativo — Fluidez académica y profesional completa"
+  - name: "English"
+    level.en: "Advanced (C1) — Full professional fluency; capable of IB/Humanities & EAL instruction"
+    level.es: "Avanzado (C1) — Fluidez profesional completa; capaz de instrucción IB"
+  - name: "French"
+    level.en: "Upper-Intermediate (B2) — Classroom instruction capability"
+    level.es: "Intermedio Alto (B2) — Capacidad de instrucción en aula"
+  - name: "Turkish"
+    level.en: "Basic (A1) — Functional conversational level"
+    level.es: "Básico (A1) — Nivel conversacional funcional"
+
+skills.en:
+  - "Dual-Language Methodology: IB Pedagogical Frameworks, EAL/ESL Scaffolding, Academic Literacy, Reading Comprehension, Comprehensible Input, CEFR A1–C1, 4E Cognition, DELE Exam Prep."
+  - "Pastoral & Extracurricular: Homeroom Advisory, Restorative Communication, SEL (Social Emotional Learning), Digital Storytelling, Reading & Creative Writing Clubs."
+  - "EdTech & LMS: Canvas, ManageBac, Moodle, Blackboard, Google Workspace, H5P (Advanced), AI-generated pedagogical pipelines."
+  - "Programming: Python 3, HTML5, CSS3, JavaScript (Custom EdTech resource development)."
+  - "Safeguarding: Enhanced DBS-equivalent (Turkey, Spain); clean police clearances available for all countries of residence."
+skills.es:
+  - "Metodología de doble idioma: marcos pedagógicos del IB, andamiaje EAL/ESL, alfabetización académica, comprensión lectora, input comprensible, MCER A1-C1, cognición 4E, preparación de exámenes DELE."
+  - "Pastoral y extracurricular: tutoría, comunicación restaurativa, SEL (aprendizaje social y emocional), narrativa digital, clubes de lectura y escritura."
+  - "EdTech y LMS: Canvas, ManageBac, Moodle, Blackboard, Google Workspace, H5P (avanzado), pipelines de aprendizaje."
+  - "Programación: Python 3, HTML5, CSS3, JavaScript."
+  - "Protección: Equivalente a DBS mejorado (Turquía, España); certificados de antecedentes penales limpios disponibles."

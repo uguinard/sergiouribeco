@@ -1,0 +1,281 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const allPages = await getCollection('pages_en');
+const entry = allPages.find(p => p.id === 'cv');
+if (!entry) throw new Error(`cv not found. IDs: ${allPages.map(p => p.id).join(', ')}`);
+
+const {
+  title, name, role, location, availableFrom,
+  linkedin, website, profile, experience,
+  education, languages, skills,
+} = entry.data;
+
+const sections = [
+  { id: 'profile', label: 'Profile' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
+  { id: 'languages', label: 'Languages' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'references', label: 'References' }
+];
+---
+
+<Layout title={title}>
+  <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-16 relative">
+
+    <!-- Left Column: Sticky Outline (ToC) -->
+    <aside class="w-full lg:w-48 shrink-0 print:hidden">
+      <nav class="lg:sticky lg:top-24 p-5 border border-earth/5 lg:border-none bg-paper/20 lg:bg-transparent rounded-2xl lg:p-0 space-y-4">
+        <p class="font-sans text-[10px] font-bold tracking-[0.25em] text-clay/80 uppercase">Navigation</p>
+        <ul class="space-y-3">
+          {sections.map(s => (
+            <li>
+              <a href={`#${s.id}`} class="toc-link font-sans text-[11px] font-bold tracking-wider uppercase text-earth hover:text-clay transition-all duration-300 block py-1 pl-3 border-l border-earth/10 hover:border-clay">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Right Column: Content -->
+    <div class="flex-1 max-w-3xl relative">
+      <!-- One elegant vertical divider line -->
+      <div class="absolute -left-8 top-0 bottom-0 w-[1px] bg-earth/10 hidden lg:block"></div>
+
+      <header class="mb-16 pb-12 border-b border-earth/10">
+        <h1 class="text-4xl md:text-5xl font-serif text-ink tracking-tight mb-3 font-medium">{name}</h1>
+        {role && (
+          <p class="font-serif text-lg text-clay mb-6 font-medium">
+            {role}
+          </p>
+        )}
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-serif text-[1.05rem] text-ink-soft">
+          {location && <span class="border-b border-earth/25 pb-0.5">{location}</span>}
+          {linkedin && (
+            <a href={linkedin} target="_blank" rel="noopener" class="hover:text-clay transition-colors border-b border-transparent hover:border-clay py-0.5">
+              LinkedIn
+            </a>
+          )}
+          <span>&bull;</span>
+          {website && (
+            <a href={website} class="hover:text-clay transition-colors border-b border-transparent hover:border-clay py-0.5">
+              {website.replace('https://', '')}
+            </a>
+          )}
+        </div>
+        {availableFrom && (
+          <p class="font-serif text-[1.05rem] text-earth mt-6 flex items-center gap-2 italic">
+            <span class="w-1.5 h-1.5 rounded-full bg-clay"></span>
+            Available from {availableFrom} &mdash; documentation and clearances available on request
+          </p>
+        )}
+      </header>
+
+      <div class="space-y-20 cv-body-text">
+
+        {profile && (
+          <section id="profile" class="scroll-mt-28">
+            <h2 class="cv-section-head">Professional Profile</h2>
+            <p class="text-justify">{profile}</p>
+          </section>
+        )}
+
+        {experience && experience.length > 0 && (
+          <section id="experience" class="scroll-mt-28">
+            <h2 class="cv-section-head">Professional Experience</h2>
+            <div class="space-y-12 relative before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[1px] before:bg-earth/10">
+              {experience.map((job, i) => (
+                <div class="relative pl-6 group">
+                  {/* Timeline dot */}
+                  <div class={`absolute -left-[3.5px] top-2.5 w-[8px] h-[8px] rounded-full border transition-all duration-300 ${
+                    i === 0 
+                      ? 'bg-clay border-clay scale-110 shadow-sm' 
+                      : 'bg-sand border-earth/30 group-hover:border-clay group-hover:bg-clay'
+                  }`}></div>
+                  
+                  <div class="flex flex-col md:flex-row md:items-baseline md:justify-between mb-2">
+                    <h3 class="font-serif text-[1.2rem] text-ink font-medium transition-colors duration-300 group-hover:text-clay">
+                      {job.role}
+                    </h3>
+                    <span class="font-serif text-[1.05rem] text-ink-soft mt-1 md:mt-0">
+                      {job.period}
+                    </span>
+                  </div>
+                  
+                  {job.location && (
+                    <p class="font-serif text-[1.05rem] text-clay/85 font-medium mb-3">
+                      {job.location}
+                    </p>
+                  )}
+                  
+                  <ul class="space-y-2 list-none text-justify">
+                    {job.highlights.map(hl => (
+                      <li class="pl-4 relative before:content-['–'] before:absolute before:left-0 before:text-clay/60">{hl}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {education && education.length > 0 && (
+          <section id="education" class="scroll-mt-28">
+            <h2 class="cv-section-head">Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {education.map(edu => (
+                <div class="p-6 rounded-2xl border border-earth/10 bg-paper/10 hover:border-earth/20 hover:bg-paper/20 transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <h3 class="font-serif text-[1.15rem] text-ink font-medium mb-1">{edu.degree}</h3>
+                    <p class="font-serif text-[1.05rem] text-clay/85 font-medium mb-2">{edu.institution}</p>
+                    {edu.notes && <p class="italic leading-relaxed">{edu.notes}</p>}
+                  </div>
+                  <span class="font-serif text-[1.05rem] text-ink font-medium mt-4 block">{edu.year}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {languages && languages.length > 0 && (
+          <section id="languages" class="scroll-mt-28">
+            <h2 class="cv-section-head">Languages</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {languages.map(l => (
+                <div class="flex items-center justify-between p-4 rounded-xl border border-earth/10 bg-paper/5 hover:bg-paper/10 transition-colors duration-300">
+                  <span class="font-serif text-[1.05rem] text-ink font-medium">{l.name}</span>
+                  <span class="font-serif text-[1.05rem] text-clay font-medium">{l.level.split(' — ')[0]}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {skills && skills.length > 0 && (
+          <section id="skills" class="scroll-mt-28">
+            <h2 class="cv-section-head">Teaching Skills &amp; Technology</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                skills.slice(0, Math.ceil(skills.length / 2)),
+                skills.slice(Math.ceil(skills.length / 2)),
+              ].map(col => (
+                <ul class="space-y-3 list-none">
+                  {col.map(skill => {
+                    const parts = skill.split(': ');
+                    if (parts.length > 1) {
+                      return (
+                        <li class="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-clay/60">
+                          <strong class="font-serif text-ink font-medium">{parts[0]}:</strong> {parts[1]}
+                        </li>
+                      );
+                    }
+                    return (
+                      <li class="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-clay/60">{skill}</li>
+                    );
+                  })}
+                </ul>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section id="references" class="scroll-mt-28">
+          <h2 class="cv-section-head">Professional References</h2>
+          <p class="italic">Available upon request.</p>
+        </section>
+
+      </div>
+
+      <div class="mt-20 pt-8 border-t border-earth/10 flex items-center justify-between print:hidden">
+        <a href="/philosophy" class="text-xs uppercase tracking-widest text-earth hover:text-clay font-sans font-bold transition-colors">
+          &rarr; Educational Philosophy
+        </a>
+        <button
+          onclick="window.print()"
+          class="text-xs font-sans uppercase tracking-widest text-ink-soft hover:text-clay transition-colors flex items-center gap-2 font-bold"
+          aria-label="Print CV"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="1" width="8" height="6" rx="0.5"/>
+            <path d="M2 7v3a.5.5 0 00.5.5h7a.5.5 0 00.5-.5V7"/>
+            <path d="M4 5h4M4 8h4M4 9.5h2"/>
+          </svg>
+          Print / PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  section {
+    scroll-margin-top: 6.5rem;
+  }
+  .cv-section-head {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(122, 106, 82, 0.1);
+  }
+  .cv-body-text p,
+  .cv-body-text li,
+  .cv-body-text div {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--color-ink-soft);
+  }
+  @media print {
+    header { margin-bottom: 6mm !important; }
+    h3 { font-size: 10.5pt; }
+    p, li { font-size: 9pt; line-height: 1.5; }
+  }
+</style>
+
+<script>
+  function initScrollSpy() {
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    if (!sections.length || !tocLinks.length) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -75% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('text-clay', 'border-clay');
+              link.classList.remove('text-earth', 'border-earth/10');
+            } else {
+              link.classList.remove('text-clay', 'border-clay');
+              link.classList.add('text-earth', 'border-earth/10');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  document.addEventListener('astro:page-load', initScrollSpy);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollSpy);
+  } else {
+    initScrollSpy();
+  }
+</script>
